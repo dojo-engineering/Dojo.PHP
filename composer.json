@@ -1,0 +1,30 @@
+{
+    "name": "your-vendor-name/your-package-name",
+    "description": "A brief description of your package",
+    "type": "library",
+    "keywords": ["php", "package", "example"],
+    "homepage": "https://github.com/your-github-username/your-package-name",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dojo",
+            "email": "support@dojo.tech"
+        }
+    ],
+    "require": {
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "dojo\\dojo-php\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "dojo\\dojo-php\\Tests\\": "tests/"
+        }
+    }
+}
