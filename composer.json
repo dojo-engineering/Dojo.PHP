@@ -1,9 +1,9 @@
 {
-    "name": "your-vendor-name/your-package-name",
+    "name": "dojo-engineering/dojo-php",
     "description": "A brief description of your package",
     "type": "library",
     "keywords": ["php", "package", "example"],
-    "homepage": "https://github.com/your-github-username/your-package-name",
+    "homepage": "https://github.com/...",
     "license": "MIT",
     "authors": [
         {
@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "dojo\\dojo-php\\": "src/"
+            "Dojo_PHP\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "dojo\\dojo-php\\Tests\\": "tests/"
+            "Dojo_PHP\\Tests\\": "tests/"
         }
     }
 }
