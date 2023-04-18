@@ -2,7 +2,7 @@
     "name": "dojo-engineering/dojo-php",
     "description": "A brief description of your package",
     "type": "library",
-    "keywords": ["php", "package", "example"],
+    "keywords": ["php", "package", "api", "dojo"],
     "homepage": "https://github.com/...",
     "license": "MIT",
     "authors": [

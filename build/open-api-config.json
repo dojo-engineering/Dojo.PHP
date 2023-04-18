@@ -1,0 +1,15 @@
+{
+  "packageName": "dojo-engineering/dojo-php",
+  "apiPackage": "Api",
+  "modelPackage": "Model",
+  "variableNamingConvention": "camelCase",
+  "composerVendorName": "dojo-engineering",
+  "composerProjectName": "dojo-engineering/dojo-php",
+  "gitUserId": "myusername",
+  "gitRepoId": "awesome-api",
+  "srcBasePath": "src",
+  "testBasePath": "tests",
+  "sortParamsByRequiredFlag": true,
+  "ensureUniqueParams": true,
+  "allowUnicodeIdentifiers": false
+}
