@@ -1,6 +1,10 @@
 #!/bin/bash
 
-docker run --rm -v ${PWD}:../src/generated openapitools/openapi-generator-cli generate \
+docker run -v ${PWD}:/local openapitools/openapi-generator-cli generate \
   -i https://docs.dojo.tech/bundled.json \
-  -g php -o ../src/generated
+  -g php \
+  -o /local \
+  -c /local/build/open-api-config.json \
+  --global-property models,apis \
+  --additional-properties invokerPackage=Dojo_PHP
 

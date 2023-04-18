@@ -2,4 +2,6 @@
 /generated/
 /.idea/
 /.vscode/
+Api/
+Model/
 composer.lock
