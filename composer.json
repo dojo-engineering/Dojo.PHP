@@ -3,7 +3,7 @@
     "description": "The official Dojo PHP library, supporting PHP 7.4+",
     "type": "library",
     "keywords": ["php", "package", "api", "dojo"],
-    "homepage": "https://github.com/...",
+    "homepage": "https://github.com/dojo-engineering/Dojo.PHP",
     "license": "MIT",
     "authors": [
         {
