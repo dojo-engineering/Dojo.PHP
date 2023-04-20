@@ -1,0 +1,11 @@
+{
+    "require": {
+        "dojo-engineering/dojo-php": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../"
+        }
+    ]
+}

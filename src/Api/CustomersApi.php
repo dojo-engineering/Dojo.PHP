@@ -12,7 +12,7 @@
 /**
  * Payment Service
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../docs/plugins/) for your site.  # Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  # HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  # Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ## Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  # Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../docs/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.  # Postman collection  You can run the API collection in Postman:   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443?action=collection%2Ffork&collection-url=entityId%3D16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443%26entityType%3Dcollection%26workspaceId%3Dfdd152df-0154-428c-aeb4-1b90e46b8523)
+ * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../docs/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../docs/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.  ## Postman collection  You can run the API collection in Postman:   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443?action=collection%2Ffork&collection-url=entityId%3D16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443%26entityType%3Dcollection%26workspaceId%3Dfdd152df-0154-428c-aeb4-1b90e46b8523)
  *
  * The version of the OpenAPI document: 2022-04-07
  * Generated by: https://openapi-generator.tech
@@ -83,13 +83,13 @@ class CustomersApi
         'customersDeletePaymentMethod' => [
             'application/json',
         ],
+        'customersGet' => [
+            'application/json',
+        ],
         'customersGetPaymentMethods' => [
             'application/json',
         ],
         'customersSearch' => [
-            'application/json',
-        ],
-        'customersSearchAll' => [
             'application/json',
         ],
         'customersUpdate' => [
@@ -1450,6 +1450,356 @@ class CustomersApi
     }
 
     /**
+     * Operation customersGet
+     *
+     * Retrieve a customer
+     *
+     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersGet'] to see the possible values for this operation
+     *
+     * @throws \Dojo_PHP\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Dojo_PHP\Model\CustomerFull[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     */
+    public function customersGet($customer_id, $version, string $contentType = self::contentTypes['customersGet'][0])
+    {
+        list($response) = $this->customersGetWithHttpInfo($customer_id, $version, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation customersGetWithHttpInfo
+     *
+     * Retrieve a customer
+     *
+     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersGet'] to see the possible values for this operation
+     *
+     * @throws \Dojo_PHP\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Dojo_PHP\Model\CustomerFull[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function customersGetWithHttpInfo($customer_id, $version, string $contentType = self::contentTypes['customersGet'][0])
+    {
+        $request = $this->customersGetRequest($customer_id, $version, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Dojo_PHP\Model\CustomerFull[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\CustomerFull[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\CustomerFull[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Dojo_PHP\Model\CustomerFull[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\CustomerFull[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation customersGetAsync
+     *
+     * Retrieve a customer
+     *
+     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function customersGetAsync($customer_id, $version, string $contentType = self::contentTypes['customersGet'][0])
+    {
+        return $this->customersGetAsyncWithHttpInfo($customer_id, $version, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation customersGetAsyncWithHttpInfo
+     *
+     * Retrieve a customer
+     *
+     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function customersGetAsyncWithHttpInfo($customer_id, $version, string $contentType = self::contentTypes['customersGet'][0])
+    {
+        $returnType = '\Dojo_PHP\Model\CustomerFull[]';
+        $request = $this->customersGetRequest($customer_id, $version, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'customersGet'
+     *
+     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function customersGetRequest($customer_id, $version, string $contentType = self::contentTypes['customersGet'][0])
+    {
+
+        // verify the required parameter 'customer_id' is set
+        if ($customer_id === null || (is_array($customer_id) && count($customer_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $customer_id when calling customersGet'
+            );
+        }
+
+        // verify the required parameter 'version' is set
+        if ($version === null || (is_array($version) && count($version) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $version when calling customersGet'
+            );
+        }
+
+
+        $resourcePath = '/customers/{customerId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($version !== null) {
+            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
+        }
+
+        // path params
+        if ($customer_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'customerId' . '}',
+                ObjectSerializer::toPathValue($customer_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation customersGetPaymentMethods
      *
      * Retrieve payment method
@@ -1844,18 +2194,16 @@ class CustomersApi
      * List all customers
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  int $limit The maximum number of results to be returned in a single page. (optional)
-     * @param  string $before A cursor for use in pagination for the previous page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
-     * @param  string $after A cursor for use in pagination for the next page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
+     * @param  \Dojo_PHP\Model\SearchCustomerRequest $search_customer_request search_customer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearch'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Dojo_PHP\Model\PagedResultOfCustomer|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
      */
-    public function customersSearch($version, $limit = null, $before = null, $after = null, string $contentType = self::contentTypes['customersSearch'][0])
+    public function customersSearch($version, $search_customer_request, string $contentType = self::contentTypes['customersSearch'][0])
     {
-        list($response) = $this->customersSearchWithHttpInfo($version, $limit, $before, $after, $contentType);
+        list($response) = $this->customersSearchWithHttpInfo($version, $search_customer_request, $contentType);
         return $response;
     }
 
@@ -1865,18 +2213,16 @@ class CustomersApi
      * List all customers
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  int $limit The maximum number of results to be returned in a single page. (optional)
-     * @param  string $before A cursor for use in pagination for the previous page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
-     * @param  string $after A cursor for use in pagination for the next page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
+     * @param  \Dojo_PHP\Model\SearchCustomerRequest $search_customer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearch'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Dojo_PHP\Model\PagedResultOfCustomer|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function customersSearchWithHttpInfo($version, $limit = null, $before = null, $after = null, string $contentType = self::contentTypes['customersSearch'][0])
+    public function customersSearchWithHttpInfo($version, $search_customer_request, string $contentType = self::contentTypes['customersSearch'][0])
     {
-        $request = $this->customersSearchRequest($version, $limit, $before, $after, $contentType);
+        $request = $this->customersSearchRequest($version, $search_customer_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2014,17 +2360,15 @@ class CustomersApi
      * List all customers
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  int $limit The maximum number of results to be returned in a single page. (optional)
-     * @param  string $before A cursor for use in pagination for the previous page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
-     * @param  string $after A cursor for use in pagination for the next page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
+     * @param  \Dojo_PHP\Model\SearchCustomerRequest $search_customer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function customersSearchAsync($version, $limit = null, $before = null, $after = null, string $contentType = self::contentTypes['customersSearch'][0])
+    public function customersSearchAsync($version, $search_customer_request, string $contentType = self::contentTypes['customersSearch'][0])
     {
-        return $this->customersSearchAsyncWithHttpInfo($version, $limit, $before, $after, $contentType)
+        return $this->customersSearchAsyncWithHttpInfo($version, $search_customer_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2038,18 +2382,16 @@ class CustomersApi
      * List all customers
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  int $limit The maximum number of results to be returned in a single page. (optional)
-     * @param  string $before A cursor for use in pagination for the previous page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
-     * @param  string $after A cursor for use in pagination for the next page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
+     * @param  \Dojo_PHP\Model\SearchCustomerRequest $search_customer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function customersSearchAsyncWithHttpInfo($version, $limit = null, $before = null, $after = null, string $contentType = self::contentTypes['customersSearch'][0])
+    public function customersSearchAsyncWithHttpInfo($version, $search_customer_request, string $contentType = self::contentTypes['customersSearch'][0])
     {
         $returnType = '\Dojo_PHP\Model\PagedResultOfCustomer';
-        $request = $this->customersSearchRequest($version, $limit, $before, $after, $contentType);
+        $request = $this->customersSearchRequest($version, $search_customer_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2091,15 +2433,13 @@ class CustomersApi
      * Create request for operation 'customersSearch'
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  int $limit The maximum number of results to be returned in a single page. (optional)
-     * @param  string $before A cursor for use in pagination for the previous page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
-     * @param  string $after A cursor for use in pagination for the next page. &#x60;before&#x60; and &#x60;after&#x60; are mutually exclusive—only one of these may be used. (optional)
+     * @param  \Dojo_PHP\Model\SearchCustomerRequest $search_customer_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearch'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function customersSearchRequest($version, $limit = null, $before = null, $after = null, string $contentType = self::contentTypes['customersSearch'][0])
+    public function customersSearchRequest($version, $search_customer_request, string $contentType = self::contentTypes['customersSearch'][0])
     {
 
         // verify the required parameter 'version' is set
@@ -2109,8 +2449,12 @@ class CustomersApi
             );
         }
 
-
-
+        // verify the required parameter 'search_customer_request' is set
+        if ($search_customer_request === null || (is_array($search_customer_request) && count($search_customer_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $search_customer_request when calling customersSearch'
+            );
+        }
 
 
         $resourcePath = '/customers/search';
@@ -2120,33 +2464,6 @@ class CustomersApi
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $limit,
-            'limit', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $before,
-            'before', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $after,
-            'after', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
 
         // header params
         if ($version !== null) {
@@ -2162,7 +2479,14 @@ class CustomersApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($search_customer_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($search_customer_request));
+            } else {
+                $httpBody = $search_customer_request;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -2207,356 +2531,6 @@ class CustomersApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation customersSearchAll
-     *
-     * Retrieve a customer
-     *
-     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearchAll'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\CustomerFull[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
-     */
-    public function customersSearchAll($customer_id, $version, string $contentType = self::contentTypes['customersSearchAll'][0])
-    {
-        list($response) = $this->customersSearchAllWithHttpInfo($customer_id, $version, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation customersSearchAllWithHttpInfo
-     *
-     * Retrieve a customer
-     *
-     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearchAll'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\CustomerFull[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function customersSearchAllWithHttpInfo($customer_id, $version, string $contentType = self::contentTypes['customersSearchAll'][0])
-    {
-        $request = $this->customersSearchAllRequest($customer_id, $version, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Dojo_PHP\Model\CustomerFull[]' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\CustomerFull[]' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\CustomerFull[]', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Dojo_PHP\Model\CustomerFull[]';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\CustomerFull[]',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation customersSearchAllAsync
-     *
-     * Retrieve a customer
-     *
-     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearchAll'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function customersSearchAllAsync($customer_id, $version, string $contentType = self::contentTypes['customersSearchAll'][0])
-    {
-        return $this->customersSearchAllAsyncWithHttpInfo($customer_id, $version, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation customersSearchAllAsyncWithHttpInfo
-     *
-     * Retrieve a customer
-     *
-     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearchAll'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function customersSearchAllAsyncWithHttpInfo($customer_id, $version, string $contentType = self::contentTypes['customersSearchAll'][0])
-    {
-        $returnType = '\Dojo_PHP\Model\CustomerFull[]';
-        $request = $this->customersSearchAllRequest($customer_id, $version, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'customersSearchAll'
-     *
-     * @param  string $customer_id Unique identifiers for the customers you want to get information about, separated by commas. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022–04–07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customersSearchAll'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function customersSearchAllRequest($customer_id, $version, string $contentType = self::contentTypes['customersSearchAll'][0])
-    {
-
-        // verify the required parameter 'customer_id' is set
-        if ($customer_id === null || (is_array($customer_id) && count($customer_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $customer_id when calling customersSearchAll'
-            );
-        }
-
-        // verify the required parameter 'version' is set
-        if ($version === null || (is_array($version) && count($version) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling customersSearchAll'
-            );
-        }
-
-
-        $resourcePath = '/customers/{customerId}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($version !== null) {
-            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
-        }
-
-        // path params
-        if ($customer_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'customerId' . '}',
-                ObjectSerializer::toPathValue($customer_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

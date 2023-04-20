@@ -41,6 +41,17 @@ use Dojo_PHP\ApiFactory;
 
 $apiKey = "YOUR_API_KEY";
 $client = ApiFactory::createPaymentIntentApi($apiKey);
+
+$req = new CreatePaymentIntentRequest();
+$req->setReference("test");
+
+$money = new Money();
+$money->setValue(100);
+$money->setCurrencyCode("GBP");
+
+$req->setAmount($money);
+
+$pi = $apiPaymentIntent->paymentIntentsCreatePaymentIntent(\Dojo_PHP\API_VERSION, $req);
 ```
 
 For any requests, bugs, or comments, please [open an issue][issues] or [submit a pull request][pulls].

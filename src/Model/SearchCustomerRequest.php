@@ -1,6 +1,6 @@
 <?php
 /**
- * CreatePaymentIntentRequestShippingDetails
+ * SearchCustomerRequest
  *
  * PHP version 7.4
  *
@@ -32,16 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * CreatePaymentIntentRequestShippingDetails Class Doc Comment
+ * SearchCustomerRequest Class Doc Comment
  *
  * @category Class
- * @description The address where to send the order.
+ * @description A cursor for use in pagination.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreatePaymentIntentRequestShippingDetails implements ModelInterface, ArrayAccess, \JsonSerializable
+class SearchCustomerRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreatePaymentIntentRequest_shippingDetails';
+    protected static $openAPIModelName = 'SearchCustomerRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'delivery_notes' => 'string',
-        'address' => '\Dojo_PHP\Model\ShippingDetailsAddress'
+        'limit' => 'int',
+        'before' => 'string',
+        'after' => 'string'
     ];
 
     /**
@@ -71,9 +71,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'delivery_notes' => null,
-        'address' => null
+        'limit' => 'int32',
+        'before' => null,
+        'after' => null
     ];
 
     /**
@@ -82,9 +82,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => true,
-		'delivery_notes' => true,
-		'address' => false
+        'limit' => false,
+		'before' => true,
+		'after' => true
     ];
 
     /**
@@ -173,9 +173,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'delivery_notes' => 'deliveryNotes',
-        'address' => 'address'
+        'limit' => 'limit',
+        'before' => 'before',
+        'after' => 'after'
     ];
 
     /**
@@ -184,9 +184,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'delivery_notes' => 'setDeliveryNotes',
-        'address' => 'setAddress'
+        'limit' => 'setLimit',
+        'before' => 'setBefore',
+        'after' => 'setAfter'
     ];
 
     /**
@@ -195,9 +195,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'delivery_notes' => 'getDeliveryNotes',
-        'address' => 'getAddress'
+        'limit' => 'getLimit',
+        'before' => 'getBefore',
+        'after' => 'getAfter'
     ];
 
     /**
@@ -257,9 +257,9 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('delivery_notes', $data ?? [], null);
-        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('limit', $data ?? [], 50);
+        $this->setIfExists('before', $data ?? [], null);
+        $this->setIfExists('after', $data ?? [], null);
     }
 
     /**
@@ -289,6 +289,10 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['limit']) && ($this->container['limit'] < 1)) {
+            $invalidProperties[] = "invalid value for 'limit', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -305,96 +309,101 @@ class CreatePaymentIntentRequestShippingDetails implements ModelInterface, Array
 
 
     /**
-     * Gets name
+     * Gets limit
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getName()
+    public function getLimit()
     {
-        return $this->container['name'];
+        return $this->container['limit'];
     }
 
     /**
-     * Sets name
+     * Sets limit
      *
-     * @param string|null $name The name of the customer.
+     * @param int|null $limit The maximum number of results to be returned in a single page.
      *
      * @return self
      */
-    public function setName($name)
+    public function setLimit($limit)
     {
-        if (is_null($name)) {
-            array_push($this->openAPINullablesSetToNull, 'name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($limit)) {
+            throw new \InvalidArgumentException('non-nullable limit cannot be null');
         }
-        $this->container['name'] = $name;
+
+        if (($limit < 1)) {
+            throw new \InvalidArgumentException('invalid value for $limit when calling SearchCustomerRequest., must be bigger than or equal to 1.');
+        }
+
+        $this->container['limit'] = $limit;
 
         return $this;
     }
 
     /**
-     * Gets delivery_notes
+     * Gets before
      *
      * @return string|null
      */
-    public function getDeliveryNotes()
+    public function getBefore()
     {
-        return $this->container['delivery_notes'];
+        return $this->container['before'];
     }
 
     /**
-     * Sets delivery_notes
+     * Sets before
      *
-     * @param string|null $delivery_notes The delivery notes.
+     * @param string|null $before A cursor for use in pagination for the previous page. `before` and `after` are mutually exclusive—only one of these may be used.
      *
      * @return self
      */
-    public function setDeliveryNotes($delivery_notes)
+    public function setBefore($before)
     {
-        if (is_null($delivery_notes)) {
-            array_push($this->openAPINullablesSetToNull, 'delivery_notes');
+        if (is_null($before)) {
+            array_push($this->openAPINullablesSetToNull, 'before');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('delivery_notes', $nullablesSetToNull);
+            $index = array_search('before', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['delivery_notes'] = $delivery_notes;
+        $this->container['before'] = $before;
 
         return $this;
     }
 
     /**
-     * Gets address
+     * Gets after
      *
-     * @return \Dojo_PHP\Model\ShippingDetailsAddress|null
+     * @return string|null
      */
-    public function getAddress()
+    public function getAfter()
     {
-        return $this->container['address'];
+        return $this->container['after'];
     }
 
     /**
-     * Sets address
+     * Sets after
      *
-     * @param \Dojo_PHP\Model\ShippingDetailsAddress|null $address address
+     * @param string|null $after A cursor for use in pagination for the next page. `before` and `after` are mutually exclusive—only one of these may be used.
      *
      * @return self
      */
-    public function setAddress($address)
+    public function setAfter($after)
     {
-        if (is_null($address)) {
-            throw new \InvalidArgumentException('non-nullable address cannot be null');
+        if (is_null($after)) {
+            array_push($this->openAPINullablesSetToNull, 'after');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('after', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['address'] = $address;
+        $this->container['after'] = $after;
 
         return $this;
     }
