@@ -1,6 +1,6 @@
 <?php
 /**
- * SecretsResponse
+ * PaymentIntentConfigRequestCustomerEmail
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * SecretsResponse Class Doc Comment
+ * PaymentIntentConfigRequestCustomerEmail Class Doc Comment
  *
  * @category Class
+ * @description Configuration of the client&#39;s email address.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentIntentConfigRequestCustomerEmail implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SecretsResponse';
+    protected static $openAPIModelName = 'PaymentIntentConfigRequest_customerEmail';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'secrets' => '\Dojo_PHP\Model\SubscriptionSecret[]'
+        'collection_required' => 'bool'
     ];
 
     /**
@@ -69,8 +69,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'secrets' => null
+        'collection_required' => null
     ];
 
     /**
@@ -79,8 +78,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'secrets' => false
+        'collection_required' => false
     ];
 
     /**
@@ -169,8 +167,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'secrets' => 'secrets'
+        'collection_required' => 'collectionRequired'
     ];
 
     /**
@@ -179,8 +176,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'secrets' => 'setSecrets'
+        'collection_required' => 'setCollectionRequired'
     ];
 
     /**
@@ -189,8 +185,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'secrets' => 'getSecrets'
+        'collection_required' => 'getCollectionRequired'
     ];
 
     /**
@@ -250,8 +245,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('secrets', $data ?? [], null);
+        $this->setIfExists('collection_required', $data ?? [], false);
     }
 
     /**
@@ -297,55 +291,28 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets collection_required
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getId()
+    public function getCollectionRequired()
     {
-        return $this->container['id'];
+        return $this->container['collection_required'];
     }
 
     /**
-     * Sets id
+     * Sets collection_required
      *
-     * @param string|null $id Unique identifier for the subscription.
+     * @param bool|null $collection_required If has the value `true` the object will be collected.
      *
      * @return self
      */
-    public function setId($id)
+    public function setCollectionRequired($collection_required)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($collection_required)) {
+            throw new \InvalidArgumentException('non-nullable collection_required cannot be null');
         }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets secrets
-     *
-     * @return \Dojo_PHP\Model\SubscriptionSecret[]|null
-     */
-    public function getSecrets()
-    {
-        return $this->container['secrets'];
-    }
-
-    /**
-     * Sets secrets
-     *
-     * @param \Dojo_PHP\Model\SubscriptionSecret[]|null $secrets The list of subscription’s secrets, used to generate signatures.
-     *
-     * @return self
-     */
-    public function setSecrets($secrets)
-    {
-        if (is_null($secrets)) {
-            throw new \InvalidArgumentException('non-nullable secrets cannot be null');
-        }
-        $this->container['secrets'] = $secrets;
+        $this->container['collection_required'] = $collection_required;
 
         return $this;
     }

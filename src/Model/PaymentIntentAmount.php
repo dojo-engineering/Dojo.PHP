@@ -1,6 +1,6 @@
 <?php
 /**
- * SecretsResponse
+ * PaymentIntentAmount
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * SecretsResponse Class Doc Comment
+ * PaymentIntentAmount Class Doc Comment
  *
  * @category Class
+ * @description The amount intended to be collected by this payment intent.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentIntentAmount implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SecretsResponse';
+    protected static $openAPIModelName = 'PaymentIntent_amount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'secrets' => '\Dojo_PHP\Model\SubscriptionSecret[]'
+        'value' => 'int',
+        'currency_code' => 'string'
     ];
 
     /**
@@ -69,8 +70,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'secrets' => null
+        'value' => 'int64',
+        'currency_code' => null
     ];
 
     /**
@@ -79,8 +80,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'secrets' => false
+        'value' => false,
+		'currency_code' => false
     ];
 
     /**
@@ -169,8 +170,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'secrets' => 'secrets'
+        'value' => 'value',
+        'currency_code' => 'currencyCode'
     ];
 
     /**
@@ -179,8 +180,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'secrets' => 'setSecrets'
+        'value' => 'setValue',
+        'currency_code' => 'setCurrencyCode'
     ];
 
     /**
@@ -189,8 +190,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'secrets' => 'getSecrets'
+        'value' => 'getValue',
+        'currency_code' => 'getCurrencyCode'
     ];
 
     /**
@@ -250,8 +251,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('secrets', $data ?? [], null);
+        $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('currency_code', $data ?? [], null);
     }
 
     /**
@@ -281,6 +282,20 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['value'] === null) {
+            $invalidProperties[] = "'value' can't be null";
+        }
+        if ($this->container['currency_code'] === null) {
+            $invalidProperties[] = "'currency_code' can't be null";
+        }
+        if ((mb_strlen($this->container['currency_code']) > 10)) {
+            $invalidProperties[] = "invalid value for 'currency_code', the character length must be smaller than or equal to 10.";
+        }
+
+        if ((mb_strlen($this->container['currency_code']) < 1)) {
+            $invalidProperties[] = "invalid value for 'currency_code', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -297,55 +312,62 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets value
      *
-     * @return string|null
+     * @return int
      */
-    public function getId()
+    public function getValue()
     {
-        return $this->container['id'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets id
+     * Sets value
      *
-     * @param string|null $id Unique identifier for the subscription.
+     * @param int $value The amount in the minor unit, for example \"100\" for 1.00 GBP.
      *
      * @return self
      */
-    public function setId($id)
+    public function setValue($value)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($value)) {
+            throw new \InvalidArgumentException('non-nullable value cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets secrets
+     * Gets currency_code
      *
-     * @return \Dojo_PHP\Model\SubscriptionSecret[]|null
+     * @return string
      */
-    public function getSecrets()
+    public function getCurrencyCode()
     {
-        return $this->container['secrets'];
+        return $this->container['currency_code'];
     }
 
     /**
-     * Sets secrets
+     * Sets currency_code
      *
-     * @param \Dojo_PHP\Model\SubscriptionSecret[]|null $secrets The list of subscription’s secrets, used to generate signatures.
+     * @param string $currency_code Three-letter currency code in [ISO 4217 alpha-3](https://en.wikipedia.org/wiki/ISO_4217) format.
      *
      * @return self
      */
-    public function setSecrets($secrets)
+    public function setCurrencyCode($currency_code)
     {
-        if (is_null($secrets)) {
-            throw new \InvalidArgumentException('non-nullable secrets cannot be null');
+        if (is_null($currency_code)) {
+            throw new \InvalidArgumentException('non-nullable currency_code cannot be null');
         }
-        $this->container['secrets'] = $secrets;
+        if ((mb_strlen($currency_code) > 10)) {
+            throw new \InvalidArgumentException('invalid length for $currency_code when calling PaymentIntentAmount., must be smaller than or equal to 10.');
+        }
+        if ((mb_strlen($currency_code) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $currency_code when calling PaymentIntentAmount., must be bigger than or equal to 1.');
+        }
+
+        $this->container['currency_code'] = $currency_code;
 
         return $this;
     }

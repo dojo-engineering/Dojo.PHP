@@ -1,6 +1,6 @@
 <?php
 /**
- * SecretsResponse
+ * PaymentIntentConfigResponse
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * SecretsResponse Class Doc Comment
+ * PaymentIntentConfigResponse Class Doc Comment
  *
  * @category Class
  * @package  Dojo_PHP
@@ -40,7 +40,7 @@ use \Dojo_PHP\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentIntentConfigResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SecretsResponse';
+    protected static $openAPIModelName = 'PaymentIntentConfigResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'secrets' => '\Dojo_PHP\Model\SubscriptionSecret[]'
+        'title' => 'string',
+        'redirect_url' => 'string',
+        'cancel_url' => 'string',
+        'customer_email' => '\Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail',
+        'details' => '\Dojo_PHP\Model\PaymentIntentConfigRequestDetails',
+        'billing_address' => '\Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress',
+        'shipping_details' => '\Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails',
+        'payment' => '\Dojo_PHP\Model\PaymentIntentConfigRequestPayment'
     ];
 
     /**
@@ -69,8 +75,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'secrets' => null
+        'title' => null,
+        'redirect_url' => 'uri',
+        'cancel_url' => 'uri',
+        'customer_email' => null,
+        'details' => null,
+        'billing_address' => null,
+        'shipping_details' => null,
+        'payment' => null
     ];
 
     /**
@@ -79,8 +91,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'secrets' => false
+        'title' => true,
+		'redirect_url' => true,
+		'cancel_url' => true,
+		'customer_email' => true,
+		'details' => true,
+		'billing_address' => true,
+		'shipping_details' => true,
+		'payment' => true
     ];
 
     /**
@@ -169,8 +187,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'secrets' => 'secrets'
+        'title' => 'title',
+        'redirect_url' => 'redirectUrl',
+        'cancel_url' => 'cancelUrl',
+        'customer_email' => 'customerEmail',
+        'details' => 'details',
+        'billing_address' => 'billingAddress',
+        'shipping_details' => 'shippingDetails',
+        'payment' => 'payment'
     ];
 
     /**
@@ -179,8 +203,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'secrets' => 'setSecrets'
+        'title' => 'setTitle',
+        'redirect_url' => 'setRedirectUrl',
+        'cancel_url' => 'setCancelUrl',
+        'customer_email' => 'setCustomerEmail',
+        'details' => 'setDetails',
+        'billing_address' => 'setBillingAddress',
+        'shipping_details' => 'setShippingDetails',
+        'payment' => 'setPayment'
     ];
 
     /**
@@ -189,8 +219,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'secrets' => 'getSecrets'
+        'title' => 'getTitle',
+        'redirect_url' => 'getRedirectUrl',
+        'cancel_url' => 'getCancelUrl',
+        'customer_email' => 'getCustomerEmail',
+        'details' => 'getDetails',
+        'billing_address' => 'getBillingAddress',
+        'shipping_details' => 'getShippingDetails',
+        'payment' => 'getPayment'
     ];
 
     /**
@@ -250,8 +286,14 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('secrets', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('redirect_url', $data ?? [], null);
+        $this->setIfExists('cancel_url', $data ?? [], null);
+        $this->setIfExists('customer_email', $data ?? [], null);
+        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('billing_address', $data ?? [], null);
+        $this->setIfExists('shipping_details', $data ?? [], null);
+        $this->setIfExists('payment', $data ?? [], null);
     }
 
     /**
@@ -281,6 +323,10 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 100)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -297,55 +343,277 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets title
      *
      * @return string|null
      */
-    public function getId()
+    public function getTitle()
     {
-        return $this->container['id'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets id
+     * Sets title
      *
-     * @param string|null $id Unique identifier for the subscription.
+     * @param string|null $title The [checkout page’s title](../payments/accept-payments/checkout-page/configuration#add-information-about-your-company).
      *
      * @return self
      */
-    public function setId($id)
+    public function setTitle($title)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($title)) {
+            array_push($this->openAPINullablesSetToNull, 'title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['id'] = $id;
+        if (!is_null($title) && (mb_strlen($title) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling PaymentIntentConfigResponse., must be smaller than or equal to 100.');
+        }
+
+        $this->container['title'] = $title;
 
         return $this;
     }
 
     /**
-     * Gets secrets
+     * Gets redirect_url
      *
-     * @return \Dojo_PHP\Model\SubscriptionSecret[]|null
+     * @return string|null
      */
-    public function getSecrets()
+    public function getRedirectUrl()
     {
-        return $this->container['secrets'];
+        return $this->container['redirect_url'];
     }
 
     /**
-     * Sets secrets
+     * Sets redirect_url
      *
-     * @param \Dojo_PHP\Model\SubscriptionSecret[]|null $secrets The list of subscription’s secrets, used to generate signatures.
+     * @param string|null $redirect_url The URL where the customer will be directed to after the payment.
      *
      * @return self
      */
-    public function setSecrets($secrets)
+    public function setRedirectUrl($redirect_url)
     {
-        if (is_null($secrets)) {
-            throw new \InvalidArgumentException('non-nullable secrets cannot be null');
+        if (is_null($redirect_url)) {
+            array_push($this->openAPINullablesSetToNull, 'redirect_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('redirect_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['secrets'] = $secrets;
+        $this->container['redirect_url'] = $redirect_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancel_url
+     *
+     * @return string|null
+     */
+    public function getCancelUrl()
+    {
+        return $this->container['cancel_url'];
+    }
+
+    /**
+     * Sets cancel_url
+     *
+     * @param string|null $cancel_url The URL where the customer will be directed to when canceling the payment.
+     *
+     * @return self
+     */
+    public function setCancelUrl($cancel_url)
+    {
+        if (is_null($cancel_url)) {
+            array_push($this->openAPINullablesSetToNull, 'cancel_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancel_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cancel_url'] = $cancel_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_email
+     *
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail|null
+     */
+    public function getCustomerEmail()
+    {
+        return $this->container['customer_email'];
+    }
+
+    /**
+     * Sets customer_email
+     *
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail|null $customer_email customer_email
+     *
+     * @return self
+     */
+    public function setCustomerEmail($customer_email)
+    {
+        if (is_null($customer_email)) {
+            array_push($this->openAPINullablesSetToNull, 'customer_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('customer_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['customer_email'] = $customer_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets details
+     *
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestDetails|null
+     */
+    public function getDetails()
+    {
+        return $this->container['details'];
+    }
+
+    /**
+     * Sets details
+     *
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestDetails|null $details details
+     *
+     * @return self
+     */
+    public function setDetails($details)
+    {
+        if (is_null($details)) {
+            array_push($this->openAPINullablesSetToNull, 'details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['details'] = $details;
+
+        return $this;
+    }
+
+    /**
+     * Gets billing_address
+     *
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress|null
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billing_address'];
+    }
+
+    /**
+     * Sets billing_address
+     *
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress|null $billing_address billing_address
+     *
+     * @return self
+     */
+    public function setBillingAddress($billing_address)
+    {
+        if (is_null($billing_address)) {
+            array_push($this->openAPINullablesSetToNull, 'billing_address');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('billing_address', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['billing_address'] = $billing_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets shipping_details
+     *
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails|null
+     */
+    public function getShippingDetails()
+    {
+        return $this->container['shipping_details'];
+    }
+
+    /**
+     * Sets shipping_details
+     *
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails|null $shipping_details shipping_details
+     *
+     * @return self
+     */
+    public function setShippingDetails($shipping_details)
+    {
+        if (is_null($shipping_details)) {
+            array_push($this->openAPINullablesSetToNull, 'shipping_details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('shipping_details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['shipping_details'] = $shipping_details;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment
+     *
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestPayment|null
+     */
+    public function getPayment()
+    {
+        return $this->container['payment'];
+    }
+
+    /**
+     * Sets payment
+     *
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestPayment|null $payment payment
+     *
+     * @return self
+     */
+    public function setPayment($payment)
+    {
+        if (is_null($payment)) {
+            array_push($this->openAPINullablesSetToNull, 'payment');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment'] = $payment;
 
         return $this;
     }

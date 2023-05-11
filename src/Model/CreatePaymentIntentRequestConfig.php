@@ -13,7 +13,7 @@
 /**
  * Payment Service
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../docs/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../docs/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.  ## Postman collection  You can run the API collection in Postman:   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443?action=collection%2Ffork&collection-url=entityId%3D16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443%26entityType%3Dcollection%26workspaceId%3Dfdd152df-0154-428c-aeb4-1b90e46b8523)
+ * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
  *
  * The version of the OpenAPI document: 2022-04-07
  * Generated by: https://openapi-generator.tech
@@ -61,11 +61,11 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
         'title' => 'string',
         'redirect_url' => 'string',
         'cancel_url' => 'string',
-        'customer_email' => '\Dojo_PHP\Model\PaymentIntentConfigCustomerEmail',
-        'details' => '\Dojo_PHP\Model\PaymentIntentConfigDetails',
-        'billing_address' => '\Dojo_PHP\Model\PaymentIntentConfigBillingAddress',
-        'shipping_details' => '\Dojo_PHP\Model\PaymentIntentConfigShippingDetails',
-        'payment' => '\Dojo_PHP\Model\PaymentIntentConfigPayment'
+        'customer_email' => '\Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail',
+        'details' => '\Dojo_PHP\Model\PaymentIntentConfigRequestDetails',
+        'billing_address' => '\Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress',
+        'shipping_details' => '\Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails',
+        'payment' => '\Dojo_PHP\Model\PaymentIntentConfigRequestPayment'
     ];
 
     /**
@@ -324,6 +324,10 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 100)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -352,7 +356,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets title
      *
-     * @param string|null $title The [checkout page’s title](docs/accept-payments/checkout-page/configuration#add-information-about-your-company).
+     * @param string|null $title The [checkout page’s title](../payments/accept-payments/checkout-page/configuration#add-information-about-your-company).
      *
      * @return self
      */
@@ -368,6 +372,10 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($title) && (mb_strlen($title) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling CreatePaymentIntentRequestConfig., must be smaller than or equal to 100.');
+        }
+
         $this->container['title'] = $title;
 
         return $this;
@@ -444,7 +452,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets customer_email
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigCustomerEmail|null
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail|null
      */
     public function getCustomerEmail()
     {
@@ -454,7 +462,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets customer_email
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigCustomerEmail|null $customer_email customer_email
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail|null $customer_email customer_email
      *
      * @return self
      */
@@ -478,7 +486,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets details
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigDetails|null
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestDetails|null
      */
     public function getDetails()
     {
@@ -488,7 +496,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets details
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigDetails|null $details details
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestDetails|null $details details
      *
      * @return self
      */
@@ -512,7 +520,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets billing_address
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigBillingAddress|null
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress|null
      */
     public function getBillingAddress()
     {
@@ -522,7 +530,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets billing_address
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigBillingAddress|null $billing_address billing_address
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress|null $billing_address billing_address
      *
      * @return self
      */
@@ -546,7 +554,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets shipping_details
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigShippingDetails|null
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails|null
      */
     public function getShippingDetails()
     {
@@ -556,7 +564,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets shipping_details
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigShippingDetails|null $shipping_details shipping_details
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails|null $shipping_details shipping_details
      *
      * @return self
      */
@@ -580,7 +588,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets payment
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigPayment|null
+     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestPayment|null
      */
     public function getPayment()
     {
@@ -590,7 +598,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets payment
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigPayment|null $payment payment
+     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestPayment|null $payment payment
      *
      * @return self
      */

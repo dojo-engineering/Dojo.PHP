@@ -1,6 +1,6 @@
 <?php
 /**
- * SecretsResponse
+ * PaymentIntentConfigRequestPayment
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * SecretsResponse Class Doc Comment
+ * PaymentIntentConfigRequestPayment Class Doc Comment
  *
  * @category Class
+ * @description Configuration of the payment.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentIntentConfigRequestPayment implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SecretsResponse';
+    protected static $openAPIModelName = 'PaymentIntentConfigRequest_payment';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'secrets' => '\Dojo_PHP\Model\SubscriptionSecret[]'
+        'custom_amount_allowed' => 'bool',
+        'tips_allowed' => 'bool'
     ];
 
     /**
@@ -69,8 +70,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'secrets' => null
+        'custom_amount_allowed' => null,
+        'tips_allowed' => null
     ];
 
     /**
@@ -79,8 +80,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'secrets' => false
+        'custom_amount_allowed' => false,
+		'tips_allowed' => false
     ];
 
     /**
@@ -169,8 +170,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'secrets' => 'secrets'
+        'custom_amount_allowed' => 'customAmountAllowed',
+        'tips_allowed' => 'tipsAllowed'
     ];
 
     /**
@@ -179,8 +180,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'secrets' => 'setSecrets'
+        'custom_amount_allowed' => 'setCustomAmountAllowed',
+        'tips_allowed' => 'setTipsAllowed'
     ];
 
     /**
@@ -189,8 +190,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'secrets' => 'getSecrets'
+        'custom_amount_allowed' => 'getCustomAmountAllowed',
+        'tips_allowed' => 'getTipsAllowed'
     ];
 
     /**
@@ -250,8 +251,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('secrets', $data ?? [], null);
+        $this->setIfExists('custom_amount_allowed', $data ?? [], null);
+        $this->setIfExists('tips_allowed', $data ?? [], null);
     }
 
     /**
@@ -297,55 +298,55 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets custom_amount_allowed
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getId()
+    public function getCustomAmountAllowed()
     {
-        return $this->container['id'];
+        return $this->container['custom_amount_allowed'];
     }
 
     /**
-     * Sets id
+     * Sets custom_amount_allowed
      *
-     * @param string|null $id Unique identifier for the subscription.
+     * @param bool|null $custom_amount_allowed If has the value `true` the amount of the payment intent can be changed.
      *
      * @return self
      */
-    public function setId($id)
+    public function setCustomAmountAllowed($custom_amount_allowed)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($custom_amount_allowed)) {
+            throw new \InvalidArgumentException('non-nullable custom_amount_allowed cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['custom_amount_allowed'] = $custom_amount_allowed;
 
         return $this;
     }
 
     /**
-     * Gets secrets
+     * Gets tips_allowed
      *
-     * @return \Dojo_PHP\Model\SubscriptionSecret[]|null
+     * @return bool|null
      */
-    public function getSecrets()
+    public function getTipsAllowed()
     {
-        return $this->container['secrets'];
+        return $this->container['tips_allowed'];
     }
 
     /**
-     * Sets secrets
+     * Sets tips_allowed
      *
-     * @param \Dojo_PHP\Model\SubscriptionSecret[]|null $secrets The list of subscription’s secrets, used to generate signatures.
+     * @param bool|null $tips_allowed If has the value `true` tips are allowed.
      *
      * @return self
      */
-    public function setSecrets($secrets)
+    public function setTipsAllowed($tips_allowed)
     {
-        if (is_null($secrets)) {
-            throw new \InvalidArgumentException('non-nullable secrets cannot be null');
+        if (is_null($tips_allowed)) {
+            throw new \InvalidArgumentException('non-nullable tips_allowed cannot be null');
         }
-        $this->container['secrets'] = $secrets;
+        $this->container['tips_allowed'] = $tips_allowed;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * SecretsResponse
+ * CreatePaymentIntentRequestAutoExpireAction
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * SecretsResponse Class Doc Comment
+ * CreatePaymentIntentRequestAutoExpireAction Class Doc Comment
  *
  * @category Class
  * @package  Dojo_PHP
@@ -40,7 +40,7 @@ use \Dojo_PHP\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreatePaymentIntentRequestAutoExpireAction implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SecretsResponse';
+    protected static $openAPIModelName = 'CreatePaymentIntentRequest_autoExpireAction';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'secrets' => '\Dojo_PHP\Model\SubscriptionSecret[]'
+        
     ];
 
     /**
@@ -69,8 +68,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'secrets' => null
+        
     ];
 
     /**
@@ -79,8 +77,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'secrets' => false
+        
     ];
 
     /**
@@ -169,8 +166,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'secrets' => 'secrets'
+        
     ];
 
     /**
@@ -179,8 +175,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'secrets' => 'setSecrets'
+        
     ];
 
     /**
@@ -189,8 +184,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'secrets' => 'getSecrets'
+        
     ];
 
     /**
@@ -250,8 +244,6 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('secrets', $data ?? [], null);
     }
 
     /**
@@ -295,60 +287,6 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return string|null
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string|null $id Unique identifier for the subscription.
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets secrets
-     *
-     * @return \Dojo_PHP\Model\SubscriptionSecret[]|null
-     */
-    public function getSecrets()
-    {
-        return $this->container['secrets'];
-    }
-
-    /**
-     * Sets secrets
-     *
-     * @param \Dojo_PHP\Model\SubscriptionSecret[]|null $secrets The list of subscription’s secrets, used to generate signatures.
-     *
-     * @return self
-     */
-    public function setSecrets($secrets)
-    {
-        if (is_null($secrets)) {
-            throw new \InvalidArgumentException('non-nullable secrets cannot be null');
-        }
-        $this->container['secrets'] = $secrets;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

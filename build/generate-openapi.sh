@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Generate the PHP client
-docker run -v --rm ${PWD}:/local openapitools/openapi-generator-cli generate \
+docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
   -i /local/openapi/2022-04-07.yaml \
   -g php \
   -o /local/generated \

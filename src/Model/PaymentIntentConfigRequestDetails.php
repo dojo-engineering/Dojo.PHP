@@ -1,6 +1,6 @@
 <?php
 /**
- * SecretsResponse
+ * PaymentIntentConfigRequestDetails
  *
  * PHP version 7.4
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * SecretsResponse Class Doc Comment
+ * PaymentIntentConfigRequestDetails Class Doc Comment
  *
  * @category Class
+ * @description The following configuration details of the payment intent. See [detailed information about the order and taxes](../payments/accept-payments/checkout-page/configuration#show-detailed-information-about-the-order-and-taxes).  - The total order amount including tax. - The order reference id.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentIntentConfigRequestDetails implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SecretsResponse';
+    protected static $openAPIModelName = 'PaymentIntentConfigRequest_details';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'secrets' => '\Dojo_PHP\Model\SubscriptionSecret[]'
+        'show_total' => 'bool',
+        'show_reference' => 'bool'
     ];
 
     /**
@@ -69,8 +70,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'secrets' => null
+        'show_total' => null,
+        'show_reference' => null
     ];
 
     /**
@@ -79,8 +80,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-		'secrets' => false
+        'show_total' => false,
+		'show_reference' => false
     ];
 
     /**
@@ -169,8 +170,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'secrets' => 'secrets'
+        'show_total' => 'showTotal',
+        'show_reference' => 'showReference'
     ];
 
     /**
@@ -179,8 +180,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'secrets' => 'setSecrets'
+        'show_total' => 'setShowTotal',
+        'show_reference' => 'setShowReference'
     ];
 
     /**
@@ -189,8 +190,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'secrets' => 'getSecrets'
+        'show_total' => 'getShowTotal',
+        'show_reference' => 'getShowReference'
     ];
 
     /**
@@ -250,8 +251,8 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('secrets', $data ?? [], null);
+        $this->setIfExists('show_total', $data ?? [], null);
+        $this->setIfExists('show_reference', $data ?? [], null);
     }
 
     /**
@@ -297,55 +298,55 @@ class SecretsResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets show_total
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getId()
+    public function getShowTotal()
     {
-        return $this->container['id'];
+        return $this->container['show_total'];
     }
 
     /**
-     * Sets id
+     * Sets show_total
      *
-     * @param string|null $id Unique identifier for the subscription.
+     * @param bool|null $show_total If has the value `true`, the total order amount will be showed.
      *
      * @return self
      */
-    public function setId($id)
+    public function setShowTotal($show_total)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        if (is_null($show_total)) {
+            throw new \InvalidArgumentException('non-nullable show_total cannot be null');
         }
-        $this->container['id'] = $id;
+        $this->container['show_total'] = $show_total;
 
         return $this;
     }
 
     /**
-     * Gets secrets
+     * Gets show_reference
      *
-     * @return \Dojo_PHP\Model\SubscriptionSecret[]|null
+     * @return bool|null
      */
-    public function getSecrets()
+    public function getShowReference()
     {
-        return $this->container['secrets'];
+        return $this->container['show_reference'];
     }
 
     /**
-     * Sets secrets
+     * Sets show_reference
      *
-     * @param \Dojo_PHP\Model\SubscriptionSecret[]|null $secrets The list of subscription’s secrets, used to generate signatures.
+     * @param bool|null $show_reference If has the value `true`, the order reference id will be showed.
      *
      * @return self
      */
-    public function setSecrets($secrets)
+    public function setShowReference($show_reference)
     {
-        if (is_null($secrets)) {
-            throw new \InvalidArgumentException('non-nullable secrets cannot be null');
+        if (is_null($show_reference)) {
+            throw new \InvalidArgumentException('non-nullable show_reference cannot be null');
         }
-        $this->container['secrets'] = $secrets;
+        $this->container['show_reference'] = $show_reference;
 
         return $this;
     }

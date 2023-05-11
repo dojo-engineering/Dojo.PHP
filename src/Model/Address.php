@@ -13,7 +13,7 @@
 /**
  * Payment Service
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../docs/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../docs/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.  ## Postman collection  You can run the API collection in Postman:   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443?action=collection%2Ffork&collection-url=entityId%3D16735701-b218f555-a7ad-46c4-8ad8-1f11c0aee443%26entityType%3Dcollection%26workspaceId%3Dfdd152df-0154-428c-aeb4-1b90e46b8523)
+ * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
  *
  * The version of the OpenAPI document: 2022-04-07
  * Generated by: https://openapi-generator.tech
@@ -103,7 +103,7 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
 		'city' => true,
 		'state' => true,
 		'postcode' => true,
-		'country_code' => true,
+		'country_code' => false,
 		'locality' => true,
 		'county' => true
     ];
@@ -338,6 +338,49 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['address1']) && (mb_strlen($this->container['address1']) > 100)) {
+            $invalidProperties[] = "invalid value for 'address1', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['address2']) && (mb_strlen($this->container['address2']) > 100)) {
+            $invalidProperties[] = "invalid value for 'address2', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['address3']) && (mb_strlen($this->container['address3']) > 100)) {
+            $invalidProperties[] = "invalid value for 'address3', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['address4']) && (mb_strlen($this->container['address4']) > 100)) {
+            $invalidProperties[] = "invalid value for 'address4', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['city']) && (mb_strlen($this->container['city']) > 100)) {
+            $invalidProperties[] = "invalid value for 'city', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['state']) && (mb_strlen($this->container['state']) > 100)) {
+            $invalidProperties[] = "invalid value for 'state', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['postcode']) && (mb_strlen($this->container['postcode']) > 50)) {
+            $invalidProperties[] = "invalid value for 'postcode', the character length must be smaller than or equal to 50.";
+        }
+
+        if ($this->container['country_code'] === null) {
+            $invalidProperties[] = "'country_code' can't be null";
+        }
+        if ((mb_strlen($this->container['country_code']) > 10)) {
+            $invalidProperties[] = "invalid value for 'country_code', the character length must be smaller than or equal to 10.";
+        }
+
+        if (!is_null($this->container['locality']) && (mb_strlen($this->container['locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'locality', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['county']) && (mb_strlen($this->container['county']) > 100)) {
+            $invalidProperties[] = "invalid value for 'county', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -382,6 +425,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($address1) && (mb_strlen($address1) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $address1 when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['address1'] = $address1;
 
         return $this;
@@ -416,6 +463,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($address2) && (mb_strlen($address2) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $address2 when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['address2'] = $address2;
 
         return $this;
@@ -450,6 +501,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($address3) && (mb_strlen($address3) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $address3 when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['address3'] = $address3;
 
         return $this;
@@ -484,6 +539,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($address4) && (mb_strlen($address4) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $address4 when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['address4'] = $address4;
 
         return $this;
@@ -518,6 +577,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($city) && (mb_strlen($city) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $city when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['city'] = $city;
 
         return $this;
@@ -552,6 +615,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($state) && (mb_strlen($state) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $state when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['state'] = $state;
 
         return $this;
@@ -586,6 +653,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($postcode) && (mb_strlen($postcode) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $postcode when calling Address., must be smaller than or equal to 50.');
+        }
+
         $this->container['postcode'] = $postcode;
 
         return $this;
@@ -594,7 +665,7 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets country_code
      *
-     * @return string|null
+     * @return string
      */
     public function getCountryCode()
     {
@@ -604,22 +675,19 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets country_code
      *
-     * @param string|null $country_code Two-letter country code in [ISO 3166–1-alpha-2 format](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+     * @param string $country_code Two-letter country code in [ISO 3166–1-alpha-2 format](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
      *
      * @return self
      */
     public function setCountryCode($country_code)
     {
         if (is_null($country_code)) {
-            array_push($this->openAPINullablesSetToNull, 'country_code');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('country_code', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable country_code cannot be null');
         }
+        if ((mb_strlen($country_code) > 10)) {
+            throw new \InvalidArgumentException('invalid length for $country_code when calling Address., must be smaller than or equal to 10.');
+        }
+
         $this->container['country_code'] = $country_code;
 
         return $this;
@@ -654,6 +722,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($locality) && (mb_strlen($locality) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $locality when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['locality'] = $locality;
 
         return $this;
@@ -688,6 +760,10 @@ class Address implements ModelInterface, ArrayAccess, \JsonSerializable
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+        if (!is_null($county) && (mb_strlen($county) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $county when calling Address., must be smaller than or equal to 100.');
+        }
+
         $this->container['county'] = $county;
 
         return $this;
