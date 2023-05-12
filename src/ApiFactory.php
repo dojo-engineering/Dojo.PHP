@@ -6,7 +6,6 @@ require_once __DIR__ . '/Constants.php';
 /**
  * Use ApiFactory to create an API - so basically a starting point.
  */
-
 class ApiFactory {
     public static function createPaymentIntentApi($apiKey) {
         $api = new Api\PaymentIntentsApi();
