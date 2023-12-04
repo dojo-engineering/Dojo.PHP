@@ -1,6 +1,6 @@
 <?php
 /**
- * AutoExpireAction
+ * MerchantInitiatedTransactionType
  *
  * PHP version 7.4
  *
@@ -30,22 +30,22 @@ namespace Dojo_PHP\Model;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * AutoExpireAction Class Doc Comment
+ * MerchantInitiatedTransactionType Class Doc Comment
  *
  * @category Class
- * @description  
+ * @description Details about the merchant initiated transaction type.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AutoExpireAction
+class MerchantInitiatedTransactionType
 {
     /**
      * Possible values of this enum
      */
-    public const RELEASE = 'Release';
+    public const NO_SHOW = 'NoShow';
 
-    public const CAPTURE = 'Capture';
+    public const UNSCHEDULED = 'Unscheduled';
 
     /**
      * Gets allowable values of the enum
@@ -54,8 +54,8 @@ class AutoExpireAction
     public static function getAllowableEnumValues()
     {
         return [
-            self::RELEASE,
-            self::CAPTURE
+            self::NO_SHOW,
+            self::UNSCHEDULED
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * AutoExpireAction
+ * EventType
  *
  * PHP version 7.4
  *
@@ -30,22 +30,40 @@ namespace Dojo_PHP\Model;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * AutoExpireAction Class Doc Comment
+ * EventType Class Doc Comment
  *
  * @category Class
- * @description  
+ * @description The current state of the payment.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AutoExpireAction
+class EventType
 {
     /**
      * Possible values of this enum
      */
-    public const RELEASE = 'Release';
+    public const CREATED = 'Created';
 
-    public const CAPTURE = 'Capture';
+    public const AUTHORIZED = 'Authorized';
+
+    public const CAPTURED = 'Captured';
+
+    public const REVERSED = 'Reversed';
+
+    public const REFUNDED = 'Refunded';
+
+    public const CANCELED = 'Canceled';
+
+    public const AUTH_CHALLENGED = 'AuthChallenged';
+
+    public const DECLINED = 'Declined';
+
+    public const MANUAL_AUTH_READY = 'ManualAuthReady';
+
+    public const ERROR = 'Error';
+
+    public const UNKNOWN = 'Unknown';
 
     /**
      * Gets allowable values of the enum
@@ -54,8 +72,17 @@ class AutoExpireAction
     public static function getAllowableEnumValues()
     {
         return [
-            self::RELEASE,
-            self::CAPTURE
+            self::CREATED,
+            self::AUTHORIZED,
+            self::CAPTURED,
+            self::REVERSED,
+            self::REFUNDED,
+            self::CANCELED,
+            self::AUTH_CHALLENGED,
+            self::DECLINED,
+            self::MANUAL_AUTH_READY,
+            self::ERROR,
+            self::UNKNOWN
         ];
     }
 }

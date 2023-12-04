@@ -1,6 +1,6 @@
 <?php
 /**
- * PaymentIntent
+ * SetupIntentResponse
  *
  * PHP version 7.4
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * PaymentIntent Class Doc Comment
+ * SetupIntentResponse Class Doc Comment
  *
  * @category Class
- * @description The PaymentIntent object.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
+class SetupIntentResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PaymentIntent';
+    protected static $openAPIModelName = 'SetupIntentResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,37 +58,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'capture_mode' => '\Dojo_PHP\Model\CaptureMode',
         'client_session_secret' => 'string',
         'client_session_secret_expiration_date' => '\DateTime',
-        'payment_details' => '\Dojo_PHP\Model\PaymentIntentPaymentDetails',
-        'status' => '\Dojo_PHP\Model\PaymentIntentStatus',
+        'status' => '\Dojo_PHP\Model\SetupIntentStatus',
         'payment_methods' => '\Dojo_PHP\Model\PaymentMethod[]',
-        'amount' => '\Dojo_PHP\Model\PaymentIntentAmount',
-        'tips_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestTipsAmount',
-        'requested_amount' => '\Dojo_PHP\Model\PaymentIntentRequestedAmount',
-        'total_amount' => '\Dojo_PHP\Model\PaymentIntentTotalAmount',
-        'refunded_amount' => 'int',
         'customer' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCustomer',
-        'request_security' => '\Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity',
         'billing_address' => '\Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress',
         'shipping_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
+        'expire_at' => '\DateTime',
         'reference' => 'string',
         'description' => 'string',
-        'subtotal_line_items' => '\Dojo_PHP\Model\PaymentIntentTotalAmount',
-        'item_lines' => '\Dojo_PHP\Model\ItemLine[]',
-        'tax_lines' => '\Dojo_PHP\Model\TaxLine[]',
-        'action_link' => '\Dojo_PHP\Model\CreatePaymentIntentRequestActionLink',
-        'config' => '\Dojo_PHP\Model\PaymentIntentConfig',
         'merchant_config' => '\Dojo_PHP\Model\PaymentIntentMerchantConfig',
-        'expire_at' => '\DateTime',
-        'auto_expire_in' => 'string',
-        'auto_expire_action' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction',
+        'config' => '\Dojo_PHP\Model\PaymentIntentConfig',
         'metadata' => 'array<string,string>',
-        'setup_intent_id' => 'string',
-        'payment_events' => '\Dojo_PHP\Model\PaymentStatusResponse[]'
+        'intended_amount' => '\Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount',
+        'merchant_initiated_transaction_type' => '\Dojo_PHP\Model\MerchantInitiatedTransactionType',
+        'terms' => 'string',
+        'setup_events' => '\Dojo_PHP\Model\PaymentStatusResponse[]'
     ];
 
     /**
@@ -101,37 +88,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'capture_mode' => null,
         'client_session_secret' => null,
         'client_session_secret_expiration_date' => 'date-time',
-        'payment_details' => null,
         'status' => null,
         'payment_methods' => null,
-        'amount' => null,
-        'tips_amount' => null,
-        'requested_amount' => null,
-        'total_amount' => null,
-        'refunded_amount' => 'int64',
         'customer' => null,
-        'request_security' => null,
         'billing_address' => null,
         'shipping_details' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
+        'expire_at' => 'date-time',
         'reference' => null,
         'description' => null,
-        'subtotal_line_items' => null,
-        'item_lines' => null,
-        'tax_lines' => null,
-        'action_link' => null,
-        'config' => null,
         'merchant_config' => null,
-        'expire_at' => 'date-time',
-        'auto_expire_in' => 'timespan',
-        'auto_expire_action' => null,
+        'config' => null,
         'metadata' => null,
-        'setup_intent_id' => null,
-        'payment_events' => null
+        'intended_amount' => null,
+        'merchant_initiated_transaction_type' => null,
+        'terms' => null,
+        'setup_events' => null
     ];
 
     /**
@@ -141,37 +116,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => true,
-		'capture_mode' => false,
 		'client_session_secret' => true,
 		'client_session_secret_expiration_date' => false,
-		'payment_details' => true,
 		'status' => false,
 		'payment_methods' => true,
-		'amount' => true,
-		'tips_amount' => true,
-		'requested_amount' => true,
-		'total_amount' => true,
-		'refunded_amount' => true,
 		'customer' => true,
-		'request_security' => true,
 		'billing_address' => true,
 		'shipping_details' => true,
 		'created_at' => false,
 		'updated_at' => false,
+		'expire_at' => true,
 		'reference' => true,
 		'description' => true,
-		'subtotal_line_items' => true,
-		'item_lines' => true,
-		'tax_lines' => true,
-		'action_link' => true,
-		'config' => true,
 		'merchant_config' => true,
-		'expire_at' => true,
-		'auto_expire_in' => true,
-		'auto_expire_action' => true,
+		'config' => true,
 		'metadata' => true,
-		'setup_intent_id' => true,
-		'payment_events' => true
+		'intended_amount' => true,
+		'merchant_initiated_transaction_type' => false,
+		'terms' => true,
+		'setup_events' => true
     ];
 
     /**
@@ -261,37 +224,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'capture_mode' => 'captureMode',
         'client_session_secret' => 'clientSessionSecret',
         'client_session_secret_expiration_date' => 'clientSessionSecretExpirationDate',
-        'payment_details' => 'paymentDetails',
         'status' => 'status',
         'payment_methods' => 'paymentMethods',
-        'amount' => 'amount',
-        'tips_amount' => 'tipsAmount',
-        'requested_amount' => 'requestedAmount',
-        'total_amount' => 'totalAmount',
-        'refunded_amount' => 'refundedAmount',
         'customer' => 'customer',
-        'request_security' => 'requestSecurity',
         'billing_address' => 'billingAddress',
         'shipping_details' => 'shippingDetails',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
+        'expire_at' => 'expireAt',
         'reference' => 'reference',
         'description' => 'description',
-        'subtotal_line_items' => 'subtotalLineItems',
-        'item_lines' => 'itemLines',
-        'tax_lines' => 'taxLines',
-        'action_link' => 'actionLink',
-        'config' => 'config',
         'merchant_config' => 'merchantConfig',
-        'expire_at' => 'expireAt',
-        'auto_expire_in' => 'autoExpireIn',
-        'auto_expire_action' => 'autoExpireAction',
+        'config' => 'config',
         'metadata' => 'metadata',
-        'setup_intent_id' => 'setupIntentId',
-        'payment_events' => 'paymentEvents'
+        'intended_amount' => 'intendedAmount',
+        'merchant_initiated_transaction_type' => 'merchantInitiatedTransactionType',
+        'terms' => 'terms',
+        'setup_events' => 'setupEvents'
     ];
 
     /**
@@ -301,37 +252,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'capture_mode' => 'setCaptureMode',
         'client_session_secret' => 'setClientSessionSecret',
         'client_session_secret_expiration_date' => 'setClientSessionSecretExpirationDate',
-        'payment_details' => 'setPaymentDetails',
         'status' => 'setStatus',
         'payment_methods' => 'setPaymentMethods',
-        'amount' => 'setAmount',
-        'tips_amount' => 'setTipsAmount',
-        'requested_amount' => 'setRequestedAmount',
-        'total_amount' => 'setTotalAmount',
-        'refunded_amount' => 'setRefundedAmount',
         'customer' => 'setCustomer',
-        'request_security' => 'setRequestSecurity',
         'billing_address' => 'setBillingAddress',
         'shipping_details' => 'setShippingDetails',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
+        'expire_at' => 'setExpireAt',
         'reference' => 'setReference',
         'description' => 'setDescription',
-        'subtotal_line_items' => 'setSubtotalLineItems',
-        'item_lines' => 'setItemLines',
-        'tax_lines' => 'setTaxLines',
-        'action_link' => 'setActionLink',
-        'config' => 'setConfig',
         'merchant_config' => 'setMerchantConfig',
-        'expire_at' => 'setExpireAt',
-        'auto_expire_in' => 'setAutoExpireIn',
-        'auto_expire_action' => 'setAutoExpireAction',
+        'config' => 'setConfig',
         'metadata' => 'setMetadata',
-        'setup_intent_id' => 'setSetupIntentId',
-        'payment_events' => 'setPaymentEvents'
+        'intended_amount' => 'setIntendedAmount',
+        'merchant_initiated_transaction_type' => 'setMerchantInitiatedTransactionType',
+        'terms' => 'setTerms',
+        'setup_events' => 'setSetupEvents'
     ];
 
     /**
@@ -341,37 +280,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'capture_mode' => 'getCaptureMode',
         'client_session_secret' => 'getClientSessionSecret',
         'client_session_secret_expiration_date' => 'getClientSessionSecretExpirationDate',
-        'payment_details' => 'getPaymentDetails',
         'status' => 'getStatus',
         'payment_methods' => 'getPaymentMethods',
-        'amount' => 'getAmount',
-        'tips_amount' => 'getTipsAmount',
-        'requested_amount' => 'getRequestedAmount',
-        'total_amount' => 'getTotalAmount',
-        'refunded_amount' => 'getRefundedAmount',
         'customer' => 'getCustomer',
-        'request_security' => 'getRequestSecurity',
         'billing_address' => 'getBillingAddress',
         'shipping_details' => 'getShippingDetails',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
+        'expire_at' => 'getExpireAt',
         'reference' => 'getReference',
         'description' => 'getDescription',
-        'subtotal_line_items' => 'getSubtotalLineItems',
-        'item_lines' => 'getItemLines',
-        'tax_lines' => 'getTaxLines',
-        'action_link' => 'getActionLink',
-        'config' => 'getConfig',
         'merchant_config' => 'getMerchantConfig',
-        'expire_at' => 'getExpireAt',
-        'auto_expire_in' => 'getAutoExpireIn',
-        'auto_expire_action' => 'getAutoExpireAction',
+        'config' => 'getConfig',
         'metadata' => 'getMetadata',
-        'setup_intent_id' => 'getSetupIntentId',
-        'payment_events' => 'getPaymentEvents'
+        'intended_amount' => 'getIntendedAmount',
+        'merchant_initiated_transaction_type' => 'getMerchantInitiatedTransactionType',
+        'terms' => 'getTerms',
+        'setup_events' => 'getSetupEvents'
     ];
 
     /**
@@ -432,37 +359,25 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('capture_mode', $data ?? [], null);
         $this->setIfExists('client_session_secret', $data ?? [], null);
         $this->setIfExists('client_session_secret_expiration_date', $data ?? [], null);
-        $this->setIfExists('payment_details', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('payment_methods', $data ?? [], null);
-        $this->setIfExists('amount', $data ?? [], null);
-        $this->setIfExists('tips_amount', $data ?? [], null);
-        $this->setIfExists('requested_amount', $data ?? [], null);
-        $this->setIfExists('total_amount', $data ?? [], null);
-        $this->setIfExists('refunded_amount', $data ?? [], null);
         $this->setIfExists('customer', $data ?? [], null);
-        $this->setIfExists('request_security', $data ?? [], null);
         $this->setIfExists('billing_address', $data ?? [], null);
         $this->setIfExists('shipping_details', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('expire_at', $data ?? [], null);
         $this->setIfExists('reference', $data ?? [], null);
         $this->setIfExists('description', $data ?? [], null);
-        $this->setIfExists('subtotal_line_items', $data ?? [], null);
-        $this->setIfExists('item_lines', $data ?? [], null);
-        $this->setIfExists('tax_lines', $data ?? [], null);
-        $this->setIfExists('action_link', $data ?? [], null);
-        $this->setIfExists('config', $data ?? [], null);
         $this->setIfExists('merchant_config', $data ?? [], null);
-        $this->setIfExists('expire_at', $data ?? [], null);
-        $this->setIfExists('auto_expire_in', $data ?? [], null);
-        $this->setIfExists('auto_expire_action', $data ?? [], null);
+        $this->setIfExists('config', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
-        $this->setIfExists('setup_intent_id', $data ?? [], null);
-        $this->setIfExists('payment_events', $data ?? [], null);
+        $this->setIfExists('intended_amount', $data ?? [], null);
+        $this->setIfExists('merchant_initiated_transaction_type', $data ?? [], null);
+        $this->setIfExists('terms', $data ?? [], null);
+        $this->setIfExists('setup_events', $data ?? [], null);
     }
 
     /**
@@ -520,7 +435,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the payment intent.
+     * @param string|null $id Unique identifier for the setup intent.
      *
      * @return self
      */
@@ -537,33 +452,6 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets capture_mode
-     *
-     * @return \Dojo_PHP\Model\CaptureMode|null
-     */
-    public function getCaptureMode()
-    {
-        return $this->container['capture_mode'];
-    }
-
-    /**
-     * Sets capture_mode
-     *
-     * @param \Dojo_PHP\Model\CaptureMode|null $capture_mode capture_mode
-     *
-     * @return self
-     */
-    public function setCaptureMode($capture_mode)
-    {
-        if (is_null($capture_mode)) {
-            throw new \InvalidArgumentException('non-nullable capture_mode cannot be null');
-        }
-        $this->container['capture_mode'] = $capture_mode;
 
         return $this;
     }
@@ -630,43 +518,9 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets payment_details
-     *
-     * @return \Dojo_PHP\Model\PaymentIntentPaymentDetails|null
-     */
-    public function getPaymentDetails()
-    {
-        return $this->container['payment_details'];
-    }
-
-    /**
-     * Sets payment_details
-     *
-     * @param \Dojo_PHP\Model\PaymentIntentPaymentDetails|null $payment_details payment_details
-     *
-     * @return self
-     */
-    public function setPaymentDetails($payment_details)
-    {
-        if (is_null($payment_details)) {
-            array_push($this->openAPINullablesSetToNull, 'payment_details');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payment_details', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['payment_details'] = $payment_details;
-
-        return $this;
-    }
-
-    /**
      * Gets status
      *
-     * @return \Dojo_PHP\Model\PaymentIntentStatus|null
+     * @return \Dojo_PHP\Model\SetupIntentStatus|null
      */
     public function getStatus()
     {
@@ -676,7 +530,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param \Dojo_PHP\Model\PaymentIntentStatus|null $status status
+     * @param \Dojo_PHP\Model\SetupIntentStatus|null $status status
      *
      * @return self
      */
@@ -725,176 +579,6 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets amount
-     *
-     * @return \Dojo_PHP\Model\PaymentIntentAmount|null
-     */
-    public function getAmount()
-    {
-        return $this->container['amount'];
-    }
-
-    /**
-     * Sets amount
-     *
-     * @param \Dojo_PHP\Model\PaymentIntentAmount|null $amount amount
-     *
-     * @return self
-     */
-    public function setAmount($amount)
-    {
-        if (is_null($amount)) {
-            array_push($this->openAPINullablesSetToNull, 'amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['amount'] = $amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets tips_amount
-     *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestTipsAmount|null
-     */
-    public function getTipsAmount()
-    {
-        return $this->container['tips_amount'];
-    }
-
-    /**
-     * Sets tips_amount
-     *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestTipsAmount|null $tips_amount tips_amount
-     *
-     * @return self
-     */
-    public function setTipsAmount($tips_amount)
-    {
-        if (is_null($tips_amount)) {
-            array_push($this->openAPINullablesSetToNull, 'tips_amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('tips_amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['tips_amount'] = $tips_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets requested_amount
-     *
-     * @return \Dojo_PHP\Model\PaymentIntentRequestedAmount|null
-     */
-    public function getRequestedAmount()
-    {
-        return $this->container['requested_amount'];
-    }
-
-    /**
-     * Sets requested_amount
-     *
-     * @param \Dojo_PHP\Model\PaymentIntentRequestedAmount|null $requested_amount requested_amount
-     *
-     * @return self
-     */
-    public function setRequestedAmount($requested_amount)
-    {
-        if (is_null($requested_amount)) {
-            array_push($this->openAPINullablesSetToNull, 'requested_amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('requested_amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['requested_amount'] = $requested_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_amount
-     *
-     * @return \Dojo_PHP\Model\PaymentIntentTotalAmount|null
-     */
-    public function getTotalAmount()
-    {
-        return $this->container['total_amount'];
-    }
-
-    /**
-     * Sets total_amount
-     *
-     * @param \Dojo_PHP\Model\PaymentIntentTotalAmount|null $total_amount total_amount
-     *
-     * @return self
-     */
-    public function setTotalAmount($total_amount)
-    {
-        if (is_null($total_amount)) {
-            array_push($this->openAPINullablesSetToNull, 'total_amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('total_amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['total_amount'] = $total_amount;
-
-        return $this;
-    }
-
-    /**
-     * Gets refunded_amount
-     *
-     * @return int|null
-     */
-    public function getRefundedAmount()
-    {
-        return $this->container['refunded_amount'];
-    }
-
-    /**
-     * Sets refunded_amount
-     *
-     * @param int|null $refunded_amount The amount that was [refunded](../payments/manage-payments/cancellation-payments/refund).
-     *
-     * @return self
-     */
-    public function setRefundedAmount($refunded_amount)
-    {
-        if (is_null($refunded_amount)) {
-            array_push($this->openAPINullablesSetToNull, 'refunded_amount');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('refunded_amount', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['refunded_amount'] = $refunded_amount;
-
-        return $this;
-    }
-
-    /**
      * Gets customer
      *
      * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null
@@ -924,40 +608,6 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['customer'] = $customer;
-
-        return $this;
-    }
-
-    /**
-     * Gets request_security
-     *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity|null
-     */
-    public function getRequestSecurity()
-    {
-        return $this->container['request_security'];
-    }
-
-    /**
-     * Sets request_security
-     *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity|null $request_security request_security
-     *
-     * @return self
-     */
-    public function setRequestSecurity($request_security)
-    {
-        if (is_null($request_security)) {
-            array_push($this->openAPINullablesSetToNull, 'request_security');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('request_security', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['request_security'] = $request_security;
 
         return $this;
     }
@@ -1085,6 +735,40 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets expire_at
+     *
+     * @return \DateTime|null
+     */
+    public function getExpireAt()
+    {
+        return $this->container['expire_at'];
+    }
+
+    /**
+     * Sets expire_at
+     *
+     * @param \DateTime|null $expire_at The timestamp and date of when a setup intent will be voided, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format. This occurs when a setup intent is created and not yet authorized.
+     *
+     * @return self
+     */
+    public function setExpireAt($expire_at)
+    {
+        if (is_null($expire_at)) {
+            array_push($this->openAPINullablesSetToNull, 'expire_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expire_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['expire_at'] = $expire_at;
+
+        return $this;
+    }
+
+    /**
      * Gets reference
      *
      * @return string|null
@@ -1153,137 +837,35 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets subtotal_line_items
+     * Gets merchant_config
      *
-     * @return \Dojo_PHP\Model\PaymentIntentTotalAmount|null
+     * @return \Dojo_PHP\Model\PaymentIntentMerchantConfig|null
      */
-    public function getSubtotalLineItems()
+    public function getMerchantConfig()
     {
-        return $this->container['subtotal_line_items'];
+        return $this->container['merchant_config'];
     }
 
     /**
-     * Sets subtotal_line_items
+     * Sets merchant_config
      *
-     * @param \Dojo_PHP\Model\PaymentIntentTotalAmount|null $subtotal_line_items subtotal_line_items
+     * @param \Dojo_PHP\Model\PaymentIntentMerchantConfig|null $merchant_config merchant_config
      *
      * @return self
      */
-    public function setSubtotalLineItems($subtotal_line_items)
+    public function setMerchantConfig($merchant_config)
     {
-        if (is_null($subtotal_line_items)) {
-            array_push($this->openAPINullablesSetToNull, 'subtotal_line_items');
+        if (is_null($merchant_config)) {
+            array_push($this->openAPINullablesSetToNull, 'merchant_config');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('subtotal_line_items', $nullablesSetToNull);
+            $index = array_search('merchant_config', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['subtotal_line_items'] = $subtotal_line_items;
-
-        return $this;
-    }
-
-    /**
-     * Gets item_lines
-     *
-     * @return \Dojo_PHP\Model\ItemLine[]|null
-     */
-    public function getItemLines()
-    {
-        return $this->container['item_lines'];
-    }
-
-    /**
-     * Sets item_lines
-     *
-     * @param \Dojo_PHP\Model\ItemLine[]|null $item_lines The line items purchased by the customer.
-     *
-     * @return self
-     */
-    public function setItemLines($item_lines)
-    {
-        if (is_null($item_lines)) {
-            array_push($this->openAPINullablesSetToNull, 'item_lines');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('item_lines', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['item_lines'] = $item_lines;
-
-        return $this;
-    }
-
-    /**
-     * Gets tax_lines
-     *
-     * @return \Dojo_PHP\Model\TaxLine[]|null
-     */
-    public function getTaxLines()
-    {
-        return $this->container['tax_lines'];
-    }
-
-    /**
-     * Sets tax_lines
-     *
-     * @param \Dojo_PHP\Model\TaxLine[]|null $tax_lines The taxes applied to the items.
-     *
-     * @return self
-     */
-    public function setTaxLines($tax_lines)
-    {
-        if (is_null($tax_lines)) {
-            array_push($this->openAPINullablesSetToNull, 'tax_lines');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('tax_lines', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['tax_lines'] = $tax_lines;
-
-        return $this;
-    }
-
-    /**
-     * Gets action_link
-     *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestActionLink|null
-     */
-    public function getActionLink()
-    {
-        return $this->container['action_link'];
-    }
-
-    /**
-     * Sets action_link
-     *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestActionLink|null $action_link action_link
-     *
-     * @return self
-     */
-    public function setActionLink($action_link)
-    {
-        if (is_null($action_link)) {
-            array_push($this->openAPINullablesSetToNull, 'action_link');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('action_link', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['action_link'] = $action_link;
+        $this->container['merchant_config'] = $merchant_config;
 
         return $this;
     }
@@ -1323,142 +905,6 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets merchant_config
-     *
-     * @return \Dojo_PHP\Model\PaymentIntentMerchantConfig|null
-     */
-    public function getMerchantConfig()
-    {
-        return $this->container['merchant_config'];
-    }
-
-    /**
-     * Sets merchant_config
-     *
-     * @param \Dojo_PHP\Model\PaymentIntentMerchantConfig|null $merchant_config merchant_config
-     *
-     * @return self
-     */
-    public function setMerchantConfig($merchant_config)
-    {
-        if (is_null($merchant_config)) {
-            array_push($this->openAPINullablesSetToNull, 'merchant_config');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('merchant_config', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['merchant_config'] = $merchant_config;
-
-        return $this;
-    }
-
-    /**
-     * Gets expire_at
-     *
-     * @return \DateTime|null
-     */
-    public function getExpireAt()
-    {
-        return $this->container['expire_at'];
-    }
-
-    /**
-     * Sets expire_at
-     *
-     * @param \DateTime|null $expire_at The timestamp and date of when a payment intent will be voided, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format. This occurs when a payment intent is created and not yet authorized. If `null`, the payment intent is voided after 30 days.
-     *
-     * @return self
-     */
-    public function setExpireAt($expire_at)
-    {
-        if (is_null($expire_at)) {
-            array_push($this->openAPINullablesSetToNull, 'expire_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expire_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['expire_at'] = $expire_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets auto_expire_in
-     *
-     * @return string|null
-     */
-    public function getAutoExpireIn()
-    {
-        return $this->container['auto_expire_in'];
-    }
-
-    /**
-     * Sets auto_expire_in
-     *
-     * @param string|null $auto_expire_in The time interval after which `paymentIntent: Manual` will be captured or reversed, in `dd.hh:MM:ss` format. The timestamp value must be more than 30 seconds and less than 7 days.
-     *
-     * @return self
-     */
-    public function setAutoExpireIn($auto_expire_in)
-    {
-        if (is_null($auto_expire_in)) {
-            array_push($this->openAPINullablesSetToNull, 'auto_expire_in');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auto_expire_in', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auto_expire_in'] = $auto_expire_in;
-
-        return $this;
-    }
-
-    /**
-     * Gets auto_expire_action
-     *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction|null
-     */
-    public function getAutoExpireAction()
-    {
-        return $this->container['auto_expire_action'];
-    }
-
-    /**
-     * Sets auto_expire_action
-     *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction|null $auto_expire_action auto_expire_action
-     *
-     * @return self
-     */
-    public function setAutoExpireAction($auto_expire_action)
-    {
-        if (is_null($auto_expire_action)) {
-            array_push($this->openAPINullablesSetToNull, 'auto_expire_action');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auto_expire_action', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auto_expire_action'] = $auto_expire_action;
-
-        return $this;
-    }
-
-    /**
      * Gets metadata
      *
      * @return array<string,string>|null
@@ -1493,69 +939,130 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets setup_intent_id
+     * Gets intended_amount
      *
-     * @return string|null
+     * @return \Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount|null
      */
-    public function getSetupIntentId()
+    public function getIntendedAmount()
     {
-        return $this->container['setup_intent_id'];
+        return $this->container['intended_amount'];
     }
 
     /**
-     * Sets setup_intent_id
+     * Sets intended_amount
      *
-     * @param string|null $setup_intent_id Unique identifier for the setup intent.
+     * @param \Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount|null $intended_amount intended_amount
      *
      * @return self
      */
-    public function setSetupIntentId($setup_intent_id)
+    public function setIntendedAmount($intended_amount)
     {
-        if (is_null($setup_intent_id)) {
-            array_push($this->openAPINullablesSetToNull, 'setup_intent_id');
+        if (is_null($intended_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'intended_amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('setup_intent_id', $nullablesSetToNull);
+            $index = array_search('intended_amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['setup_intent_id'] = $setup_intent_id;
+        $this->container['intended_amount'] = $intended_amount;
 
         return $this;
     }
 
     /**
-     * Gets payment_events
+     * Gets merchant_initiated_transaction_type
      *
-     * @return \Dojo_PHP\Model\PaymentStatusResponse[]|null
+     * @return \Dojo_PHP\Model\MerchantInitiatedTransactionType|null
      */
-    public function getPaymentEvents()
+    public function getMerchantInitiatedTransactionType()
     {
-        return $this->container['payment_events'];
+        return $this->container['merchant_initiated_transaction_type'];
     }
 
     /**
-     * Sets payment_events
+     * Sets merchant_initiated_transaction_type
      *
-     * @param \Dojo_PHP\Model\PaymentStatusResponse[]|null $payment_events The past events of the payment.
+     * @param \Dojo_PHP\Model\MerchantInitiatedTransactionType|null $merchant_initiated_transaction_type merchant_initiated_transaction_type
      *
      * @return self
      */
-    public function setPaymentEvents($payment_events)
+    public function setMerchantInitiatedTransactionType($merchant_initiated_transaction_type)
     {
-        if (is_null($payment_events)) {
-            array_push($this->openAPINullablesSetToNull, 'payment_events');
+        if (is_null($merchant_initiated_transaction_type)) {
+            throw new \InvalidArgumentException('non-nullable merchant_initiated_transaction_type cannot be null');
+        }
+        $this->container['merchant_initiated_transaction_type'] = $merchant_initiated_transaction_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets terms
+     *
+     * @return string|null
+     */
+    public function getTerms()
+    {
+        return $this->container['terms'];
+    }
+
+    /**
+     * Sets terms
+     *
+     * @param string|null $terms The terms that customers are required to review before adding a card to setup intent.
+     *
+     * @return self
+     */
+    public function setTerms($terms)
+    {
+        if (is_null($terms)) {
+            array_push($this->openAPINullablesSetToNull, 'terms');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payment_events', $nullablesSetToNull);
+            $index = array_search('terms', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['payment_events'] = $payment_events;
+        $this->container['terms'] = $terms;
+
+        return $this;
+    }
+
+    /**
+     * Gets setup_events
+     *
+     * @return \Dojo_PHP\Model\PaymentStatusResponse[]|null
+     */
+    public function getSetupEvents()
+    {
+        return $this->container['setup_events'];
+    }
+
+    /**
+     * Sets setup_events
+     *
+     * @param \Dojo_PHP\Model\PaymentStatusResponse[]|null $setup_events Information of the setup intent.
+     *
+     * @return self
+     */
+    public function setSetupEvents($setup_events)
+    {
+        if (is_null($setup_events)) {
+            array_push($this->openAPINullablesSetToNull, 'setup_events');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('setup_events', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['setup_events'] = $setup_events;
 
         return $this;
     }

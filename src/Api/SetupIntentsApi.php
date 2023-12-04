@@ -1,6 +1,6 @@
 <?php
 /**
- * PaymentIntentsApi
+ * SetupIntentsApi
  * PHP version 7.4
  *
  * @category Class
@@ -40,14 +40,14 @@ use Dojo_PHP\HeaderSelector;
 use Dojo_PHP\ObjectSerializer;
 
 /**
- * PaymentIntentsApi Class Doc Comment
+ * SetupIntentsApi Class Doc Comment
  *
  * @category Class
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PaymentIntentsApi
+class SetupIntentsApi
 {
     /**
      * @var ClientInterface
@@ -71,31 +71,22 @@ class PaymentIntentsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'paymentIntentsChargePaymentIntent' => [
+        'setupIntentsCreate' => [
             'application/json',
         ],
-        'paymentIntentsCreatePaymentIntent' => [
+        'setupIntentsDelete' => [
             'application/json',
         ],
-        'paymentIntentsDelete' => [
+        'setupIntentsGetById' => [
             'application/json',
         ],
-        'paymentIntentsGet' => [
+        'setupIntentsGetPublicById' => [
             'application/json',
         ],
-        'paymentIntentsRefreshClientSessionSecret' => [
+        'setupIntentsRefreshPaymentIntentToken' => [
             'application/json',
         ],
-        'paymentIntentsSearch' => [
-            'application/json',
-        ],
-        'paymentIntentsSetCustomAmount' => [
-            'application/json',
-        ],
-        'paymentIntentsSetTipsAmount' => [
-            'application/json',
-        ],
-        'receiptCreate' => [
+        'setupIntentsRefreshSetupIntentTokenPublic' => [
             'application/json',
         ],
     ];
@@ -147,40 +138,40 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsChargePaymentIntent
+     * Operation setupIntentsCreate
      *
-     * Charge a card
+     * Create a setup intent
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
+     * @param  \Dojo_PHP\Model\CreateSetupIntentRequest $create_setup_intent_request create_setup_intent_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsCreate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\ChargeResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
      */
-    public function paymentIntentsChargePaymentIntent($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsChargePaymentIntent'][0])
+    public function setupIntentsCreate($version, $create_setup_intent_request, string $contentType = self::contentTypes['setupIntentsCreate'][0])
     {
-        list($response) = $this->paymentIntentsChargePaymentIntentWithHttpInfo($version, $payment_intent_id, $contentType);
+        list($response) = $this->setupIntentsCreateWithHttpInfo($version, $create_setup_intent_request, $contentType);
         return $response;
     }
 
     /**
-     * Operation paymentIntentsChargePaymentIntentWithHttpInfo
+     * Operation setupIntentsCreateWithHttpInfo
      *
-     * Charge a card
+     * Create a setup intent
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
+     * @param  \Dojo_PHP\Model\CreateSetupIntentRequest $create_setup_intent_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsCreate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\ChargeResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function paymentIntentsChargePaymentIntentWithHttpInfo($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsChargePaymentIntent'][0])
+    public function setupIntentsCreateWithHttpInfo($version, $create_setup_intent_request, string $contentType = self::contentTypes['setupIntentsCreate'][0])
     {
-        $request = $this->paymentIntentsChargePaymentIntentRequest($version, $payment_intent_id, $contentType);
+        $request = $this->setupIntentsCreateRequest($version, $create_setup_intent_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -219,11 +210,11 @@ class PaymentIntentsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Dojo_PHP\Model\ChargeResponse' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\SetupIntentResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ChargeResponse' !== 'string') {
+                        if ('\Dojo_PHP\Model\SetupIntentResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -241,7 +232,7 @@ class PaymentIntentsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ChargeResponse', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\SetupIntentResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -299,36 +290,9 @@ class PaymentIntentsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
-            $returnType = '\Dojo_PHP\Model\ChargeResponse';
+            $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -361,7 +325,7 @@ class PaymentIntentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ChargeResponse',
+                        '\Dojo_PHP\Model\SetupIntentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -382,34 +346,26 @@ class PaymentIntentsApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation paymentIntentsChargePaymentIntentAsync
+     * Operation setupIntentsCreateAsync
      *
-     * Charge a card
+     * Create a setup intent
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
+     * @param  \Dojo_PHP\Model\CreateSetupIntentRequest $create_setup_intent_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsChargePaymentIntentAsync($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsChargePaymentIntent'][0])
+    public function setupIntentsCreateAsync($version, $create_setup_intent_request, string $contentType = self::contentTypes['setupIntentsCreate'][0])
     {
-        return $this->paymentIntentsChargePaymentIntentAsyncWithHttpInfo($version, $payment_intent_id, $contentType)
+        return $this->setupIntentsCreateAsyncWithHttpInfo($version, $create_setup_intent_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -418,21 +374,21 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsChargePaymentIntentAsyncWithHttpInfo
+     * Operation setupIntentsCreateAsyncWithHttpInfo
      *
-     * Charge a card
+     * Create a setup intent
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
+     * @param  \Dojo_PHP\Model\CreateSetupIntentRequest $create_setup_intent_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsChargePaymentIntentAsyncWithHttpInfo($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsChargePaymentIntent'][0])
+    public function setupIntentsCreateAsyncWithHttpInfo($version, $create_setup_intent_request, string $contentType = self::contentTypes['setupIntentsCreate'][0])
     {
-        $returnType = '\Dojo_PHP\Model\ChargeResponse';
-        $request = $this->paymentIntentsChargePaymentIntentRequest($version, $payment_intent_id, $contentType);
+        $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
+        $request = $this->setupIntentsCreateRequest($version, $create_setup_intent_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -471,467 +427,34 @@ class PaymentIntentsApi
     }
 
     /**
-     * Create request for operation 'paymentIntentsChargePaymentIntent'
+     * Create request for operation 'setupIntentsCreate'
      *
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
+     * @param  \Dojo_PHP\Model\CreateSetupIntentRequest $create_setup_intent_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function paymentIntentsChargePaymentIntentRequest($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsChargePaymentIntent'][0])
+    public function setupIntentsCreateRequest($version, $create_setup_intent_request, string $contentType = self::contentTypes['setupIntentsCreate'][0])
     {
 
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsChargePaymentIntent'
+                'Missing the required parameter $version when calling setupIntentsCreate'
             );
         }
 
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
+        // verify the required parameter 'create_setup_intent_request' is set
+        if ($create_setup_intent_request === null || (is_array($create_setup_intent_request) && count($create_setup_intent_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling paymentIntentsChargePaymentIntent'
+                'Missing the required parameter $create_setup_intent_request when calling setupIntentsCreate'
             );
         }
 
 
-        $resourcePath = '/payment-intents/{paymentIntentId}/charge';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($version !== null) {
-            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
-        }
-
-        // path params
-        if ($payment_intent_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation paymentIntentsCreatePaymentIntent
-     *
-     * Create a payment intent
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request create_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
-     */
-    public function paymentIntentsCreatePaymentIntent($version, $create_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsCreatePaymentIntent'][0])
-    {
-        list($response) = $this->paymentIntentsCreatePaymentIntentWithHttpInfo($version, $create_payment_intent_request, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation paymentIntentsCreatePaymentIntentWithHttpInfo
-     *
-     * Create a payment intent
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function paymentIntentsCreatePaymentIntentWithHttpInfo($version, $create_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsCreatePaymentIntent'][0])
-    {
-        $request = $this->paymentIntentsCreatePaymentIntentRequest($version, $create_payment_intent_request, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Dojo_PHP\Model\PaymentIntent' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PaymentIntent' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PaymentIntent', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Dojo_PHP\Model\PaymentIntent';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PaymentIntent',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 403:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation paymentIntentsCreatePaymentIntentAsync
-     *
-     * Create a payment intent
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsCreatePaymentIntentAsync($version, $create_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsCreatePaymentIntent'][0])
-    {
-        return $this->paymentIntentsCreatePaymentIntentAsyncWithHttpInfo($version, $create_payment_intent_request, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation paymentIntentsCreatePaymentIntentAsyncWithHttpInfo
-     *
-     * Create a payment intent
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsCreatePaymentIntentAsyncWithHttpInfo($version, $create_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsCreatePaymentIntent'][0])
-    {
-        $returnType = '\Dojo_PHP\Model\PaymentIntent';
-        $request = $this->paymentIntentsCreatePaymentIntentRequest($version, $create_payment_intent_request, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'paymentIntentsCreatePaymentIntent'
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function paymentIntentsCreatePaymentIntentRequest($version, $create_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsCreatePaymentIntent'][0])
-    {
-
-        // verify the required parameter 'version' is set
-        if ($version === null || (is_array($version) && count($version) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsCreatePaymentIntent'
-            );
-        }
-
-        // verify the required parameter 'create_payment_intent_request' is set
-        if ($create_payment_intent_request === null || (is_array($create_payment_intent_request) && count($create_payment_intent_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $create_payment_intent_request when calling paymentIntentsCreatePaymentIntent'
-            );
-        }
-
-
-        $resourcePath = '/payment-intents';
+        $resourcePath = '/setup-intents';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -953,12 +476,12 @@ class PaymentIntentsApi
         );
 
         // for model (json/xml)
-        if (isset($create_payment_intent_request)) {
+        if (isset($create_setup_intent_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_payment_intent_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($create_setup_intent_request));
             } else {
-                $httpBody = $create_payment_intent_request;
+                $httpBody = $create_setup_intent_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1012,40 +535,42 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsDelete
+     * Operation setupIntentsDelete
      *
-     * Cancel a payment intent
+     * Cancel a setup intent
      *
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
+     * @param  bool $include_authorized Default: &#x60;false&#x60;. Set to &#x60;true&#x60; to also delete the authorized setup intents and to update their statuses to &#x60;Closed&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsDelete'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
      */
-    public function paymentIntentsDelete($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsDelete'][0])
+    public function setupIntentsDelete($setup_intent_id, $version, $include_authorized = null, string $contentType = self::contentTypes['setupIntentsDelete'][0])
     {
-        list($response) = $this->paymentIntentsDeleteWithHttpInfo($version, $payment_intent_id, $contentType);
+        list($response) = $this->setupIntentsDeleteWithHttpInfo($setup_intent_id, $version, $include_authorized, $contentType);
         return $response;
     }
 
     /**
-     * Operation paymentIntentsDeleteWithHttpInfo
+     * Operation setupIntentsDeleteWithHttpInfo
      *
-     * Cancel a payment intent
+     * Cancel a setup intent
      *
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
+     * @param  bool $include_authorized Default: &#x60;false&#x60;. Set to &#x60;true&#x60; to also delete the authorized setup intents and to update their statuses to &#x60;Closed&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsDelete'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function paymentIntentsDeleteWithHttpInfo($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsDelete'][0])
+    public function setupIntentsDeleteWithHttpInfo($setup_intent_id, $version, $include_authorized = null, string $contentType = self::contentTypes['setupIntentsDelete'][0])
     {
-        $request = $this->paymentIntentsDeleteRequest($version, $payment_intent_id, $contentType);
+        $request = $this->setupIntentsDeleteRequest($setup_intent_id, $version, $include_authorized, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1084,11 +609,11 @@ class PaymentIntentsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Dojo_PHP\Model\PaymentIntent' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\SetupIntentResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PaymentIntent' !== 'string') {
+                        if ('\Dojo_PHP\Model\SetupIntentResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1106,7 +631,7 @@ class PaymentIntentsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PaymentIntent', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\SetupIntentResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1193,7 +718,7 @@ class PaymentIntentsApi
                     ];
             }
 
-            $returnType = '\Dojo_PHP\Model\PaymentIntent';
+            $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1226,7 +751,7 @@ class PaymentIntentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PaymentIntent',
+                        '\Dojo_PHP\Model\SetupIntentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1261,20 +786,21 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsDeleteAsync
+     * Operation setupIntentsDeleteAsync
      *
-     * Cancel a payment intent
+     * Cancel a setup intent
      *
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
+     * @param  bool $include_authorized Default: &#x60;false&#x60;. Set to &#x60;true&#x60; to also delete the authorized setup intents and to update their statuses to &#x60;Closed&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsDeleteAsync($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsDelete'][0])
+    public function setupIntentsDeleteAsync($setup_intent_id, $version, $include_authorized = null, string $contentType = self::contentTypes['setupIntentsDelete'][0])
     {
-        return $this->paymentIntentsDeleteAsyncWithHttpInfo($version, $payment_intent_id, $contentType)
+        return $this->setupIntentsDeleteAsyncWithHttpInfo($setup_intent_id, $version, $include_authorized, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1283,21 +809,22 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsDeleteAsyncWithHttpInfo
+     * Operation setupIntentsDeleteAsyncWithHttpInfo
      *
-     * Cancel a payment intent
+     * Cancel a setup intent
      *
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
+     * @param  bool $include_authorized Default: &#x60;false&#x60;. Set to &#x60;true&#x60; to also delete the authorized setup intents and to update their statuses to &#x60;Closed&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsDeleteAsyncWithHttpInfo($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsDelete'][0])
+    public function setupIntentsDeleteAsyncWithHttpInfo($setup_intent_id, $version, $include_authorized = null, string $contentType = self::contentTypes['setupIntentsDelete'][0])
     {
-        $returnType = '\Dojo_PHP\Model\PaymentIntent';
-        $request = $this->paymentIntentsDeleteRequest($version, $payment_intent_id, $contentType);
+        $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
+        $request = $this->setupIntentsDeleteRequest($setup_intent_id, $version, $include_authorized, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1336,40 +863,54 @@ class PaymentIntentsApi
     }
 
     /**
-     * Create request for operation 'paymentIntentsDelete'
+     * Create request for operation 'setupIntentsDelete'
      *
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
+     * @param  bool $include_authorized Default: &#x60;false&#x60;. Set to &#x60;true&#x60; to also delete the authorized setup intents and to update their statuses to &#x60;Closed&#x60;. (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function paymentIntentsDeleteRequest($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsDelete'][0])
+    public function setupIntentsDeleteRequest($setup_intent_id, $version, $include_authorized = null, string $contentType = self::contentTypes['setupIntentsDelete'][0])
     {
 
+        // verify the required parameter 'setup_intent_id' is set
+        if ($setup_intent_id === null || (is_array($setup_intent_id) && count($setup_intent_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $setup_intent_id when calling setupIntentsDelete'
+            );
+        }
+        if (strlen($setup_intent_id) > 50) {
+            throw new \InvalidArgumentException('invalid length for "$setup_intent_id" when calling SetupIntentsApi.setupIntentsDelete, must be smaller than or equal to 50.');
+        }
+        
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsDelete'
-            );
-        }
-
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling paymentIntentsDelete'
+                'Missing the required parameter $version when calling setupIntentsDelete'
             );
         }
 
 
-        $resourcePath = '/payment-intents/{paymentIntentId}';
+
+        $resourcePath = '/setup-intents/{setupIntentId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $include_authorized,
+            'includeAuthorized', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
         // header params
         if ($version !== null) {
@@ -1377,10 +918,10 @@ class PaymentIntentsApi
         }
 
         // path params
-        if ($payment_intent_id !== null) {
+        if ($setup_intent_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
+                '{' . 'setupIntentId' . '}',
+                ObjectSerializer::toPathValue($setup_intent_id),
                 $resourcePath
             );
         }
@@ -1445,40 +986,40 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsGet
+     * Operation setupIntentsGetById
      *
-     * Retrieve a payment intent
+     * Retrieve a setup intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetById'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
      */
-    public function paymentIntentsGet($payment_intent_id, $version, string $contentType = self::contentTypes['paymentIntentsGet'][0])
+    public function setupIntentsGetById($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetById'][0])
     {
-        list($response) = $this->paymentIntentsGetWithHttpInfo($payment_intent_id, $version, $contentType);
+        list($response) = $this->setupIntentsGetByIdWithHttpInfo($setup_intent_id, $version, $contentType);
         return $response;
     }
 
     /**
-     * Operation paymentIntentsGetWithHttpInfo
+     * Operation setupIntentsGetByIdWithHttpInfo
      *
-     * Retrieve a payment intent
+     * Retrieve a setup intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetById'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function paymentIntentsGetWithHttpInfo($payment_intent_id, $version, string $contentType = self::contentTypes['paymentIntentsGet'][0])
+    public function setupIntentsGetByIdWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetById'][0])
     {
-        $request = $this->paymentIntentsGetRequest($payment_intent_id, $version, $contentType);
+        $request = $this->setupIntentsGetByIdRequest($setup_intent_id, $version, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1517,11 +1058,11 @@ class PaymentIntentsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Dojo_PHP\Model\PaymentIntent' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\SetupIntentResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PaymentIntent' !== 'string') {
+                        if ('\Dojo_PHP\Model\SetupIntentResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1539,7 +1080,7 @@ class PaymentIntentsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PaymentIntent', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\SetupIntentResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1626,7 +1167,7 @@ class PaymentIntentsApi
                     ];
             }
 
-            $returnType = '\Dojo_PHP\Model\PaymentIntent';
+            $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -1659,7 +1200,7 @@ class PaymentIntentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PaymentIntent',
+                        '\Dojo_PHP\Model\SetupIntentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1694,20 +1235,20 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsGetAsync
+     * Operation setupIntentsGetByIdAsync
      *
-     * Retrieve a payment intent
+     * Retrieve a setup intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsGetAsync($payment_intent_id, $version, string $contentType = self::contentTypes['paymentIntentsGet'][0])
+    public function setupIntentsGetByIdAsync($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetById'][0])
     {
-        return $this->paymentIntentsGetAsyncWithHttpInfo($payment_intent_id, $version, $contentType)
+        return $this->setupIntentsGetByIdAsyncWithHttpInfo($setup_intent_id, $version, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1716,21 +1257,21 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsGetAsyncWithHttpInfo
+     * Operation setupIntentsGetByIdAsyncWithHttpInfo
      *
-     * Retrieve a payment intent
+     * Retrieve a setup intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsGetAsyncWithHttpInfo($payment_intent_id, $version, string $contentType = self::contentTypes['paymentIntentsGet'][0])
+    public function setupIntentsGetByIdAsyncWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetById'][0])
     {
-        $returnType = '\Dojo_PHP\Model\PaymentIntent';
-        $request = $this->paymentIntentsGetRequest($payment_intent_id, $version, $contentType);
+        $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
+        $request = $this->setupIntentsGetByIdRequest($setup_intent_id, $version, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1769,34 +1310,34 @@ class PaymentIntentsApi
     }
 
     /**
-     * Create request for operation 'paymentIntentsGet'
+     * Create request for operation 'setupIntentsGetById'
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  string $setup_intent_id Unique identifier for the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function paymentIntentsGetRequest($payment_intent_id, $version, string $contentType = self::contentTypes['paymentIntentsGet'][0])
+    public function setupIntentsGetByIdRequest($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetById'][0])
     {
 
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
+        // verify the required parameter 'setup_intent_id' is set
+        if ($setup_intent_id === null || (is_array($setup_intent_id) && count($setup_intent_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling paymentIntentsGet'
+                'Missing the required parameter $setup_intent_id when calling setupIntentsGetById'
             );
         }
 
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsGet'
+                'Missing the required parameter $version when calling setupIntentsGetById'
             );
         }
 
 
-        $resourcePath = '/payment-intents/{paymentIntentId}';
+        $resourcePath = '/setup-intents/{setupIntentId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1810,10 +1351,10 @@ class PaymentIntentsApi
         }
 
         // path params
-        if ($payment_intent_id !== null) {
+        if ($setup_intent_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
+                '{' . 'setupIntentId' . '}',
+                ObjectSerializer::toPathValue($setup_intent_id),
                 $resourcePath
             );
         }
@@ -1878,40 +1419,40 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsRefreshClientSessionSecret
+     * Operation setupIntentsGetPublicById
      *
-     * Update a client session secret
+     * Retrieve a setup intent (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetPublicById'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SetupIntentPublicResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
      */
-    public function paymentIntentsRefreshClientSessionSecret($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsRefreshClientSessionSecret'][0])
+    public function setupIntentsGetPublicById($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetPublicById'][0])
     {
-        list($response) = $this->paymentIntentsRefreshClientSessionSecretWithHttpInfo($version, $payment_intent_id, $contentType);
+        list($response) = $this->setupIntentsGetPublicByIdWithHttpInfo($setup_intent_id, $version, $contentType);
         return $response;
     }
 
     /**
-     * Operation paymentIntentsRefreshClientSessionSecretWithHttpInfo
+     * Operation setupIntentsGetPublicByIdWithHttpInfo
      *
-     * Update a client session secret
+     * Retrieve a setup intent (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetPublicById'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SetupIntentPublicResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function paymentIntentsRefreshClientSessionSecretWithHttpInfo($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsRefreshClientSessionSecret'][0])
+    public function setupIntentsGetPublicByIdWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetPublicById'][0])
     {
-        $request = $this->paymentIntentsRefreshClientSessionSecretRequest($version, $payment_intent_id, $contentType);
+        $request = $this->setupIntentsGetPublicByIdRequest($setup_intent_id, $version, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1950,11 +1491,11 @@ class PaymentIntentsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Dojo_PHP\Model\PaymentIntent' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\SetupIntentPublicResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PaymentIntent' !== 'string') {
+                        if ('\Dojo_PHP\Model\SetupIntentPublicResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1972,7 +1513,7 @@ class PaymentIntentsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PaymentIntent', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\SetupIntentPublicResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2030,9 +1571,36 @@ class PaymentIntentsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 404:
+                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                 );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
-            $returnType = '\Dojo_PHP\Model\PaymentIntent';
+            $returnType = '\Dojo_PHP\Model\SetupIntentPublicResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2065,7 +1633,7 @@ class PaymentIntentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PaymentIntent',
+                        '\Dojo_PHP\Model\SetupIntentPublicResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2086,26 +1654,34 @@ class PaymentIntentsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation paymentIntentsRefreshClientSessionSecretAsync
+     * Operation setupIntentsGetPublicByIdAsync
      *
-     * Update a client session secret
+     * Retrieve a setup intent (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetPublicById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsRefreshClientSessionSecretAsync($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsRefreshClientSessionSecret'][0])
+    public function setupIntentsGetPublicByIdAsync($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetPublicById'][0])
     {
-        return $this->paymentIntentsRefreshClientSessionSecretAsyncWithHttpInfo($version, $payment_intent_id, $contentType)
+        return $this->setupIntentsGetPublicByIdAsyncWithHttpInfo($setup_intent_id, $version, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2114,21 +1690,21 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsRefreshClientSessionSecretAsyncWithHttpInfo
+     * Operation setupIntentsGetPublicByIdAsyncWithHttpInfo
      *
-     * Update a client session secret
+     * Retrieve a setup intent (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetPublicById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function paymentIntentsRefreshClientSessionSecretAsyncWithHttpInfo($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsRefreshClientSessionSecret'][0])
+    public function setupIntentsGetPublicByIdAsyncWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetPublicById'][0])
     {
-        $returnType = '\Dojo_PHP\Model\PaymentIntent';
-        $request = $this->paymentIntentsRefreshClientSessionSecretRequest($version, $payment_intent_id, $contentType);
+        $returnType = '\Dojo_PHP\Model\SetupIntentPublicResponse';
+        $request = $this->setupIntentsGetPublicByIdRequest($setup_intent_id, $version, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2167,34 +1743,34 @@ class PaymentIntentsApi
     }
 
     /**
-     * Create request for operation 'paymentIntentsRefreshClientSessionSecret'
+     * Create request for operation 'setupIntentsGetPublicById'
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsGetPublicById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function paymentIntentsRefreshClientSessionSecretRequest($version, $payment_intent_id, string $contentType = self::contentTypes['paymentIntentsRefreshClientSessionSecret'][0])
+    public function setupIntentsGetPublicByIdRequest($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsGetPublicById'][0])
     {
+
+        // verify the required parameter 'setup_intent_id' is set
+        if ($setup_intent_id === null || (is_array($setup_intent_id) && count($setup_intent_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $setup_intent_id when calling setupIntentsGetPublicById'
+            );
+        }
 
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsRefreshClientSessionSecret'
-            );
-        }
-
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling paymentIntentsRefreshClientSessionSecret'
+                'Missing the required parameter $version when calling setupIntentsGetPublicById'
             );
         }
 
 
-        $resourcePath = '/payment-intents/{paymentIntentId}/refresh-client-session-secret';
+        $resourcePath = '/setup-intents/public/{setupIntentId}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2208,10 +1784,408 @@ class PaymentIntentsApi
         }
 
         // path params
-        if ($payment_intent_id !== null) {
+        if ($setup_intent_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
+                '{' . 'setupIntentId' . '}',
+                ObjectSerializer::toPathValue($setup_intent_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation setupIntentsRefreshPaymentIntentToken
+     *
+     * Update a client session secret
+     *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshPaymentIntentToken'] to see the possible values for this operation
+     *
+     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     */
+    public function setupIntentsRefreshPaymentIntentToken($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshPaymentIntentToken'][0])
+    {
+        list($response) = $this->setupIntentsRefreshPaymentIntentTokenWithHttpInfo($setup_intent_id, $version, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation setupIntentsRefreshPaymentIntentTokenWithHttpInfo
+     *
+     * Update a client session secret
+     *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshPaymentIntentToken'] to see the possible values for this operation
+     *
+     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Dojo_PHP\Model\SetupIntentResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function setupIntentsRefreshPaymentIntentTokenWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshPaymentIntentToken'][0])
+    {
+        $request = $this->setupIntentsRefreshPaymentIntentTokenRequest($setup_intent_id, $version, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Dojo_PHP\Model\SetupIntentResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\SetupIntentResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                 );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\SetupIntentResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                 );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                 );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\SetupIntentResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Dojo_PHP\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation setupIntentsRefreshPaymentIntentTokenAsync
+     *
+     * Update a client session secret
+     *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshPaymentIntentToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function setupIntentsRefreshPaymentIntentTokenAsync($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshPaymentIntentToken'][0])
+    {
+        return $this->setupIntentsRefreshPaymentIntentTokenAsyncWithHttpInfo($setup_intent_id, $version, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation setupIntentsRefreshPaymentIntentTokenAsyncWithHttpInfo
+     *
+     * Update a client session secret
+     *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshPaymentIntentToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function setupIntentsRefreshPaymentIntentTokenAsyncWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshPaymentIntentToken'][0])
+    {
+        $returnType = '\Dojo_PHP\Model\SetupIntentResponse';
+        $request = $this->setupIntentsRefreshPaymentIntentTokenRequest($setup_intent_id, $version, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'setupIntentsRefreshPaymentIntentToken'
+     *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
+     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshPaymentIntentToken'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function setupIntentsRefreshPaymentIntentTokenRequest($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshPaymentIntentToken'][0])
+    {
+
+        // verify the required parameter 'setup_intent_id' is set
+        if ($setup_intent_id === null || (is_array($setup_intent_id) && count($setup_intent_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $setup_intent_id when calling setupIntentsRefreshPaymentIntentToken'
+            );
+        }
+
+        // verify the required parameter 'version' is set
+        if ($version === null || (is_array($version) && count($version) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $version when calling setupIntentsRefreshPaymentIntentToken'
+            );
+        }
+
+
+        $resourcePath = '/setup-intents/{setupIntentId}/refresh-client-session-secret';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($version !== null) {
+            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
+        }
+
+        // path params
+        if ($setup_intent_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'setupIntentId' . '}',
+                ObjectSerializer::toPathValue($setup_intent_id),
                 $resourcePath
             );
         }
@@ -2276,40 +2250,40 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation paymentIntentsSearch
+     * Operation setupIntentsRefreshSetupIntentTokenPublic
      *
-     * List all payment intents
+     * Update a client session secret (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request search_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PagedPaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SetupIntentPublicResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
      */
-    public function paymentIntentsSearch($version, $search_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsSearch'][0])
+    public function setupIntentsRefreshSetupIntentTokenPublic($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'][0])
     {
-        list($response) = $this->paymentIntentsSearchWithHttpInfo($version, $search_payment_intent_request, $contentType);
+        list($response) = $this->setupIntentsRefreshSetupIntentTokenPublicWithHttpInfo($setup_intent_id, $version, $contentType);
         return $response;
     }
 
     /**
-     * Operation paymentIntentsSearchWithHttpInfo
+     * Operation setupIntentsRefreshSetupIntentTokenPublicWithHttpInfo
      *
-     * List all payment intents
+     * Update a client session secret (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PagedPaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SetupIntentPublicResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function paymentIntentsSearchWithHttpInfo($version, $search_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsSearch'][0])
+    public function setupIntentsRefreshSetupIntentTokenPublicWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'][0])
     {
-        $request = $this->paymentIntentsSearchRequest($version, $search_payment_intent_request, $contentType);
+        $request = $this->setupIntentsRefreshSetupIntentTokenPublicRequest($setup_intent_id, $version, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2348,11 +2322,11 @@ class PaymentIntentsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Dojo_PHP\Model\PagedPaymentIntent' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\SetupIntentPublicResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PagedPaymentIntent' !== 'string') {
+                        if ('\Dojo_PHP\Model\SetupIntentPublicResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2370,7 +2344,7 @@ class PaymentIntentsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PagedPaymentIntent', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\SetupIntentPublicResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2428,9 +2402,36 @@ class PaymentIntentsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 404:
+                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                 );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
-            $returnType = '\Dojo_PHP\Model\PagedPaymentIntent';
+            $returnType = '\Dojo_PHP\Model\SetupIntentPublicResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2463,1195 +2464,11 @@ class PaymentIntentsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PagedPaymentIntent',
+                        '\Dojo_PHP\Model\SetupIntentPublicResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation paymentIntentsSearchAsync
-     *
-     * List all payment intents
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsSearchAsync($version, $search_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsSearch'][0])
-    {
-        return $this->paymentIntentsSearchAsyncWithHttpInfo($version, $search_payment_intent_request, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation paymentIntentsSearchAsyncWithHttpInfo
-     *
-     * List all payment intents
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsSearchAsyncWithHttpInfo($version, $search_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsSearch'][0])
-    {
-        $returnType = '\Dojo_PHP\Model\PagedPaymentIntent';
-        $request = $this->paymentIntentsSearchRequest($version, $search_payment_intent_request, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'paymentIntentsSearch'
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function paymentIntentsSearchRequest($version, $search_payment_intent_request, string $contentType = self::contentTypes['paymentIntentsSearch'][0])
-    {
-
-        // verify the required parameter 'version' is set
-        if ($version === null || (is_array($version) && count($version) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsSearch'
-            );
-        }
-
-        // verify the required parameter 'search_payment_intent_request' is set
-        if ($search_payment_intent_request === null || (is_array($search_payment_intent_request) && count($search_payment_intent_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $search_payment_intent_request when calling paymentIntentsSearch'
-            );
-        }
-
-
-        $resourcePath = '/payment-intents/search';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($version !== null) {
-            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
-        }
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($search_payment_intent_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($search_payment_intent_request));
-            } else {
-                $httpBody = $search_payment_intent_request;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation paymentIntentsSetCustomAmount
-     *
-     * Change a payment intent amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request set_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
-     */
-    public function paymentIntentsSetCustomAmount($version, $payment_intent_id, $set_amount_request, string $contentType = self::contentTypes['paymentIntentsSetCustomAmount'][0])
-    {
-        list($response) = $this->paymentIntentsSetCustomAmountWithHttpInfo($version, $payment_intent_id, $set_amount_request, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation paymentIntentsSetCustomAmountWithHttpInfo
-     *
-     * Change a payment intent amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function paymentIntentsSetCustomAmountWithHttpInfo($version, $payment_intent_id, $set_amount_request, string $contentType = self::contentTypes['paymentIntentsSetCustomAmount'][0])
-    {
-        $request = $this->paymentIntentsSetCustomAmountRequest($version, $payment_intent_id, $set_amount_request, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Dojo_PHP\Model\PaymentIntent' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PaymentIntent' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PaymentIntent', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 405:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Dojo_PHP\Model\PaymentIntent';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PaymentIntent',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 405:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation paymentIntentsSetCustomAmountAsync
-     *
-     * Change a payment intent amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsSetCustomAmountAsync($version, $payment_intent_id, $set_amount_request, string $contentType = self::contentTypes['paymentIntentsSetCustomAmount'][0])
-    {
-        return $this->paymentIntentsSetCustomAmountAsyncWithHttpInfo($version, $payment_intent_id, $set_amount_request, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation paymentIntentsSetCustomAmountAsyncWithHttpInfo
-     *
-     * Change a payment intent amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsSetCustomAmountAsyncWithHttpInfo($version, $payment_intent_id, $set_amount_request, string $contentType = self::contentTypes['paymentIntentsSetCustomAmount'][0])
-    {
-        $returnType = '\Dojo_PHP\Model\PaymentIntent';
-        $request = $this->paymentIntentsSetCustomAmountRequest($version, $payment_intent_id, $set_amount_request, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'paymentIntentsSetCustomAmount'
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function paymentIntentsSetCustomAmountRequest($version, $payment_intent_id, $set_amount_request, string $contentType = self::contentTypes['paymentIntentsSetCustomAmount'][0])
-    {
-
-        // verify the required parameter 'version' is set
-        if ($version === null || (is_array($version) && count($version) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsSetCustomAmount'
-            );
-        }
-
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling paymentIntentsSetCustomAmount'
-            );
-        }
-
-        // verify the required parameter 'set_amount_request' is set
-        if ($set_amount_request === null || (is_array($set_amount_request) && count($set_amount_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $set_amount_request when calling paymentIntentsSetCustomAmount'
-            );
-        }
-
-
-        $resourcePath = '/payment-intents/{paymentIntentId}/amount';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($version !== null) {
-            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
-        }
-
-        // path params
-        if ($payment_intent_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($set_amount_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($set_amount_request));
-            } else {
-                $httpBody = $set_amount_request;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation paymentIntentsSetTipsAmount
-     *
-     * Change tips amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request set_tips_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
-     */
-    public function paymentIntentsSetTipsAmount($version, $payment_intent_id, $set_tips_amount_request, string $contentType = self::contentTypes['paymentIntentsSetTipsAmount'][0])
-    {
-        list($response) = $this->paymentIntentsSetTipsAmountWithHttpInfo($version, $payment_intent_id, $set_tips_amount_request, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation paymentIntentsSetTipsAmountWithHttpInfo
-     *
-     * Change tips amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\PaymentIntent|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function paymentIntentsSetTipsAmountWithHttpInfo($version, $payment_intent_id, $set_tips_amount_request, string $contentType = self::contentTypes['paymentIntentsSetTipsAmount'][0])
-    {
-        $request = $this->paymentIntentsSetTipsAmountRequest($version, $payment_intent_id, $set_tips_amount_request, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Dojo_PHP\Model\PaymentIntent' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\PaymentIntent' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\PaymentIntent', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 405:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                 );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Dojo_PHP\Model\PaymentIntent';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\PaymentIntent',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 405:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation paymentIntentsSetTipsAmountAsync
-     *
-     * Change tips amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsSetTipsAmountAsync($version, $payment_intent_id, $set_tips_amount_request, string $contentType = self::contentTypes['paymentIntentsSetTipsAmount'][0])
-    {
-        return $this->paymentIntentsSetTipsAmountAsyncWithHttpInfo($version, $payment_intent_id, $set_tips_amount_request, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation paymentIntentsSetTipsAmountAsyncWithHttpInfo
-     *
-     * Change tips amount
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function paymentIntentsSetTipsAmountAsyncWithHttpInfo($version, $payment_intent_id, $set_tips_amount_request, string $contentType = self::contentTypes['paymentIntentsSetTipsAmount'][0])
-    {
-        $returnType = '\Dojo_PHP\Model\PaymentIntent';
-        $request = $this->paymentIntentsSetTipsAmountRequest($version, $payment_intent_id, $set_tips_amount_request, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'paymentIntentsSetTipsAmount'
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function paymentIntentsSetTipsAmountRequest($version, $payment_intent_id, $set_tips_amount_request, string $contentType = self::contentTypes['paymentIntentsSetTipsAmount'][0])
-    {
-
-        // verify the required parameter 'version' is set
-        if ($version === null || (is_array($version) && count($version) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling paymentIntentsSetTipsAmount'
-            );
-        }
-
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling paymentIntentsSetTipsAmount'
-            );
-        }
-
-        // verify the required parameter 'set_tips_amount_request' is set
-        if ($set_tips_amount_request === null || (is_array($set_tips_amount_request) && count($set_tips_amount_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $set_tips_amount_request when calling paymentIntentsSetTipsAmount'
-            );
-        }
-
-
-        $resourcePath = '/payment-intents/{paymentIntentId}/tips-amount';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($version !== null) {
-            $headerParams['version'] = ObjectSerializer::toHeaderValue($version);
-        }
-
-        // path params
-        if ($payment_intent_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($set_tips_amount_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($set_tips_amount_request));
-            } else {
-                $httpBody = $set_tips_amount_request;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation receiptCreate
-     *
-     * Send a receipt
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return void
-     */
-    public function receiptCreate($version, $payment_intent_id, $send_email_receipt_request, string $contentType = self::contentTypes['receiptCreate'][0])
-    {
-        $this->receiptCreateWithHttpInfo($version, $payment_intent_id, $send_email_receipt_request, $contentType);
-    }
-
-    /**
-     * Operation receiptCreateWithHttpInfo
-     *
-     * Send a receipt
-     *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
-     *
-     * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function receiptCreateWithHttpInfo($version, $payment_intent_id, $send_email_receipt_request, string $contentType = self::contentTypes['receiptCreate'][0])
-    {
-        $request = $this->receiptCreateRequest($version, $payment_intent_id, $send_email_receipt_request, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            return [null, $statusCode, $response->getHeaders()];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -3682,21 +2499,20 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation receiptCreateAsync
+     * Operation setupIntentsRefreshSetupIntentTokenPublicAsync
      *
-     * Send a receipt
+     * Update a client session secret (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function receiptCreateAsync($version, $payment_intent_id, $send_email_receipt_request, string $contentType = self::contentTypes['receiptCreate'][0])
+    public function setupIntentsRefreshSetupIntentTokenPublicAsync($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'][0])
     {
-        return $this->receiptCreateAsyncWithHttpInfo($version, $payment_intent_id, $send_email_receipt_request, $contentType)
+        return $this->setupIntentsRefreshSetupIntentTokenPublicAsyncWithHttpInfo($setup_intent_id, $version, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3705,28 +2521,40 @@ class PaymentIntentsApi
     }
 
     /**
-     * Operation receiptCreateAsyncWithHttpInfo
+     * Operation setupIntentsRefreshSetupIntentTokenPublicAsyncWithHttpInfo
      *
-     * Send a receipt
+     * Update a client session secret (no auth)
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function receiptCreateAsyncWithHttpInfo($version, $payment_intent_id, $send_email_receipt_request, string $contentType = self::contentTypes['receiptCreate'][0])
+    public function setupIntentsRefreshSetupIntentTokenPublicAsyncWithHttpInfo($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'][0])
     {
-        $returnType = '';
-        $request = $this->receiptCreateRequest($version, $payment_intent_id, $send_email_receipt_request, $contentType);
+        $returnType = '\Dojo_PHP\Model\SetupIntentPublicResponse';
+        $request = $this->setupIntentsRefreshSetupIntentTokenPublicRequest($setup_intent_id, $version, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -3746,42 +2574,34 @@ class PaymentIntentsApi
     }
 
     /**
-     * Create request for operation 'receiptCreate'
+     * Create request for operation 'setupIntentsRefreshSetupIntentTokenPublic'
      *
+     * @param  string $setup_intent_id The unique ID of the setup intent. (required)
      * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function receiptCreateRequest($version, $payment_intent_id, $send_email_receipt_request, string $contentType = self::contentTypes['receiptCreate'][0])
+    public function setupIntentsRefreshSetupIntentTokenPublicRequest($setup_intent_id, $version, string $contentType = self::contentTypes['setupIntentsRefreshSetupIntentTokenPublic'][0])
     {
+
+        // verify the required parameter 'setup_intent_id' is set
+        if ($setup_intent_id === null || (is_array($setup_intent_id) && count($setup_intent_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $setup_intent_id when calling setupIntentsRefreshSetupIntentTokenPublic'
+            );
+        }
 
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling receiptCreate'
-            );
-        }
-
-        // verify the required parameter 'payment_intent_id' is set
-        if ($payment_intent_id === null || (is_array($payment_intent_id) && count($payment_intent_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $payment_intent_id when calling receiptCreate'
-            );
-        }
-
-        // verify the required parameter 'send_email_receipt_request' is set
-        if ($send_email_receipt_request === null || (is_array($send_email_receipt_request) && count($send_email_receipt_request) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $send_email_receipt_request when calling receiptCreate'
+                'Missing the required parameter $version when calling setupIntentsRefreshSetupIntentTokenPublic'
             );
         }
 
 
-        $resourcePath = '/payment-intents/{paymentIntentId}/receipt';
+        $resourcePath = '/setup-intents/public/{setupIntentId}/refresh-client-session-secret';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3795,10 +2615,10 @@ class PaymentIntentsApi
         }
 
         // path params
-        if ($payment_intent_id !== null) {
+        if ($setup_intent_id !== null) {
             $resourcePath = str_replace(
-                '{' . 'paymentIntentId' . '}',
-                ObjectSerializer::toPathValue($payment_intent_id),
+                '{' . 'setupIntentId' . '}',
+                ObjectSerializer::toPathValue($setup_intent_id),
                 $resourcePath
             );
         }
@@ -3811,14 +2631,7 @@ class PaymentIntentsApi
         );
 
         // for model (json/xml)
-        if (isset($send_email_receipt_request)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($send_email_receipt_request));
-            } else {
-                $httpBody = $send_email_receipt_request;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

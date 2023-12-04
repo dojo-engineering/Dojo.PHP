@@ -1,6 +1,6 @@
 <?php
 /**
- * AutoExpireAction
+ * CaptureStatus
  *
  * PHP version 7.4
  *
@@ -30,22 +30,26 @@ namespace Dojo_PHP\Model;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * AutoExpireAction Class Doc Comment
+ * CaptureStatus Class Doc Comment
  *
  * @category Class
- * @description  
+ * @description Current capture status.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AutoExpireAction
+class CaptureStatus
 {
     /**
      * Possible values of this enum
      */
-    public const RELEASE = 'Release';
+    public const CREATED = 'Created';
 
-    public const CAPTURE = 'Capture';
+    public const SUCCESSFUL = 'Successful';
+
+    public const DECLINED = 'Declined';
+
+    public const FAILED = 'Failed';
 
     /**
      * Gets allowable values of the enum
@@ -54,8 +58,10 @@ class AutoExpireAction
     public static function getAllowableEnumValues()
     {
         return [
-            self::RELEASE,
-            self::CAPTURE
+            self::CREATED,
+            self::SUCCESSFUL,
+            self::DECLINED,
+            self::FAILED
         ];
     }
 }

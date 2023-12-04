@@ -1,6 +1,6 @@
 <?php
 /**
- * AutoExpireAction
+ * SetupIntentStatus
  *
  * PHP version 7.4
  *
@@ -30,22 +30,32 @@ namespace Dojo_PHP\Model;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * AutoExpireAction Class Doc Comment
+ * SetupIntentStatus Class Doc Comment
  *
  * @category Class
- * @description  
+ * @description Current status of the setup intent.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AutoExpireAction
+class SetupIntentStatus
 {
     /**
      * Possible values of this enum
      */
-    public const RELEASE = 'Release';
+    public const CREATED = 'Created';
 
-    public const CAPTURE = 'Capture';
+    public const AUTHORIZED = 'Authorized';
+
+    public const CANCELED = 'Canceled';
+
+    public const COMPLETED = 'Completed';
+
+    public const EXPIRED = 'Expired';
+
+    public const CARD_EXPIRED = 'CardExpired';
+
+    public const CLOSED = 'Closed';
 
     /**
      * Gets allowable values of the enum
@@ -54,8 +64,13 @@ class AutoExpireAction
     public static function getAllowableEnumValues()
     {
         return [
-            self::RELEASE,
-            self::CAPTURE
+            self::CREATED,
+            self::AUTHORIZED,
+            self::CANCELED,
+            self::COMPLETED,
+            self::EXPIRED,
+            self::CARD_EXPIRED,
+            self::CLOSED
         ];
     }
 }

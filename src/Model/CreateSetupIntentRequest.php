@@ -1,6 +1,6 @@
 <?php
 /**
- * CreatePaymentIntentRequestConfig
+ * CreateSetupIntentRequest
  *
  * PHP version 7.4
  *
@@ -32,16 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * CreatePaymentIntentRequestConfig Class Doc Comment
+ * CreateSetupIntentRequest Class Doc Comment
  *
  * @category Class
- * @description Details about the payment intent configuration.
+ * @description The setup intent request object.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \JsonSerializable
+class CreateSetupIntentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreatePaymentIntentRequest_config';
+    protected static $openAPIModelName = 'CreateSetupIntentRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,14 +58,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
       * @var string[]
       */
     protected static $openAPITypes = [
-        'title' => 'string',
-        'redirect_url' => 'string',
-        'cancel_url' => 'string',
-        'customer_email' => '\Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail',
-        'details' => '\Dojo_PHP\Model\PaymentIntentConfigRequestDetails',
-        'billing_address' => '\Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress',
-        'shipping_details' => '\Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails',
-        'payment' => '\Dojo_PHP\Model\PaymentIntentConfigRequestPayment'
+        'reference' => 'string',
+        'description' => 'string',
+        'expire_at' => '\DateTime',
+        'customer' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCustomer',
+        'capture_mode' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode',
+        'payment_methods' => '\Dojo_PHP\Model\PaymentMethod[]',
+        'billing_address' => '\Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress',
+        'shipping_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails',
+        'config' => '\Dojo_PHP\Model\CreatePaymentIntentRequestConfig',
+        'metadata' => 'array<string,string>',
+        'intended_amount' => '\Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount',
+        'merchant_initiated_transaction_type' => '\Dojo_PHP\Model\MerchantInitiatedTransactionType',
+        'terms' => 'string'
     ];
 
     /**
@@ -76,14 +81,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'title' => null,
-        'redirect_url' => 'uri',
-        'cancel_url' => 'uri',
-        'customer_email' => null,
-        'details' => null,
+        'reference' => null,
+        'description' => null,
+        'expire_at' => 'date-time',
+        'customer' => null,
+        'capture_mode' => null,
+        'payment_methods' => null,
         'billing_address' => null,
         'shipping_details' => null,
-        'payment' => null
+        'config' => null,
+        'metadata' => null,
+        'intended_amount' => null,
+        'merchant_initiated_transaction_type' => null,
+        'terms' => null
     ];
 
     /**
@@ -92,14 +102,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'title' => true,
-		'redirect_url' => true,
-		'cancel_url' => true,
-		'customer_email' => true,
-		'details' => true,
+        'reference' => false,
+		'description' => true,
+		'expire_at' => true,
+		'customer' => true,
+		'capture_mode' => false,
+		'payment_methods' => true,
 		'billing_address' => true,
 		'shipping_details' => true,
-		'payment' => true
+		'config' => true,
+		'metadata' => true,
+		'intended_amount' => true,
+		'merchant_initiated_transaction_type' => false,
+		'terms' => false
     ];
 
     /**
@@ -188,14 +203,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'title' => 'title',
-        'redirect_url' => 'redirectUrl',
-        'cancel_url' => 'cancelUrl',
-        'customer_email' => 'customerEmail',
-        'details' => 'details',
+        'reference' => 'reference',
+        'description' => 'description',
+        'expire_at' => 'expireAt',
+        'customer' => 'customer',
+        'capture_mode' => 'captureMode',
+        'payment_methods' => 'paymentMethods',
         'billing_address' => 'billingAddress',
         'shipping_details' => 'shippingDetails',
-        'payment' => 'payment'
+        'config' => 'config',
+        'metadata' => 'metadata',
+        'intended_amount' => 'intendedAmount',
+        'merchant_initiated_transaction_type' => 'merchantInitiatedTransactionType',
+        'terms' => 'terms'
     ];
 
     /**
@@ -204,14 +224,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'title' => 'setTitle',
-        'redirect_url' => 'setRedirectUrl',
-        'cancel_url' => 'setCancelUrl',
-        'customer_email' => 'setCustomerEmail',
-        'details' => 'setDetails',
+        'reference' => 'setReference',
+        'description' => 'setDescription',
+        'expire_at' => 'setExpireAt',
+        'customer' => 'setCustomer',
+        'capture_mode' => 'setCaptureMode',
+        'payment_methods' => 'setPaymentMethods',
         'billing_address' => 'setBillingAddress',
         'shipping_details' => 'setShippingDetails',
-        'payment' => 'setPayment'
+        'config' => 'setConfig',
+        'metadata' => 'setMetadata',
+        'intended_amount' => 'setIntendedAmount',
+        'merchant_initiated_transaction_type' => 'setMerchantInitiatedTransactionType',
+        'terms' => 'setTerms'
     ];
 
     /**
@@ -220,14 +245,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'title' => 'getTitle',
-        'redirect_url' => 'getRedirectUrl',
-        'cancel_url' => 'getCancelUrl',
-        'customer_email' => 'getCustomerEmail',
-        'details' => 'getDetails',
+        'reference' => 'getReference',
+        'description' => 'getDescription',
+        'expire_at' => 'getExpireAt',
+        'customer' => 'getCustomer',
+        'capture_mode' => 'getCaptureMode',
+        'payment_methods' => 'getPaymentMethods',
         'billing_address' => 'getBillingAddress',
         'shipping_details' => 'getShippingDetails',
-        'payment' => 'getPayment'
+        'config' => 'getConfig',
+        'metadata' => 'getMetadata',
+        'intended_amount' => 'getIntendedAmount',
+        'merchant_initiated_transaction_type' => 'getMerchantInitiatedTransactionType',
+        'terms' => 'getTerms'
     ];
 
     /**
@@ -287,14 +317,19 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('redirect_url', $data ?? [], null);
-        $this->setIfExists('cancel_url', $data ?? [], null);
-        $this->setIfExists('customer_email', $data ?? [], null);
-        $this->setIfExists('details', $data ?? [], null);
+        $this->setIfExists('reference', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('expire_at', $data ?? [], null);
+        $this->setIfExists('customer', $data ?? [], null);
+        $this->setIfExists('capture_mode', $data ?? [], null);
+        $this->setIfExists('payment_methods', $data ?? [], null);
         $this->setIfExists('billing_address', $data ?? [], null);
         $this->setIfExists('shipping_details', $data ?? [], null);
-        $this->setIfExists('payment', $data ?? [], null);
+        $this->setIfExists('config', $data ?? [], null);
+        $this->setIfExists('metadata', $data ?? [], null);
+        $this->setIfExists('intended_amount', $data ?? [], null);
+        $this->setIfExists('merchant_initiated_transaction_type', $data ?? [], null);
+        $this->setIfExists('terms', $data ?? [], null);
     }
 
     /**
@@ -324,8 +359,36 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 100)) {
-            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 100.";
+        if ($this->container['reference'] === null) {
+            $invalidProperties[] = "'reference' can't be null";
+        }
+        if ((mb_strlen($this->container['reference']) > 60)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 60.";
+        }
+
+        if ((mb_strlen($this->container['reference']) < 1)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 4096)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 4096.";
+        }
+
+        if ($this->container['intended_amount'] === null) {
+            $invalidProperties[] = "'intended_amount' can't be null";
+        }
+        if ($this->container['merchant_initiated_transaction_type'] === null) {
+            $invalidProperties[] = "'merchant_initiated_transaction_type' can't be null";
+        }
+        if ($this->container['terms'] === null) {
+            $invalidProperties[] = "'terms' can't be null";
+        }
+        if ((mb_strlen($this->container['terms']) > 10240)) {
+            $invalidProperties[] = "invalid value for 'terms', the character length must be smaller than or equal to 10240.";
+        }
+
+        if ((mb_strlen($this->container['terms']) < 1)) {
+            $invalidProperties[] = "invalid value for 'terms', the character length must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -344,175 +407,202 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
 
 
     /**
-     * Gets title
+     * Gets reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->container['reference'];
+    }
+
+    /**
+     * Sets reference
+     *
+     * @param string $reference Details of the reference for the payment.
+     *
+     * @return self
+     */
+    public function setReference($reference)
+    {
+        if (is_null($reference)) {
+            throw new \InvalidArgumentException('non-nullable reference cannot be null');
+        }
+        if ((mb_strlen($reference) > 60)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling CreateSetupIntentRequest., must be smaller than or equal to 60.');
+        }
+        if ((mb_strlen($reference) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $reference when calling CreateSetupIntentRequest., must be bigger than or equal to 1.');
+        }
+
+        $this->container['reference'] = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
      *
      * @return string|null
      */
-    public function getTitle()
+    public function getDescription()
     {
-        return $this->container['title'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets title
+     * Sets description
      *
-     * @param string|null $title The [checkout page’s title](../payments/accept-payments/checkout-page/configuration#add-information-about-your-company).
+     * @param string|null $description The payment description.
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setDescription($description)
     {
-        if (is_null($title)) {
-            array_push($this->openAPINullablesSetToNull, 'title');
+        if (is_null($description)) {
+            array_push($this->openAPINullablesSetToNull, 'description');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('title', $nullablesSetToNull);
+            $index = array_search('description', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($title) && (mb_strlen($title) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $title when calling CreatePaymentIntentRequestConfig., must be smaller than or equal to 100.');
+        if (!is_null($description) && (mb_strlen($description) > 4096)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling CreateSetupIntentRequest., must be smaller than or equal to 4096.');
         }
 
-        $this->container['title'] = $title;
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets redirect_url
+     * Gets expire_at
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getRedirectUrl()
+    public function getExpireAt()
     {
-        return $this->container['redirect_url'];
+        return $this->container['expire_at'];
     }
 
     /**
-     * Sets redirect_url
+     * Sets expire_at
      *
-     * @param string|null $redirect_url The URL where the customer will be directed to after the payment.
+     * @param \DateTime|null $expire_at The timestamp and date of when a setup intent will be voided, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format. This occurs when a setup intent is created and not yet authorized.
      *
      * @return self
      */
-    public function setRedirectUrl($redirect_url)
+    public function setExpireAt($expire_at)
     {
-        if (is_null($redirect_url)) {
-            array_push($this->openAPINullablesSetToNull, 'redirect_url');
+        if (is_null($expire_at)) {
+            array_push($this->openAPINullablesSetToNull, 'expire_at');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('redirect_url', $nullablesSetToNull);
+            $index = array_search('expire_at', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['redirect_url'] = $redirect_url;
+        $this->container['expire_at'] = $expire_at;
 
         return $this;
     }
 
     /**
-     * Gets cancel_url
+     * Gets customer
      *
-     * @return string|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null
      */
-    public function getCancelUrl()
+    public function getCustomer()
     {
-        return $this->container['cancel_url'];
+        return $this->container['customer'];
     }
 
     /**
-     * Sets cancel_url
+     * Sets customer
      *
-     * @param string|null $cancel_url The URL where the customer will be directed to when canceling the payment.
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null $customer customer
      *
      * @return self
      */
-    public function setCancelUrl($cancel_url)
+    public function setCustomer($customer)
     {
-        if (is_null($cancel_url)) {
-            array_push($this->openAPINullablesSetToNull, 'cancel_url');
+        if (is_null($customer)) {
+            array_push($this->openAPINullablesSetToNull, 'customer');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('cancel_url', $nullablesSetToNull);
+            $index = array_search('customer', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['cancel_url'] = $cancel_url;
+        $this->container['customer'] = $customer;
 
         return $this;
     }
 
     /**
-     * Gets customer_email
+     * Gets capture_mode
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode|null
      */
-    public function getCustomerEmail()
+    public function getCaptureMode()
     {
-        return $this->container['customer_email'];
+        return $this->container['capture_mode'];
     }
 
     /**
-     * Sets customer_email
+     * Sets capture_mode
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestCustomerEmail|null $customer_email customer_email
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode|null $capture_mode capture_mode
      *
      * @return self
      */
-    public function setCustomerEmail($customer_email)
+    public function setCaptureMode($capture_mode)
     {
-        if (is_null($customer_email)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_email');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_email', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($capture_mode)) {
+            throw new \InvalidArgumentException('non-nullable capture_mode cannot be null');
         }
-        $this->container['customer_email'] = $customer_email;
+        $this->container['capture_mode'] = $capture_mode;
 
         return $this;
     }
 
     /**
-     * Gets details
+     * Gets payment_methods
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestDetails|null
+     * @return \Dojo_PHP\Model\PaymentMethod[]|null
      */
-    public function getDetails()
+    public function getPaymentMethods()
     {
-        return $this->container['details'];
+        return $this->container['payment_methods'];
     }
 
     /**
-     * Sets details
+     * Sets payment_methods
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestDetails|null $details details
+     * @param \Dojo_PHP\Model\PaymentMethod[]|null $payment_methods The payment methods that customers can use to pay.
      *
      * @return self
      */
-    public function setDetails($details)
+    public function setPaymentMethods($payment_methods)
     {
-        if (is_null($details)) {
-            array_push($this->openAPINullablesSetToNull, 'details');
+        if (is_null($payment_methods)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_methods');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('details', $nullablesSetToNull);
+            $index = array_search('payment_methods', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['details'] = $details;
+        $this->container['payment_methods'] = $payment_methods;
 
         return $this;
     }
@@ -520,7 +610,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets billing_address
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress|null
      */
     public function getBillingAddress()
     {
@@ -530,7 +620,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets billing_address
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestBillingAddress|null $billing_address billing_address
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress|null $billing_address billing_address
      *
      * @return self
      */
@@ -554,7 +644,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Gets shipping_details
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails|null
      */
     public function getShippingDetails()
     {
@@ -564,7 +654,7 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     /**
      * Sets shipping_details
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestShippingDetails|null $shipping_details shipping_details
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails|null $shipping_details shipping_details
      *
      * @return self
      */
@@ -586,35 +676,164 @@ class CreatePaymentIntentRequestConfig implements ModelInterface, ArrayAccess, \
     }
 
     /**
-     * Gets payment
+     * Gets config
      *
-     * @return \Dojo_PHP\Model\PaymentIntentConfigRequestPayment|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestConfig|null
      */
-    public function getPayment()
+    public function getConfig()
     {
-        return $this->container['payment'];
+        return $this->container['config'];
     }
 
     /**
-     * Sets payment
+     * Sets config
      *
-     * @param \Dojo_PHP\Model\PaymentIntentConfigRequestPayment|null $payment payment
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestConfig|null $config config
      *
      * @return self
      */
-    public function setPayment($payment)
+    public function setConfig($config)
     {
-        if (is_null($payment)) {
-            array_push($this->openAPINullablesSetToNull, 'payment');
+        if (is_null($config)) {
+            array_push($this->openAPINullablesSetToNull, 'config');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payment', $nullablesSetToNull);
+            $index = array_search('config', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['payment'] = $payment;
+        $this->container['config'] = $config;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata
+     *
+     * @return array<string,string>|null
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'];
+    }
+
+    /**
+     * Sets metadata
+     *
+     * @param array<string,string>|null $metadata A set of key-value pairs that you can use for storing additional information.
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        if (is_null($metadata)) {
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets intended_amount
+     *
+     * @return \Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount
+     */
+    public function getIntendedAmount()
+    {
+        return $this->container['intended_amount'];
+    }
+
+    /**
+     * Sets intended_amount
+     *
+     * @param \Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount $intended_amount intended_amount
+     *
+     * @return self
+     */
+    public function setIntendedAmount($intended_amount)
+    {
+        if (is_null($intended_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'intended_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('intended_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['intended_amount'] = $intended_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchant_initiated_transaction_type
+     *
+     * @return \Dojo_PHP\Model\MerchantInitiatedTransactionType
+     */
+    public function getMerchantInitiatedTransactionType()
+    {
+        return $this->container['merchant_initiated_transaction_type'];
+    }
+
+    /**
+     * Sets merchant_initiated_transaction_type
+     *
+     * @param \Dojo_PHP\Model\MerchantInitiatedTransactionType $merchant_initiated_transaction_type merchant_initiated_transaction_type
+     *
+     * @return self
+     */
+    public function setMerchantInitiatedTransactionType($merchant_initiated_transaction_type)
+    {
+        if (is_null($merchant_initiated_transaction_type)) {
+            throw new \InvalidArgumentException('non-nullable merchant_initiated_transaction_type cannot be null');
+        }
+        $this->container['merchant_initiated_transaction_type'] = $merchant_initiated_transaction_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets terms
+     *
+     * @return string
+     */
+    public function getTerms()
+    {
+        return $this->container['terms'];
+    }
+
+    /**
+     * Sets terms
+     *
+     * @param string $terms The terms that customers are required to review before adding a card to setup intent.
+     *
+     * @return self
+     */
+    public function setTerms($terms)
+    {
+        if (is_null($terms)) {
+            throw new \InvalidArgumentException('non-nullable terms cannot be null');
+        }
+        if ((mb_strlen($terms) > 10240)) {
+            throw new \InvalidArgumentException('invalid length for $terms when calling CreateSetupIntentRequest., must be smaller than or equal to 10240.');
+        }
+        if ((mb_strlen($terms) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $terms when calling CreateSetupIntentRequest., must be bigger than or equal to 1.');
+        }
+
+        $this->container['terms'] = $terms;
 
         return $this;
     }

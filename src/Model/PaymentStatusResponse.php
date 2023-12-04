@@ -1,6 +1,6 @@
 <?php
 /**
- * CreatePaymentIntentRequestCustomer
+ * PaymentStatusResponse
  *
  * PHP version 7.4
  *
@@ -32,16 +32,16 @@ use \ArrayAccess;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * CreatePaymentIntentRequestCustomer Class Doc Comment
+ * PaymentStatusResponse Class Doc Comment
  *
  * @category Class
- * @description Details about the customer.
+ * @description Details about the transaction.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaymentStatusResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreatePaymentIntentRequest_customer';
+    protected static $openAPIModelName = 'PaymentStatusResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'email_address' => 'string',
-        'phone_number' => 'string'
+        'transaction_id' => 'string',
+        'transaction_date_time' => 'string',
+        'event_type' => '\Dojo_PHP\Model\EventType',
+        'auth_code' => 'string',
+        'card_number' => 'string',
+        'expiry_date' => 'string',
+        'card_type' => 'string',
+        'cardholder_name' => 'string'
     ];
 
     /**
@@ -71,9 +76,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'email_address' => null,
-        'phone_number' => null
+        'transaction_id' => null,
+        'transaction_date_time' => null,
+        'event_type' => null,
+        'auth_code' => null,
+        'card_number' => null,
+        'expiry_date' => null,
+        'card_type' => null,
+        'cardholder_name' => null
     ];
 
     /**
@@ -82,9 +92,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-		'email_address' => true,
-		'phone_number' => true
+        'transaction_id' => true,
+		'transaction_date_time' => true,
+		'event_type' => false,
+		'auth_code' => true,
+		'card_number' => true,
+		'expiry_date' => true,
+		'card_type' => true,
+		'cardholder_name' => true
     ];
 
     /**
@@ -173,9 +188,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'email_address' => 'emailAddress',
-        'phone_number' => 'phoneNumber'
+        'transaction_id' => 'transactionId',
+        'transaction_date_time' => 'transactionDateTime',
+        'event_type' => 'eventType',
+        'auth_code' => 'authCode',
+        'card_number' => 'cardNumber',
+        'expiry_date' => 'expiryDate',
+        'card_type' => 'cardType',
+        'cardholder_name' => 'cardholderName'
     ];
 
     /**
@@ -184,9 +204,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'email_address' => 'setEmailAddress',
-        'phone_number' => 'setPhoneNumber'
+        'transaction_id' => 'setTransactionId',
+        'transaction_date_time' => 'setTransactionDateTime',
+        'event_type' => 'setEventType',
+        'auth_code' => 'setAuthCode',
+        'card_number' => 'setCardNumber',
+        'expiry_date' => 'setExpiryDate',
+        'card_type' => 'setCardType',
+        'cardholder_name' => 'setCardholderName'
     ];
 
     /**
@@ -195,9 +220,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'email_address' => 'getEmailAddress',
-        'phone_number' => 'getPhoneNumber'
+        'transaction_id' => 'getTransactionId',
+        'transaction_date_time' => 'getTransactionDateTime',
+        'event_type' => 'getEventType',
+        'auth_code' => 'getAuthCode',
+        'card_number' => 'getCardNumber',
+        'expiry_date' => 'getExpiryDate',
+        'card_type' => 'getCardType',
+        'cardholder_name' => 'getCardholderName'
     ];
 
     /**
@@ -257,9 +287,14 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('email_address', $data ?? [], null);
-        $this->setIfExists('phone_number', $data ?? [], null);
+        $this->setIfExists('transaction_id', $data ?? [], null);
+        $this->setIfExists('transaction_date_time', $data ?? [], null);
+        $this->setIfExists('event_type', $data ?? [], null);
+        $this->setIfExists('auth_code', $data ?? [], null);
+        $this->setIfExists('card_number', $data ?? [], null);
+        $this->setIfExists('expiry_date', $data ?? [], null);
+        $this->setIfExists('card_type', $data ?? [], null);
+        $this->setIfExists('cardholder_name', $data ?? [], null);
     }
 
     /**
@@ -289,14 +324,6 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
-            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
-        }
-
-        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 50)) {
-            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 50.";
-        }
-
         return $invalidProperties;
     }
 
@@ -313,111 +340,266 @@ class CreatePaymentIntentRequestCustomer implements ModelInterface, ArrayAccess,
 
 
     /**
-     * Gets id
+     * Gets transaction_id
      *
      * @return string|null
      */
-    public function getId()
+    public function getTransactionId()
     {
-        return $this->container['id'];
+        return $this->container['transaction_id'];
     }
 
     /**
-     * Sets id
+     * Sets transaction_id
      *
-     * @param string|null $id Unique identifier of the customer.
+     * @param string|null $transaction_id The unique identifier for the transaction.
      *
      * @return self
      */
-    public function setId($id)
+    public function setTransactionId($transaction_id)
     {
-        if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
+        if (is_null($transaction_id)) {
+            array_push($this->openAPINullablesSetToNull, 'transaction_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
+            $index = array_search('transaction_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['id'] = $id;
+        $this->container['transaction_id'] = $transaction_id;
 
         return $this;
     }
 
     /**
-     * Gets email_address
+     * Gets transaction_date_time
      *
      * @return string|null
      */
-    public function getEmailAddress()
+    public function getTransactionDateTime()
     {
-        return $this->container['email_address'];
+        return $this->container['transaction_date_time'];
     }
 
     /**
-     * Sets email_address
+     * Sets transaction_date_time
      *
-     * @param string|null $email_address The customer's email address.
+     * @param string|null $transaction_date_time The date and time of the payment in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format.
      *
      * @return self
      */
-    public function setEmailAddress($email_address)
+    public function setTransactionDateTime($transaction_date_time)
     {
-        if (is_null($email_address)) {
-            array_push($this->openAPINullablesSetToNull, 'email_address');
+        if (is_null($transaction_date_time)) {
+            array_push($this->openAPINullablesSetToNull, 'transaction_date_time');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('email_address', $nullablesSetToNull);
+            $index = array_search('transaction_date_time', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($email_address) && (mb_strlen($email_address) > 254)) {
-            throw new \InvalidArgumentException('invalid length for $email_address when calling CreatePaymentIntentRequestCustomer., must be smaller than or equal to 254.');
-        }
-
-        $this->container['email_address'] = $email_address;
+        $this->container['transaction_date_time'] = $transaction_date_time;
 
         return $this;
     }
 
     /**
-     * Gets phone_number
+     * Gets event_type
      *
-     * @return string|null
+     * @return \Dojo_PHP\Model\EventType|null
      */
-    public function getPhoneNumber()
+    public function getEventType()
     {
-        return $this->container['phone_number'];
+        return $this->container['event_type'];
     }
 
     /**
-     * Sets phone_number
+     * Sets event_type
      *
-     * @param string|null $phone_number The customer's phone number.
+     * @param \Dojo_PHP\Model\EventType|null $event_type event_type
      *
      * @return self
      */
-    public function setPhoneNumber($phone_number)
+    public function setEventType($event_type)
     {
-        if (is_null($phone_number)) {
-            array_push($this->openAPINullablesSetToNull, 'phone_number');
+        if (is_null($event_type)) {
+            throw new \InvalidArgumentException('non-nullable event_type cannot be null');
+        }
+        $this->container['event_type'] = $event_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_code
+     *
+     * @return string|null
+     */
+    public function getAuthCode()
+    {
+        return $this->container['auth_code'];
+    }
+
+    /**
+     * Sets auth_code
+     *
+     * @param string|null $auth_code The acquirer authorization code. This code is returned on a successful transaction.
+     *
+     * @return self
+     */
+    public function setAuthCode($auth_code)
+    {
+        if (is_null($auth_code)) {
+            array_push($this->openAPINullablesSetToNull, 'auth_code');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('phone_number', $nullablesSetToNull);
+            $index = array_search('auth_code', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($phone_number) && (mb_strlen($phone_number) > 50)) {
-            throw new \InvalidArgumentException('invalid length for $phone_number when calling CreatePaymentIntentRequestCustomer., must be smaller than or equal to 50.');
-        }
+        $this->container['auth_code'] = $auth_code;
 
-        $this->container['phone_number'] = $phone_number;
+        return $this;
+    }
+
+    /**
+     * Gets card_number
+     *
+     * @return string|null
+     */
+    public function getCardNumber()
+    {
+        return $this->container['card_number'];
+    }
+
+    /**
+     * Sets card_number
+     *
+     * @param string|null $card_number The card number.
+     *
+     * @return self
+     */
+    public function setCardNumber($card_number)
+    {
+        if (is_null($card_number)) {
+            array_push($this->openAPINullablesSetToNull, 'card_number');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('card_number', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['card_number'] = $card_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiry_date
+     *
+     * @return string|null
+     */
+    public function getExpiryDate()
+    {
+        return $this->container['expiry_date'];
+    }
+
+    /**
+     * Sets expiry_date
+     *
+     * @param string|null $expiry_date The expiry month and year. Format: MM/YY.
+     *
+     * @return self
+     */
+    public function setExpiryDate($expiry_date)
+    {
+        if (is_null($expiry_date)) {
+            array_push($this->openAPINullablesSetToNull, 'expiry_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expiry_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['expiry_date'] = $expiry_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets card_type
+     *
+     * @return string|null
+     */
+    public function getCardType()
+    {
+        return $this->container['card_type'];
+    }
+
+    /**
+     * Sets card_type
+     *
+     * @param string|null $card_type The card scheme.
+     *
+     * @return self
+     */
+    public function setCardType($card_type)
+    {
+        if (is_null($card_type)) {
+            array_push($this->openAPINullablesSetToNull, 'card_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('card_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['card_type'] = $card_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets cardholder_name
+     *
+     * @return string|null
+     */
+    public function getCardholderName()
+    {
+        return $this->container['cardholder_name'];
+    }
+
+    /**
+     * Sets cardholder_name
+     *
+     * @param string|null $cardholder_name The name of the cardholder.
+     *
+     * @return self
+     */
+    public function setCardholderName($cardholder_name)
+    {
+        if (is_null($cardholder_name)) {
+            array_push($this->openAPINullablesSetToNull, 'cardholder_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cardholder_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cardholder_name'] = $cardholder_name;
 
         return $this;
     }

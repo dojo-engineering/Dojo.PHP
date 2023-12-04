@@ -1,6 +1,6 @@
 <?php
 /**
- * AutoExpireAction
+ * TransactionSource
  *
  * PHP version 7.4
  *
@@ -30,22 +30,20 @@ namespace Dojo_PHP\Model;
 use \Dojo_PHP\ObjectSerializer;
 
 /**
- * AutoExpireAction Class Doc Comment
+ * TransactionSource Class Doc Comment
  *
  * @category Class
- * @description  
+ * @description Payments initiated through mail, telephone, or internet order. These payments are keyed manually by the merchant using a secure payment page, for example Dojo for Business, or a card machine. No physical cards are present during a MOTO transaction and these transactions don&#39;t require authentication of the cardholder using 3DS, or a chip and a pin.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AutoExpireAction
+class TransactionSource
 {
     /**
      * Possible values of this enum
      */
-    public const RELEASE = 'Release';
-
-    public const CAPTURE = 'Capture';
+    public const MOTO = 'MOTO';
 
     /**
      * Gets allowable values of the enum
@@ -54,8 +52,7 @@ class AutoExpireAction
     public static function getAllowableEnumValues()
     {
         return [
-            self::RELEASE,
-            self::CAPTURE
+            self::MOTO
         ];
     }
 }
