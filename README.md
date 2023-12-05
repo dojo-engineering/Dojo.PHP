@@ -1,6 +1,6 @@
 # Dojo PHP SDK
 
-The official [Dojo][dojo] PHP library, supporting [Remote Payments API][api-docs].
+The official [Dojo][dojo] PHP library, supporting [Payments API][api-docs].
 
 ## Installation
 
