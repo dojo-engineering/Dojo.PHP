@@ -49,6 +49,13 @@ class ApiFactory {
         return $api;
     }
 
+    public static function createSetupIntentsApi($apiKey) {
+        $api = new Api\SetupIntentsApi();
+        ApiFactory::updateConfigWithApiKey($api, $apiKey);
+
+        return $api;
+    }
+
     private static function updateConfigWithApiKey($api, $apiKey) {
         $api->getConfig()->setApiKey(HEADER_AUTHORIZATION, BASIC_AUTH_PREFIX . " {$apiKey}");
     }

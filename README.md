@@ -1,6 +1,6 @@
-# dojo-php
+# Dojo PHP SDK
 
-The official [Dojo][dojo] PHP library, supporting Remote Payments API.
+The official [Dojo][dojo] PHP library, supporting [Payments API][api-docs].
 
 ## Installation
 
@@ -21,18 +21,17 @@ Do the following:
 composer install
 ```
 
-2. Run from the root of the repository:
+2. Run from the root of the repository (with `execute` permission):
 
 ```sh
-/build/generate-openapi.sh
+./build/generate-openapi.sh
 ```
 
 3. Copy all files from `/generated/src` into `/src`
 
 ## Documentation
 
-For a comprehensive list of examples, check out the [API
-documentation][api-docs].
+For a comprehensive list of examples, check out the [API documentation][api-docs].
 
 ## Usage
 
@@ -54,9 +53,10 @@ $req->setAmount($money);
 $pi = $apiPaymentIntent->paymentIntentsCreatePaymentIntent(\Dojo_PHP\API_VERSION, $req);
 ```
 
-For any requests, bugs, or comments, please [open an issue][issues] or [submit a pull request][pulls].
+For any requests, bugs, or comments, please [open an issue][issues] or [submit a pull request][pulls]. You can also reach out to us on our [Discord server][discord].
 
-[api-docs]: https://docs.dojo.tech
+[api-docs]: https://docs.dojo.tech/payments/api
 [issues]: https://github.com/dojo-engineering/Dojo.PHP/issues
 [pulls]: https://github.com/dojo-engineering/Dojo.PHP/pulls
 [dojo]: https://dojo.tech
+[discord]: https://discord.gg/tTG98EWVdB

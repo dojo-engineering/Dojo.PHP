@@ -6,7 +6,6 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
   -g php \
   -o /local/generated \
   -c /local/build/open-api-config.json \
-  --global-property models,apis \
   --additional-properties invokerPackage=Dojo_PHP \
 
 
