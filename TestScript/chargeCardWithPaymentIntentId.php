@@ -1,6 +1,6 @@
 <?php
 
-namespace SetupIntent;
+namespace ChargeCardWithPaymentIntentId;
 require_once "vendor/autoload.php";
 
 use Dojo_PHP\ApiFactory;

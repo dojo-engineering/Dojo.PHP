@@ -1,6 +1,6 @@
 <?php
 
-namespace SetupIntent;
+namespace CreateSetupIntent;
 require_once "vendor/autoload.php";
 
 use Dojo_PHP\ApiFactory;
@@ -24,6 +24,7 @@ $req->setReference("test");
 $si = $apiSetupIntent->setupIntentsCreate(\Dojo_PHP\API_VERSION, $req);
 
 file_put_contents("setupIntentId.php", '<?php $setupIntentId = "' . $si->getId() . '";');
+// The Setup Intent ID generated will be stored in `setupIntentId.php`. 
 
 echo $si;
 
