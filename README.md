@@ -39,7 +39,7 @@ For a comprehensive list of examples, check out the [API documentation][api-docs
 use Dojo_PHP\ApiFactory;
 
 $apiKey = "YOUR_API_KEY";
-$client = ApiFactory::createPaymentIntentApi($apiKey);
+$apiPaymentIntent = ApiFactory::createPaymentIntentApi($apiKey);
 
 $req = new CreatePaymentIntentRequest();
 $req->setReference("test");
