@@ -23,7 +23,8 @@ $req->setReference("test");
 
 $si = $apiSetupIntent->setupIntentsCreate(\Dojo_PHP\API_VERSION, $req);
 
-echo $si;
+file_put_contents("setupIntentId.php", '<?php $setupIntentId = "' . $si->getId() . '";');
 
+echo $si;
 
 ?>
