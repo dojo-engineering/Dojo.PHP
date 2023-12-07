@@ -1,0 +1,1 @@
+<?php $setupIntentId = "<Your Setup Intent ID will appear here. This ID will be used in the request schema when creating a Payment Intent.>";

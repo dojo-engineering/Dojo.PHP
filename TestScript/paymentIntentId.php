@@ -1,0 +1,1 @@
+<?php $paymentIntentId = "<Your Payment Intent ID will appear here. This ID will be used in the path parameter when charging a card.>";
