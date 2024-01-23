@@ -59,4 +59,11 @@ class ApiFactory {
     private static function updateConfigWithApiKey($api, $apiKey) {
         $api->getConfig()->setApiKey(HEADER_AUTHORIZATION, BASIC_AUTH_PREFIX . " {$apiKey}");
     }
+
+    public static function createTerminalSessionApi($apiKey) {
+        $api = new Api\TerminalsApi();
+        ApiFactory::updateConfigWithApiKey($api, $apiKey);
+
+        return $api;
+    }
 }
