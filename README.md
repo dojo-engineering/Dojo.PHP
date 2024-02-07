@@ -7,7 +7,7 @@ The official [Dojo][dojo] PHP library, supporting [Payments API][api-docs].
 Use [Composer](https://getcomposer.org/) to install the Dojo PHP library:
 
 ```sh
-composer require dojo/dojo-php
+composer require dojo-engineering/dojo-php
 ```
 
 ## Build source code
