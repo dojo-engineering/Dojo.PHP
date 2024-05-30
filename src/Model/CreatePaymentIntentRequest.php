@@ -11,11 +11,11 @@
  */
 
 /**
- * Payment Service
+ * Unified Payments API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo Universal Payments API (UPAPI) is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API: [https://staging-api.dojo.dev/master](https://staging-api.dojo.dev/master)  ## Authentication  The API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on all API requests, requests without them will fail.  `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller.   `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK` — The request was successful.  * `201 Created` — The request was successful, and a new resource was created as a result.  * `204 No Content` — The request was successful, but there is no content to send.  * `400 Bad Request` — Bad request, probably due to a syntax error.  * `401 Unauthorized` — Authentication required.  * `403 Forbidden` — The API key doesn't have permissions.  * `404 Not Found` — The resource doesn't exist.  * `405 Method Not Allowed` — The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors` — An unexpected error occurred with our API, please reach out to support.  ## Errors   The API follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields: The error object contains the following fields: * `type` [string] — A URI reference RFC 3986 that identifies the problem type.  * `code` [ErrorCode] — A short, machine-readable description of the error.  * `title` [string] — A short, human-readable summary of the error.  * `detail` [string] — A human-readable message giving more details about the error. Not always present.  * `status` [integer] — The HTTP status code.  * `traceId` [string] — The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"code\": \"INVALID_REQUEST\",     \"title\": \"One or more validation errors occurred.\",     \"detail\": \"amount missing\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: Pre-release' \\ ```  When [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) are made to the API, the current version listed below will be updated.   The current version is `Pre-release`.
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2023-12-15
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 7.2.0-SNAPSHOT
  */
@@ -59,7 +59,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static $openAPITypes = [
         'capture_mode' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode',
-        'amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAmount',
+        'amount' => '\Dojo_PHP\Model\Money',
         'tips_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestTipsAmount',
         'reference' => 'string',
         'description' => 'string',
@@ -77,7 +77,9 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'string',
         'auto_expire_action' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction',
         'metadata' => 'array<string,string>',
-        'setup_intent_id' => 'string'
+        'setup_intent_id' => 'string',
+        'cashback_amount' => '\Dojo_PHP\Model\Money',
+        'service_charge_amount' => '\Dojo_PHP\Model\Money'
     ];
 
     /**
@@ -107,7 +109,9 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'timespan',
         'auto_expire_action' => null,
         'metadata' => null,
-        'setup_intent_id' => null
+        'setup_intent_id' => null,
+        'cashback_amount' => null,
+        'service_charge_amount' => null
     ];
 
     /**
@@ -135,7 +139,9 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
 		'auto_expire_in' => true,
 		'auto_expire_action' => true,
 		'metadata' => true,
-		'setup_intent_id' => true
+		'setup_intent_id' => true,
+		'cashback_amount' => false,
+		'service_charge_amount' => false
     ];
 
     /**
@@ -243,7 +249,9 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'autoExpireIn',
         'auto_expire_action' => 'autoExpireAction',
         'metadata' => 'metadata',
-        'setup_intent_id' => 'setupIntentId'
+        'setup_intent_id' => 'setupIntentId',
+        'cashback_amount' => 'cashbackAmount',
+        'service_charge_amount' => 'serviceChargeAmount'
     ];
 
     /**
@@ -271,7 +279,9 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'setAutoExpireIn',
         'auto_expire_action' => 'setAutoExpireAction',
         'metadata' => 'setMetadata',
-        'setup_intent_id' => 'setSetupIntentId'
+        'setup_intent_id' => 'setSetupIntentId',
+        'cashback_amount' => 'setCashbackAmount',
+        'service_charge_amount' => 'setServiceChargeAmount'
     ];
 
     /**
@@ -299,7 +309,9 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'getAutoExpireIn',
         'auto_expire_action' => 'getAutoExpireAction',
         'metadata' => 'getMetadata',
-        'setup_intent_id' => 'getSetupIntentId'
+        'setup_intent_id' => 'getSetupIntentId',
+        'cashback_amount' => 'getCashbackAmount',
+        'service_charge_amount' => 'getServiceChargeAmount'
     ];
 
     /**
@@ -379,6 +391,8 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('auto_expire_action', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('setup_intent_id', $data ?? [], null);
+        $this->setIfExists('cashback_amount', $data ?? [], null);
+        $this->setIfExists('service_charge_amount', $data ?? [], null);
     }
 
     /**
@@ -471,7 +485,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets amount
      *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestAmount
+     * @return \Dojo_PHP\Model\Money
      */
     public function getAmount()
     {
@@ -481,7 +495,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets amount
      *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestAmount $amount amount
+     * @param \Dojo_PHP\Model\Money $amount amount
      *
      * @return self
      */
@@ -1056,7 +1070,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets metadata
      *
-     * @param array<string,string>|null $metadata A set of key-value pairs that you can use for storing additional information.
+     * @param array<string,string>|null $metadata A set of key-value pairs that you can use to store additional information.
      *
      * @return self
      */
@@ -1090,7 +1104,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets setup_intent_id
      *
-     * @param string|null $setup_intent_id Unique identifier for the setup intent.
+     * @param string|null $setup_intent_id The unique identifier for the setup intent.
      *
      * @return self
      */
@@ -1107,6 +1121,60 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
             }
         }
         $this->container['setup_intent_id'] = $setup_intent_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets cashback_amount
+     *
+     * @return \Dojo_PHP\Model\Money|null
+     */
+    public function getCashbackAmount()
+    {
+        return $this->container['cashback_amount'];
+    }
+
+    /**
+     * Sets cashback_amount
+     *
+     * @param \Dojo_PHP\Model\Money|null $cashback_amount cashback_amount
+     *
+     * @return self
+     */
+    public function setCashbackAmount($cashback_amount)
+    {
+        if (is_null($cashback_amount)) {
+            throw new \InvalidArgumentException('non-nullable cashback_amount cannot be null');
+        }
+        $this->container['cashback_amount'] = $cashback_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_charge_amount
+     *
+     * @return \Dojo_PHP\Model\Money|null
+     */
+    public function getServiceChargeAmount()
+    {
+        return $this->container['service_charge_amount'];
+    }
+
+    /**
+     * Sets service_charge_amount
+     *
+     * @param \Dojo_PHP\Model\Money|null $service_charge_amount service_charge_amount
+     *
+     * @return self
+     */
+    public function setServiceChargeAmount($service_charge_amount)
+    {
+        if (is_null($service_charge_amount)) {
+            throw new \InvalidArgumentException('non-nullable service_charge_amount cannot be null');
+        }
+        $this->container['service_charge_amount'] = $service_charge_amount;
 
         return $this;
     }
