@@ -10,11 +10,11 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. The APIs for in-person payments are currently in **Beta**. For information on the latest development progress, visit the [changelog](../development-resources/changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2024-02-05' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2024-02-05`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](../development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](../development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2024-02-05
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 7.2.0-SNAPSHOT
  */
@@ -151,8 +151,8 @@ class PaymentIntentsApi
      *
      * Charge a card
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -170,8 +170,8 @@ class PaymentIntentsApi
      *
      * Charge a card
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -400,8 +400,8 @@ class PaymentIntentsApi
      *
      * Charge a card
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -422,8 +422,8 @@ class PaymentIntentsApi
      *
      * Charge a card
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -473,8 +473,8 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsChargePaymentIntent'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsChargePaymentIntent'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -584,7 +584,7 @@ class PaymentIntentsApi
      *
      * Create a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request create_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
      *
@@ -603,7 +603,7 @@ class PaymentIntentsApi
      *
      * Create a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
      *
@@ -833,7 +833,7 @@ class PaymentIntentsApi
      *
      * Create a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
      *
@@ -855,7 +855,7 @@ class PaymentIntentsApi
      *
      * Create a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
      *
@@ -906,7 +906,7 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsCreatePaymentIntent'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\CreatePaymentIntentRequest $create_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsCreatePaymentIntent'] to see the possible values for this operation
      *
@@ -1016,8 +1016,8 @@ class PaymentIntentsApi
      *
      * Cancel a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1035,8 +1035,8 @@ class PaymentIntentsApi
      *
      * Cancel a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1265,8 +1265,8 @@ class PaymentIntentsApi
      *
      * Cancel a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1287,8 +1287,8 @@ class PaymentIntentsApi
      *
      * Cancel a payment intent
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1338,8 +1338,8 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsDelete'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsDelete'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1449,8 +1449,8 @@ class PaymentIntentsApi
      *
      * Retrieve a payment intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1468,8 +1468,8 @@ class PaymentIntentsApi
      *
      * Retrieve a payment intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1698,8 +1698,8 @@ class PaymentIntentsApi
      *
      * Retrieve a payment intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1720,8 +1720,8 @@ class PaymentIntentsApi
      *
      * Retrieve a payment intent
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1771,8 +1771,8 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsGet'
      *
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGet'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1882,8 +1882,8 @@ class PaymentIntentsApi
      *
      * Update a client session secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -1901,8 +1901,8 @@ class PaymentIntentsApi
      *
      * Update a client session secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -2096,8 +2096,8 @@ class PaymentIntentsApi
      *
      * Update a client session secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2118,8 +2118,8 @@ class PaymentIntentsApi
      *
      * Update a client session secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2169,8 +2169,8 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsRefreshClientSessionSecret'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsRefreshClientSessionSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2280,7 +2280,7 @@ class PaymentIntentsApi
      *
      * List all payment intents
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request search_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
      *
@@ -2299,7 +2299,7 @@ class PaymentIntentsApi
      *
      * List all payment intents
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
      *
@@ -2494,7 +2494,7 @@ class PaymentIntentsApi
      *
      * List all payment intents
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
      *
@@ -2516,7 +2516,7 @@ class PaymentIntentsApi
      *
      * List all payment intents
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
      *
@@ -2567,7 +2567,7 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsSearch'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
      * @param  \Dojo_PHP\Model\SearchPaymentIntentRequest $search_payment_intent_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSearch'] to see the possible values for this operation
      *
@@ -2677,8 +2677,8 @@ class PaymentIntentsApi
      *
      * Change a payment intent amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request set_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
      *
@@ -2697,8 +2697,8 @@ class PaymentIntentsApi
      *
      * Change a payment intent amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
      *
@@ -2928,8 +2928,8 @@ class PaymentIntentsApi
      *
      * Change a payment intent amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
      *
@@ -2951,8 +2951,8 @@ class PaymentIntentsApi
      *
      * Change a payment intent amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
      *
@@ -3003,8 +3003,8 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsSetCustomAmount'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetAmountRequest $set_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetCustomAmount'] to see the possible values for this operation
      *
@@ -3129,8 +3129,8 @@ class PaymentIntentsApi
      *
      * Change tips amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request set_tips_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
      *
@@ -3149,8 +3149,8 @@ class PaymentIntentsApi
      *
      * Change tips amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
      *
@@ -3380,8 +3380,8 @@ class PaymentIntentsApi
      *
      * Change tips amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
      *
@@ -3403,8 +3403,8 @@ class PaymentIntentsApi
      *
      * Change tips amount
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
      *
@@ -3455,8 +3455,8 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'paymentIntentsSetTipsAmount'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
      * @param  \Dojo_PHP\Model\SetTipsAmountRequest $set_tips_amount_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsSetTipsAmount'] to see the possible values for this operation
      *
@@ -3581,9 +3581,9 @@ class PaymentIntentsApi
      *
      * Send a receipt
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request The email receipt request body. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3600,9 +3600,9 @@ class PaymentIntentsApi
      *
      * Send a receipt
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request The email receipt request body. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -3686,9 +3686,9 @@ class PaymentIntentsApi
      *
      * Send a receipt
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request The email receipt request body. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3709,9 +3709,9 @@ class PaymentIntentsApi
      *
      * Send a receipt
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request The email receipt request body. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -3748,9 +3748,9 @@ class PaymentIntentsApi
     /**
      * Create request for operation 'receiptCreate'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2024-02-05&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier for the payment intent. (required)
+     * @param  \Dojo_PHP\Model\SendEmailReceiptRequest $send_email_receipt_request The email receipt request body. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['receiptCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

@@ -11,11 +11,11 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. The APIs for in-person payments are currently in **Beta**. For information on the latest development progress, visit the [changelog](../development-resources/changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2024-02-05' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2024-02-05`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](../development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](../development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2024-02-05
  * Generated by: https://openapi-generator.tech
  * OpenAPI Generator version: 7.2.0-SNAPSHOT
  */
@@ -35,7 +35,7 @@ use \Dojo_PHP\ObjectSerializer;
  * ProblemDetails Class Doc Comment
  *
  * @category Class
- * @description 
+ * @description Dojo follows the error response format proposed in [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807), also known as Problem Details for HTTP APIs.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,8 +62,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'string',
         'status' => 'int',
         'detail' => 'string',
+        'instance' => 'string',
         'trace_id' => 'string',
-        'errors' => 'array<string,mixed>'
+        'extensions' => 'array<string,mixed>'
     ];
 
     /**
@@ -78,8 +79,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => null,
         'status' => 'int32',
         'detail' => null,
+        'instance' => null,
         'trace_id' => null,
-        'errors' => null
+        'extensions' => null
     ];
 
     /**
@@ -92,8 +94,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
 		'title' => true,
 		'status' => true,
 		'detail' => true,
+		'instance' => true,
 		'trace_id' => true,
-		'errors' => true
+		'extensions' => false
     ];
 
     /**
@@ -186,8 +189,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'title',
         'status' => 'status',
         'detail' => 'detail',
+        'instance' => 'instance',
         'trace_id' => 'traceId',
-        'errors' => 'errors'
+        'extensions' => 'extensions'
     ];
 
     /**
@@ -200,8 +204,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'setTitle',
         'status' => 'setStatus',
         'detail' => 'setDetail',
+        'instance' => 'setInstance',
         'trace_id' => 'setTraceId',
-        'errors' => 'setErrors'
+        'extensions' => 'setExtensions'
     ];
 
     /**
@@ -214,8 +219,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'getTitle',
         'status' => 'getStatus',
         'detail' => 'getDetail',
+        'instance' => 'getInstance',
         'trace_id' => 'getTraceId',
-        'errors' => 'getErrors'
+        'extensions' => 'getExtensions'
     ];
 
     /**
@@ -279,8 +285,9 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('detail', $data ?? [], null);
+        $this->setIfExists('instance', $data ?? [], null);
         $this->setIfExists('trace_id', $data ?? [], null);
-        $this->setIfExists('errors', $data ?? [], null);
+        $this->setIfExists('extensions', $data ?? [], null);
     }
 
     /**
@@ -406,7 +413,7 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param int|null $status The [HTTP status code](#section/HTTP-Responses).
+     * @param int|null $status The [HTTP status code](#section/Introduction/HTTP-Responses).
      *
      * @return self
      */
@@ -440,7 +447,7 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets detail
      *
-     * @param string|null $detail A human-readable message giving more details about the error. Not always present.
+     * @param string|null $detail An optional, human-readable message giving more details about the error.
      *
      * @return self
      */
@@ -457,6 +464,40 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['detail'] = $detail;
+
+        return $this;
+    }
+
+    /**
+     * Gets instance
+     *
+     * @return string|null
+     */
+    public function getInstance()
+    {
+        return $this->container['instance'];
+    }
+
+    /**
+     * Sets instance
+     *
+     * @param string|null $instance The URI reference of the problem.
+     *
+     * @return self
+     */
+    public function setInstance($instance)
+    {
+        if (is_null($instance)) {
+            array_push($this->openAPINullablesSetToNull, 'instance');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('instance', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['instance'] = $instance;
 
         return $this;
     }
@@ -496,35 +537,28 @@ class ProblemDetails implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets errors
+     * Gets extensions
      *
      * @return array<string,mixed>|null
      */
-    public function getErrors()
+    public function getExtensions()
     {
-        return $this->container['errors'];
+        return $this->container['extensions'];
     }
 
     /**
-     * Sets errors
+     * Sets extensions
      *
-     * @param array<string,mixed>|null $errors A human-readable explanation of errors.
+     * @param array<string,mixed>|null $extensions This field names any extension methods that have been configured to help handle errors handling functionality.
      *
      * @return self
      */
-    public function setErrors($errors)
+    public function setExtensions($extensions)
     {
-        if (is_null($errors)) {
-            array_push($this->openAPINullablesSetToNull, 'errors');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('errors', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($extensions)) {
+            throw new \InvalidArgumentException('non-nullable extensions cannot be null');
         }
-        $this->container['errors'] = $errors;
+        $this->container['extensions'] = $extensions;
 
         return $this;
     }
