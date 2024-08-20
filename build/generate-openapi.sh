@@ -2,7 +2,7 @@
 
 # Generate the PHP client
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-  -i /local/openapi/2022-04-07.yaml \
+  -i /local/openapi/2024-02-05.yaml \
   -g php \
   -o /local/generated \
   -c /local/build/open-api-config.json \
