@@ -11,13 +11,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -58,26 +58,30 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
       * @var string[]
       */
     protected static $openAPITypes = [
-        'capture_mode' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode',
-        'amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAmount',
+        'capture_mode' => '\Dojo_PHP\Model\CaptureMode',
+        'amount' => '\Dojo_PHP\Model\Money',
         'tips_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestTipsAmount',
         'reference' => 'string',
         'description' => 'string',
         'customer' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCustomer',
         'billing_address' => '\Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress',
         'shipping_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails',
-        'transaction_source' => '\Dojo_PHP\Model\CreatePaymentIntentRequestTransactionSource',
+        'card_holder_not_present' => 'bool',
         'config' => '\Dojo_PHP\Model\CreatePaymentIntentRequestConfig',
         'request_security' => '\Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity',
         'item_lines' => '\Dojo_PHP\Model\ItemLine[]',
         'tax_lines' => '\Dojo_PHP\Model\TaxLine[]',
-        'payment_methods' => '\Dojo_PHP\Model\PaymentMethod[]',
+        'payment_methods' => 'string[]',
         'action_link' => '\Dojo_PHP\Model\CreatePaymentIntentRequestActionLink',
         'expire_at' => '\DateTime',
         'auto_expire_in' => 'string',
         'auto_expire_action' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction',
         'metadata' => 'array<string,string>',
-        'setup_intent_id' => 'string'
+        'setup_intent_id' => 'string',
+        'order_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestOrderDetails',
+        'cashback_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCashbackAmount',
+        'service_charge_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestServiceChargeAmount',
+        'generate_remote_token' => 'bool'
     ];
 
     /**
@@ -96,7 +100,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'customer' => null,
         'billing_address' => null,
         'shipping_details' => null,
-        'transaction_source' => null,
+        'card_holder_not_present' => null,
         'config' => null,
         'request_security' => null,
         'item_lines' => null,
@@ -107,7 +111,11 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'timespan',
         'auto_expire_action' => null,
         'metadata' => null,
-        'setup_intent_id' => null
+        'setup_intent_id' => null,
+        'order_details' => null,
+        'cashback_amount' => null,
+        'service_charge_amount' => null,
+        'generate_remote_token' => null
     ];
 
     /**
@@ -117,25 +125,29 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static array $openAPINullables = [
         'capture_mode' => false,
-		'amount' => false,
-		'tips_amount' => true,
-		'reference' => false,
-		'description' => true,
-		'customer' => true,
-		'billing_address' => true,
-		'shipping_details' => true,
-		'transaction_source' => true,
-		'config' => true,
-		'request_security' => true,
-		'item_lines' => true,
-		'tax_lines' => true,
-		'payment_methods' => true,
-		'action_link' => true,
-		'expire_at' => true,
-		'auto_expire_in' => true,
-		'auto_expire_action' => true,
-		'metadata' => true,
-		'setup_intent_id' => true
+        'amount' => false,
+        'tips_amount' => true,
+        'reference' => false,
+        'description' => true,
+        'customer' => true,
+        'billing_address' => true,
+        'shipping_details' => true,
+        'card_holder_not_present' => true,
+        'config' => true,
+        'request_security' => true,
+        'item_lines' => true,
+        'tax_lines' => true,
+        'payment_methods' => true,
+        'action_link' => true,
+        'expire_at' => true,
+        'auto_expire_in' => true,
+        'auto_expire_action' => true,
+        'metadata' => true,
+        'setup_intent_id' => true,
+        'order_details' => true,
+        'cashback_amount' => true,
+        'service_charge_amount' => true,
+        'generate_remote_token' => false
     ];
 
     /**
@@ -232,7 +244,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'customer' => 'customer',
         'billing_address' => 'billingAddress',
         'shipping_details' => 'shippingDetails',
-        'transaction_source' => 'transactionSource',
+        'card_holder_not_present' => 'cardHolderNotPresent',
         'config' => 'config',
         'request_security' => 'requestSecurity',
         'item_lines' => 'itemLines',
@@ -243,7 +255,11 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'autoExpireIn',
         'auto_expire_action' => 'autoExpireAction',
         'metadata' => 'metadata',
-        'setup_intent_id' => 'setupIntentId'
+        'setup_intent_id' => 'setupIntentId',
+        'order_details' => 'orderDetails',
+        'cashback_amount' => 'cashbackAmount',
+        'service_charge_amount' => 'serviceChargeAmount',
+        'generate_remote_token' => 'generateRemoteToken'
     ];
 
     /**
@@ -260,7 +276,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'customer' => 'setCustomer',
         'billing_address' => 'setBillingAddress',
         'shipping_details' => 'setShippingDetails',
-        'transaction_source' => 'setTransactionSource',
+        'card_holder_not_present' => 'setCardHolderNotPresent',
         'config' => 'setConfig',
         'request_security' => 'setRequestSecurity',
         'item_lines' => 'setItemLines',
@@ -271,7 +287,11 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'setAutoExpireIn',
         'auto_expire_action' => 'setAutoExpireAction',
         'metadata' => 'setMetadata',
-        'setup_intent_id' => 'setSetupIntentId'
+        'setup_intent_id' => 'setSetupIntentId',
+        'order_details' => 'setOrderDetails',
+        'cashback_amount' => 'setCashbackAmount',
+        'service_charge_amount' => 'setServiceChargeAmount',
+        'generate_remote_token' => 'setGenerateRemoteToken'
     ];
 
     /**
@@ -288,7 +308,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'customer' => 'getCustomer',
         'billing_address' => 'getBillingAddress',
         'shipping_details' => 'getShippingDetails',
-        'transaction_source' => 'getTransactionSource',
+        'card_holder_not_present' => 'getCardHolderNotPresent',
         'config' => 'getConfig',
         'request_security' => 'getRequestSecurity',
         'item_lines' => 'getItemLines',
@@ -299,7 +319,11 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         'auto_expire_in' => 'getAutoExpireIn',
         'auto_expire_action' => 'getAutoExpireAction',
         'metadata' => 'getMetadata',
-        'setup_intent_id' => 'getSetupIntentId'
+        'setup_intent_id' => 'getSetupIntentId',
+        'order_details' => 'getOrderDetails',
+        'cashback_amount' => 'getCashbackAmount',
+        'service_charge_amount' => 'getServiceChargeAmount',
+        'generate_remote_token' => 'getGenerateRemoteToken'
     ];
 
     /**
@@ -367,7 +391,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('customer', $data ?? [], null);
         $this->setIfExists('billing_address', $data ?? [], null);
         $this->setIfExists('shipping_details', $data ?? [], null);
-        $this->setIfExists('transaction_source', $data ?? [], null);
+        $this->setIfExists('card_holder_not_present', $data ?? [], null);
         $this->setIfExists('config', $data ?? [], null);
         $this->setIfExists('request_security', $data ?? [], null);
         $this->setIfExists('item_lines', $data ?? [], null);
@@ -379,6 +403,10 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('auto_expire_action', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('setup_intent_id', $data ?? [], null);
+        $this->setIfExists('order_details', $data ?? [], null);
+        $this->setIfExists('cashback_amount', $data ?? [], null);
+        $this->setIfExists('service_charge_amount', $data ?? [], null);
+        $this->setIfExists('generate_remote_token', $data ?? [], null);
     }
 
     /**
@@ -444,7 +472,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets capture_mode
      *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode|null
+     * @return \Dojo_PHP\Model\CaptureMode|null
      */
     public function getCaptureMode()
     {
@@ -454,7 +482,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets capture_mode
      *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCaptureMode|null $capture_mode capture_mode
+     * @param \Dojo_PHP\Model\CaptureMode|null $capture_mode capture_mode
      *
      * @return self
      */
@@ -471,7 +499,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets amount
      *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestAmount
+     * @return \Dojo_PHP\Model\Money
      */
     public function getAmount()
     {
@@ -481,7 +509,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets amount
      *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestAmount $amount amount
+     * @param \Dojo_PHP\Model\Money $amount amount
      *
      * @return self
      */
@@ -542,7 +570,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets reference
      *
-     * @param string $reference Details of the reference for the payment.
+     * @param string $reference A unique identifier for the payment. For example, `Order 236`.
      *
      * @return self
      */
@@ -704,35 +732,35 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     }
 
     /**
-     * Gets transaction_source
+     * Gets card_holder_not_present
      *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestTransactionSource|null
+     * @return bool|null
      */
-    public function getTransactionSource()
+    public function getCardHolderNotPresent()
     {
-        return $this->container['transaction_source'];
+        return $this->container['card_holder_not_present'];
     }
 
     /**
-     * Sets transaction_source
+     * Sets card_holder_not_present
      *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestTransactionSource|null $transaction_source transaction_source
+     * @param bool|null $card_holder_not_present Indicates whether this transaction should be completed as Cardholder Not Present (CNP), with manual entry of card details. If the flag is true, the card machine skips the `Present Card` screen and goes directly into Key Card Number.
      *
      * @return self
      */
-    public function setTransactionSource($transaction_source)
+    public function setCardHolderNotPresent($card_holder_not_present)
     {
-        if (is_null($transaction_source)) {
-            array_push($this->openAPINullablesSetToNull, 'transaction_source');
+        if (is_null($card_holder_not_present)) {
+            array_push($this->openAPINullablesSetToNull, 'card_holder_not_present');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('transaction_source', $nullablesSetToNull);
+            $index = array_search('card_holder_not_present', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['transaction_source'] = $transaction_source;
+        $this->container['card_holder_not_present'] = $card_holder_not_present;
 
         return $this;
     }
@@ -876,7 +904,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets payment_methods
      *
-     * @return \Dojo_PHP\Model\PaymentMethod[]|null
+     * @return string[]|null
      */
     public function getPaymentMethods()
     {
@@ -886,7 +914,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets payment_methods
      *
-     * @param \Dojo_PHP\Model\PaymentMethod[]|null $payment_methods The payment methods that customers can use to pay.
+     * @param string[]|null $payment_methods The payment methods that customers can use to pay. (Card, Wallet, SavedCard)
      *
      * @return self
      */
@@ -988,7 +1016,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets auto_expire_in
      *
-     * @param string|null $auto_expire_in The time interval after which `paymentIntent: Manual` will be captured or reversed, in `dd.hh:MM:ss` format. The timestamp value must be more than 30 seconds and less than 7 days.
+     * @param string|null $auto_expire_in The time interval after which a `Manual` payment intent will be captured or reversed, in `dd.hh:MM:ss` format. The timestamp value must be more than 30 seconds and less than 7 days.
      *
      * @return self
      */
@@ -1056,7 +1084,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets metadata
      *
-     * @param array<string,string>|null $metadata A set of key-value pairs that you can use for storing additional information.
+     * @param array<string,string>|null $metadata A set of key-value pairs that you can use to store additional information.
      *
      * @return self
      */
@@ -1090,7 +1118,7 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets setup_intent_id
      *
-     * @param string|null $setup_intent_id Unique identifier for the setup intent.
+     * @param string|null $setup_intent_id The unique identifier for the setup intent.
      *
      * @return self
      */
@@ -1107,6 +1135,135 @@ class CreatePaymentIntentRequest implements ModelInterface, ArrayAccess, \JsonSe
             }
         }
         $this->container['setup_intent_id'] = $setup_intent_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets order_details
+     *
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestOrderDetails|null
+     */
+    public function getOrderDetails()
+    {
+        return $this->container['order_details'];
+    }
+
+    /**
+     * Sets order_details
+     *
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestOrderDetails|null $order_details order_details
+     *
+     * @return self
+     */
+    public function setOrderDetails($order_details)
+    {
+        if (is_null($order_details)) {
+            array_push($this->openAPINullablesSetToNull, 'order_details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['order_details'] = $order_details;
+
+        return $this;
+    }
+
+    /**
+     * Gets cashback_amount
+     *
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCashbackAmount|null
+     */
+    public function getCashbackAmount()
+    {
+        return $this->container['cashback_amount'];
+    }
+
+    /**
+     * Sets cashback_amount
+     *
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCashbackAmount|null $cashback_amount cashback_amount
+     *
+     * @return self
+     */
+    public function setCashbackAmount($cashback_amount)
+    {
+        if (is_null($cashback_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'cashback_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cashback_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cashback_amount'] = $cashback_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_charge_amount
+     *
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestServiceChargeAmount|null
+     */
+    public function getServiceChargeAmount()
+    {
+        return $this->container['service_charge_amount'];
+    }
+
+    /**
+     * Sets service_charge_amount
+     *
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestServiceChargeAmount|null $service_charge_amount service_charge_amount
+     *
+     * @return self
+     */
+    public function setServiceChargeAmount($service_charge_amount)
+    {
+        if (is_null($service_charge_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'service_charge_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('service_charge_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['service_charge_amount'] = $service_charge_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets generate_remote_token
+     *
+     * @return bool|null
+     */
+    public function getGenerateRemoteToken()
+    {
+        return $this->container['generate_remote_token'];
+    }
+
+    /**
+     * Sets generate_remote_token
+     *
+     * @param bool|null $generate_remote_token Set to `true` to start accepting online payments immediately. Defaults to `false`.
+     *
+     * @return self
+     */
+    public function setGenerateRemoteToken($generate_remote_token)
+    {
+        if (is_null($generate_remote_token)) {
+            throw new \InvalidArgumentException('non-nullable generate_remote_token cannot be null');
+        }
+        $this->container['generate_remote_token'] = $generate_remote_token;
 
         return $this;
     }

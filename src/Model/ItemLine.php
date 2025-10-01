@@ -11,13 +11,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -60,8 +60,11 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'quantity' => 'int',
-        'caption' => 'string',
-        'amount_total' => '\Dojo_PHP\Model\ItemLineAmountTotal'
+        'name' => 'string',
+        'category' => 'string',
+        'modifiers' => '\Dojo_PHP\Model\Modifier[]',
+        'amount_total' => '\Dojo_PHP\Model\ItemLineAmountTotal',
+        'plu' => 'string'
     ];
 
     /**
@@ -74,8 +77,11 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'quantity' => 'int32',
-        'caption' => null,
-        'amount_total' => null
+        'name' => null,
+        'category' => null,
+        'modifiers' => null,
+        'amount_total' => null,
+        'plu' => null
     ];
 
     /**
@@ -84,10 +90,13 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => true,
-		'quantity' => false,
-		'caption' => true,
-		'amount_total' => false
+        'id' => false,
+        'quantity' => false,
+        'name' => false,
+        'category' => false,
+        'modifiers' => false,
+        'amount_total' => true,
+        'plu' => false
     ];
 
     /**
@@ -178,8 +187,11 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'quantity' => 'quantity',
-        'caption' => 'caption',
-        'amount_total' => 'amountTotal'
+        'name' => 'name',
+        'category' => 'category',
+        'modifiers' => 'modifiers',
+        'amount_total' => 'amountTotal',
+        'plu' => 'plu'
     ];
 
     /**
@@ -190,8 +202,11 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'quantity' => 'setQuantity',
-        'caption' => 'setCaption',
-        'amount_total' => 'setAmountTotal'
+        'name' => 'setName',
+        'category' => 'setCategory',
+        'modifiers' => 'setModifiers',
+        'amount_total' => 'setAmountTotal',
+        'plu' => 'setPlu'
     ];
 
     /**
@@ -202,8 +217,11 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'quantity' => 'getQuantity',
-        'caption' => 'getCaption',
-        'amount_total' => 'getAmountTotal'
+        'name' => 'getName',
+        'category' => 'getCategory',
+        'modifiers' => 'getModifiers',
+        'amount_total' => 'getAmountTotal',
+        'plu' => 'getPlu'
     ];
 
     /**
@@ -265,8 +283,11 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('quantity', $data ?? [], null);
-        $this->setIfExists('caption', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
+        $this->setIfExists('modifiers', $data ?? [], null);
         $this->setIfExists('amount_total', $data ?? [], null);
+        $this->setIfExists('plu', $data ?? [], null);
     }
 
     /**
@@ -300,8 +321,15 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = "invalid value for 'id', the character length must be smaller than or equal to 60.";
         }
 
-        if (!is_null($this->container['caption']) && (mb_strlen($this->container['caption']) > 100)) {
-            $invalidProperties[] = "invalid value for 'caption', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['amount_total'] === null) {
+            $invalidProperties[] = "'amount_total' can't be null";
+        }
+        if (!is_null($this->container['plu']) && (mb_strlen($this->container['plu']) > 200)) {
+            $invalidProperties[] = "invalid value for 'plu', the character length must be smaller than or equal to 200.";
         }
 
         return $invalidProperties;
@@ -332,23 +360,16 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the object.
+     * @param string|null $id The unique identifier for the object.
      *
      * @return self
      */
     public function setId($id)
     {
         if (is_null($id)) {
-            array_push($this->openAPINullablesSetToNull, 'id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        if (!is_null($id) && (mb_strlen($id) > 60)) {
+        if ((mb_strlen($id) > 60)) {
             throw new \InvalidArgumentException('invalid length for $id when calling ItemLine., must be smaller than or equal to 60.');
         }
 
@@ -385,39 +406,86 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets caption
+     * Gets name
      *
      * @return string|null
      */
-    public function getCaption()
+    public function getName()
     {
-        return $this->container['caption'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets caption
+     * Sets name
      *
-     * @param string|null $caption A name of the item.
+     * @param string|null $name A name of the item.
      *
      * @return self
      */
-    public function setCaption($caption)
+    public function setName($name)
     {
-        if (is_null($caption)) {
-            array_push($this->openAPINullablesSetToNull, 'caption');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('caption', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        if (!is_null($caption) && (mb_strlen($caption) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $caption when calling ItemLine., must be smaller than or equal to 100.');
+        if ((mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling ItemLine., must be smaller than or equal to 100.');
         }
 
-        $this->container['caption'] = $caption;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets category
+     *
+     * @return string|null
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
+
+    /**
+     * Sets category
+     *
+     * @param string|null $category The type of modifier, for easy identification.
+     *
+     * @return self
+     */
+    public function setCategory($category)
+    {
+        if (is_null($category)) {
+            throw new \InvalidArgumentException('non-nullable category cannot be null');
+        }
+        $this->container['category'] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Gets modifiers
+     *
+     * @return \Dojo_PHP\Model\Modifier[]|null
+     */
+    public function getModifiers()
+    {
+        return $this->container['modifiers'];
+    }
+
+    /**
+     * Sets modifiers
+     *
+     * @param \Dojo_PHP\Model\Modifier[]|null $modifiers A list of modifiers applied to a given item.
+     *
+     * @return self
+     */
+    public function setModifiers($modifiers)
+    {
+        if (is_null($modifiers)) {
+            throw new \InvalidArgumentException('non-nullable modifiers cannot be null');
+        }
+        $this->container['modifiers'] = $modifiers;
 
         return $this;
     }
@@ -425,7 +493,7 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets amount_total
      *
-     * @return \Dojo_PHP\Model\ItemLineAmountTotal|null
+     * @return \Dojo_PHP\Model\ItemLineAmountTotal
      */
     public function getAmountTotal()
     {
@@ -435,16 +503,54 @@ class ItemLine implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount_total
      *
-     * @param \Dojo_PHP\Model\ItemLineAmountTotal|null $amount_total amount_total
+     * @param \Dojo_PHP\Model\ItemLineAmountTotal $amount_total amount_total
      *
      * @return self
      */
     public function setAmountTotal($amount_total)
     {
         if (is_null($amount_total)) {
-            throw new \InvalidArgumentException('non-nullable amount_total cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'amount_total');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('amount_total', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['amount_total'] = $amount_total;
+
+        return $this;
+    }
+
+    /**
+     * Gets plu
+     *
+     * @return string|null
+     */
+    public function getPlu()
+    {
+        return $this->container['plu'];
+    }
+
+    /**
+     * Sets plu
+     *
+     * @param string|null $plu The price look-up code of the item.
+     *
+     * @return self
+     */
+    public function setPlu($plu)
+    {
+        if (is_null($plu)) {
+            throw new \InvalidArgumentException('non-nullable plu cannot be null');
+        }
+        if ((mb_strlen($plu) > 200)) {
+            throw new \InvalidArgumentException('invalid length for $plu when calling ItemLine., must be smaller than or equal to 200.');
+        }
+
+        $this->container['plu'] = $plu;
 
         return $this;
     }

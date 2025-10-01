@@ -80,7 +80,7 @@ class WebhookViewModel implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'model' => false,
-		'events' => false
+        'events' => false
     ];
 
     /**

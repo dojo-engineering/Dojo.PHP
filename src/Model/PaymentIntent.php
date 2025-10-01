@@ -11,13 +11,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -60,17 +60,18 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'capture_mode' => '\Dojo_PHP\Model\CaptureMode',
+        'card_holder_not_present' => 'bool',
         'client_session_secret' => 'string',
         'client_session_secret_expiration_date' => '\DateTime',
         'payment_details' => '\Dojo_PHP\Model\PaymentIntentPaymentDetails',
         'status' => '\Dojo_PHP\Model\PaymentIntentStatus',
-        'payment_methods' => '\Dojo_PHP\Model\PaymentMethod[]',
+        'payment_methods' => 'string[]',
         'amount' => '\Dojo_PHP\Model\PaymentIntentAmount',
         'tips_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestTipsAmount',
         'requested_amount' => '\Dojo_PHP\Model\PaymentIntentRequestedAmount',
         'total_amount' => '\Dojo_PHP\Model\PaymentIntentTotalAmount',
         'refunded_amount' => 'int',
-        'customer' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCustomer',
+        'customer' => '\Dojo_PHP\Model\PaymentIntentCustomer',
         'request_security' => '\Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity',
         'billing_address' => '\Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress',
         'shipping_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails',
@@ -82,14 +83,19 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_lines' => '\Dojo_PHP\Model\ItemLine[]',
         'tax_lines' => '\Dojo_PHP\Model\TaxLine[]',
         'action_link' => '\Dojo_PHP\Model\CreatePaymentIntentRequestActionLink',
-        'config' => '\Dojo_PHP\Model\PaymentIntentConfig',
         'merchant_config' => '\Dojo_PHP\Model\PaymentIntentMerchantConfig',
+        'config' => '\Dojo_PHP\Model\PaymentIntentConfig',
+        'auto_expire_action' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction',
         'expire_at' => '\DateTime',
         'auto_expire_in' => 'string',
-        'auto_expire_action' => '\Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction',
         'metadata' => 'array<string,string>',
+        'order_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestOrderDetails',
         'setup_intent_id' => 'string',
-        'payment_events' => '\Dojo_PHP\Model\PaymentStatusResponse[]'
+        'cashback_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCashbackAmount',
+        'service_charge_amount' => '\Dojo_PHP\Model\CreatePaymentIntentRequestServiceChargeAmount',
+        'payment_link' => 'string',
+        'terminal_session_history' => '\Dojo_PHP\Model\TerminalSessionHistoryResponse[]',
+        'captures' => '\Dojo_PHP\Model\CaptureDetails[]'
     ];
 
     /**
@@ -102,6 +108,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'capture_mode' => null,
+        'card_holder_not_present' => null,
         'client_session_secret' => null,
         'client_session_secret_expiration_date' => 'date-time',
         'payment_details' => null,
@@ -124,14 +131,19 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_lines' => null,
         'tax_lines' => null,
         'action_link' => null,
-        'config' => null,
         'merchant_config' => null,
+        'config' => null,
+        'auto_expire_action' => null,
         'expire_at' => 'date-time',
         'auto_expire_in' => 'timespan',
-        'auto_expire_action' => null,
         'metadata' => null,
+        'order_details' => null,
         'setup_intent_id' => null,
-        'payment_events' => null
+        'cashback_amount' => null,
+        'service_charge_amount' => null,
+        'payment_link' => 'uri',
+        'terminal_session_history' => null,
+        'captures' => null
     ];
 
     /**
@@ -141,37 +153,43 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => true,
-		'capture_mode' => false,
-		'client_session_secret' => true,
-		'client_session_secret_expiration_date' => false,
-		'payment_details' => true,
-		'status' => false,
-		'payment_methods' => true,
-		'amount' => true,
-		'tips_amount' => true,
-		'requested_amount' => true,
-		'total_amount' => true,
-		'refunded_amount' => true,
-		'customer' => true,
-		'request_security' => true,
-		'billing_address' => true,
-		'shipping_details' => true,
-		'created_at' => false,
-		'updated_at' => false,
-		'reference' => true,
-		'description' => true,
-		'subtotal_line_items' => true,
-		'item_lines' => true,
-		'tax_lines' => true,
-		'action_link' => true,
-		'config' => true,
-		'merchant_config' => true,
-		'expire_at' => true,
-		'auto_expire_in' => true,
-		'auto_expire_action' => true,
-		'metadata' => true,
-		'setup_intent_id' => true,
-		'payment_events' => true
+        'capture_mode' => false,
+        'card_holder_not_present' => false,
+        'client_session_secret' => true,
+        'client_session_secret_expiration_date' => false,
+        'payment_details' => true,
+        'status' => false,
+        'payment_methods' => true,
+        'amount' => true,
+        'tips_amount' => true,
+        'requested_amount' => true,
+        'total_amount' => true,
+        'refunded_amount' => true,
+        'customer' => true,
+        'request_security' => true,
+        'billing_address' => true,
+        'shipping_details' => true,
+        'created_at' => false,
+        'updated_at' => false,
+        'reference' => true,
+        'description' => true,
+        'subtotal_line_items' => true,
+        'item_lines' => true,
+        'tax_lines' => true,
+        'action_link' => true,
+        'merchant_config' => true,
+        'config' => true,
+        'auto_expire_action' => true,
+        'expire_at' => true,
+        'auto_expire_in' => true,
+        'metadata' => true,
+        'order_details' => true,
+        'setup_intent_id' => true,
+        'cashback_amount' => true,
+        'service_charge_amount' => true,
+        'payment_link' => true,
+        'terminal_session_history' => true,
+        'captures' => true
     ];
 
     /**
@@ -262,6 +280,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'capture_mode' => 'captureMode',
+        'card_holder_not_present' => 'cardHolderNotPresent',
         'client_session_secret' => 'clientSessionSecret',
         'client_session_secret_expiration_date' => 'clientSessionSecretExpirationDate',
         'payment_details' => 'paymentDetails',
@@ -284,14 +303,19 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_lines' => 'itemLines',
         'tax_lines' => 'taxLines',
         'action_link' => 'actionLink',
-        'config' => 'config',
         'merchant_config' => 'merchantConfig',
+        'config' => 'config',
+        'auto_expire_action' => 'autoExpireAction',
         'expire_at' => 'expireAt',
         'auto_expire_in' => 'autoExpireIn',
-        'auto_expire_action' => 'autoExpireAction',
         'metadata' => 'metadata',
+        'order_details' => 'orderDetails',
         'setup_intent_id' => 'setupIntentId',
-        'payment_events' => 'paymentEvents'
+        'cashback_amount' => 'cashbackAmount',
+        'service_charge_amount' => 'serviceChargeAmount',
+        'payment_link' => 'paymentLink',
+        'terminal_session_history' => 'terminalSessionHistory',
+        'captures' => 'captures'
     ];
 
     /**
@@ -302,6 +326,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'capture_mode' => 'setCaptureMode',
+        'card_holder_not_present' => 'setCardHolderNotPresent',
         'client_session_secret' => 'setClientSessionSecret',
         'client_session_secret_expiration_date' => 'setClientSessionSecretExpirationDate',
         'payment_details' => 'setPaymentDetails',
@@ -324,14 +349,19 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_lines' => 'setItemLines',
         'tax_lines' => 'setTaxLines',
         'action_link' => 'setActionLink',
-        'config' => 'setConfig',
         'merchant_config' => 'setMerchantConfig',
+        'config' => 'setConfig',
+        'auto_expire_action' => 'setAutoExpireAction',
         'expire_at' => 'setExpireAt',
         'auto_expire_in' => 'setAutoExpireIn',
-        'auto_expire_action' => 'setAutoExpireAction',
         'metadata' => 'setMetadata',
+        'order_details' => 'setOrderDetails',
         'setup_intent_id' => 'setSetupIntentId',
-        'payment_events' => 'setPaymentEvents'
+        'cashback_amount' => 'setCashbackAmount',
+        'service_charge_amount' => 'setServiceChargeAmount',
+        'payment_link' => 'setPaymentLink',
+        'terminal_session_history' => 'setTerminalSessionHistory',
+        'captures' => 'setCaptures'
     ];
 
     /**
@@ -342,6 +372,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'capture_mode' => 'getCaptureMode',
+        'card_holder_not_present' => 'getCardHolderNotPresent',
         'client_session_secret' => 'getClientSessionSecret',
         'client_session_secret_expiration_date' => 'getClientSessionSecretExpirationDate',
         'payment_details' => 'getPaymentDetails',
@@ -364,14 +395,19 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
         'item_lines' => 'getItemLines',
         'tax_lines' => 'getTaxLines',
         'action_link' => 'getActionLink',
-        'config' => 'getConfig',
         'merchant_config' => 'getMerchantConfig',
+        'config' => 'getConfig',
+        'auto_expire_action' => 'getAutoExpireAction',
         'expire_at' => 'getExpireAt',
         'auto_expire_in' => 'getAutoExpireIn',
-        'auto_expire_action' => 'getAutoExpireAction',
         'metadata' => 'getMetadata',
+        'order_details' => 'getOrderDetails',
         'setup_intent_id' => 'getSetupIntentId',
-        'payment_events' => 'getPaymentEvents'
+        'cashback_amount' => 'getCashbackAmount',
+        'service_charge_amount' => 'getServiceChargeAmount',
+        'payment_link' => 'getPaymentLink',
+        'terminal_session_history' => 'getTerminalSessionHistory',
+        'captures' => 'getCaptures'
     ];
 
     /**
@@ -433,6 +469,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('capture_mode', $data ?? [], null);
+        $this->setIfExists('card_holder_not_present', $data ?? [], null);
         $this->setIfExists('client_session_secret', $data ?? [], null);
         $this->setIfExists('client_session_secret_expiration_date', $data ?? [], null);
         $this->setIfExists('payment_details', $data ?? [], null);
@@ -455,14 +492,19 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('item_lines', $data ?? [], null);
         $this->setIfExists('tax_lines', $data ?? [], null);
         $this->setIfExists('action_link', $data ?? [], null);
-        $this->setIfExists('config', $data ?? [], null);
         $this->setIfExists('merchant_config', $data ?? [], null);
+        $this->setIfExists('config', $data ?? [], null);
+        $this->setIfExists('auto_expire_action', $data ?? [], null);
         $this->setIfExists('expire_at', $data ?? [], null);
         $this->setIfExists('auto_expire_in', $data ?? [], null);
-        $this->setIfExists('auto_expire_action', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
+        $this->setIfExists('order_details', $data ?? [], null);
         $this->setIfExists('setup_intent_id', $data ?? [], null);
-        $this->setIfExists('payment_events', $data ?? [], null);
+        $this->setIfExists('cashback_amount', $data ?? [], null);
+        $this->setIfExists('service_charge_amount', $data ?? [], null);
+        $this->setIfExists('payment_link', $data ?? [], null);
+        $this->setIfExists('terminal_session_history', $data ?? [], null);
+        $this->setIfExists('captures', $data ?? [], null);
     }
 
     /**
@@ -520,7 +562,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the payment intent.
+     * @param string|null $id The unique identifier of the payment intent.
      *
      * @return self
      */
@@ -564,6 +606,33 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable capture_mode cannot be null');
         }
         $this->container['capture_mode'] = $capture_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets card_holder_not_present
+     *
+     * @return bool|null
+     */
+    public function getCardHolderNotPresent()
+    {
+        return $this->container['card_holder_not_present'];
+    }
+
+    /**
+     * Sets card_holder_not_present
+     *
+     * @param bool|null $card_holder_not_present Indicates whether this transaction should be completed as Cardholder Not Present (CNP), with manual entry of card details. If the flag is true, the card machine skips the `Present Card` screen and goes directly into Key Card Number.
+     *
+     * @return self
+     */
+    public function setCardHolderNotPresent($card_holder_not_present)
+    {
+        if (is_null($card_holder_not_present)) {
+            throw new \InvalidArgumentException('non-nullable card_holder_not_present cannot be null');
+        }
+        $this->container['card_holder_not_present'] = $card_holder_not_present;
 
         return $this;
     }
@@ -693,7 +762,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets payment_methods
      *
-     * @return \Dojo_PHP\Model\PaymentMethod[]|null
+     * @return string[]|null
      */
     public function getPaymentMethods()
     {
@@ -703,7 +772,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payment_methods
      *
-     * @param \Dojo_PHP\Model\PaymentMethod[]|null $payment_methods The payment methods that customers can use to pay.
+     * @param string[]|null $payment_methods The payment methods that customers can use to pay. (Card, Wallet, SavedCard)
      *
      * @return self
      */
@@ -873,7 +942,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets refunded_amount
      *
-     * @param int|null $refunded_amount The amount that was [refunded](../payments/manage-payments/cancellation-payments/refund).
+     * @param int|null $refunded_amount The amount that was [refunded](/payments/manage-payments/cancelling-payments/refund).
      *
      * @return self
      */
@@ -897,7 +966,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets customer
      *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null
+     * @return \Dojo_PHP\Model\PaymentIntentCustomer|null
      */
     public function getCustomer()
     {
@@ -907,7 +976,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets customer
      *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null $customer customer
+     * @param \Dojo_PHP\Model\PaymentIntentCustomer|null $customer customer
      *
      * @return self
      */
@@ -1043,7 +1112,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at The timestamp of the create date, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format.
+     * @param \DateTime|null $created_at The creation date, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format.
      *
      * @return self
      */
@@ -1097,7 +1166,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets reference
      *
-     * @param string|null $reference Details of the reference for the payment.
+     * @param string|null $reference A unique identifier for the payment. For example, `Order 236`.
      *
      * @return self
      */
@@ -1289,6 +1358,40 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets merchant_config
+     *
+     * @return \Dojo_PHP\Model\PaymentIntentMerchantConfig|null
+     */
+    public function getMerchantConfig()
+    {
+        return $this->container['merchant_config'];
+    }
+
+    /**
+     * Sets merchant_config
+     *
+     * @param \Dojo_PHP\Model\PaymentIntentMerchantConfig|null $merchant_config merchant_config
+     *
+     * @return self
+     */
+    public function setMerchantConfig($merchant_config)
+    {
+        if (is_null($merchant_config)) {
+            array_push($this->openAPINullablesSetToNull, 'merchant_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('merchant_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['merchant_config'] = $merchant_config;
+
+        return $this;
+    }
+
+    /**
      * Gets config
      *
      * @return \Dojo_PHP\Model\PaymentIntentConfig|null
@@ -1323,35 +1426,35 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets merchant_config
+     * Gets auto_expire_action
      *
-     * @return \Dojo_PHP\Model\PaymentIntentMerchantConfig|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction|null
      */
-    public function getMerchantConfig()
+    public function getAutoExpireAction()
     {
-        return $this->container['merchant_config'];
+        return $this->container['auto_expire_action'];
     }
 
     /**
-     * Sets merchant_config
+     * Sets auto_expire_action
      *
-     * @param \Dojo_PHP\Model\PaymentIntentMerchantConfig|null $merchant_config merchant_config
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction|null $auto_expire_action auto_expire_action
      *
      * @return self
      */
-    public function setMerchantConfig($merchant_config)
+    public function setAutoExpireAction($auto_expire_action)
     {
-        if (is_null($merchant_config)) {
-            array_push($this->openAPINullablesSetToNull, 'merchant_config');
+        if (is_null($auto_expire_action)) {
+            array_push($this->openAPINullablesSetToNull, 'auto_expire_action');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('merchant_config', $nullablesSetToNull);
+            $index = array_search('auto_expire_action', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['merchant_config'] = $merchant_config;
+        $this->container['auto_expire_action'] = $auto_expire_action;
 
         return $this;
     }
@@ -1403,7 +1506,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_expire_in
      *
-     * @param string|null $auto_expire_in The time interval after which `paymentIntent: Manual` will be captured or reversed, in `dd.hh:MM:ss` format. The timestamp value must be more than 30 seconds and less than 7 days.
+     * @param string|null $auto_expire_in The time interval after which a `Manual` payment intent will be captured or reversed, in `dd.hh:MM:ss` format. The timestamp value must be more than 30 seconds and less than 7 days.
      *
      * @return self
      */
@@ -1425,40 +1528,6 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets auto_expire_action
-     *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction|null
-     */
-    public function getAutoExpireAction()
-    {
-        return $this->container['auto_expire_action'];
-    }
-
-    /**
-     * Sets auto_expire_action
-     *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestAutoExpireAction|null $auto_expire_action auto_expire_action
-     *
-     * @return self
-     */
-    public function setAutoExpireAction($auto_expire_action)
-    {
-        if (is_null($auto_expire_action)) {
-            array_push($this->openAPINullablesSetToNull, 'auto_expire_action');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auto_expire_action', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auto_expire_action'] = $auto_expire_action;
-
-        return $this;
-    }
-
-    /**
      * Gets metadata
      *
      * @return array<string,string>|null
@@ -1471,7 +1540,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets metadata
      *
-     * @param array<string,string>|null $metadata A set of key-value pairs that you can use for storing additional information.
+     * @param array<string,string>|null $metadata A set of key-value pairs that you can use to store additional information.
      *
      * @return self
      */
@@ -1493,6 +1562,40 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets order_details
+     *
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestOrderDetails|null
+     */
+    public function getOrderDetails()
+    {
+        return $this->container['order_details'];
+    }
+
+    /**
+     * Sets order_details
+     *
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestOrderDetails|null $order_details order_details
+     *
+     * @return self
+     */
+    public function setOrderDetails($order_details)
+    {
+        if (is_null($order_details)) {
+            array_push($this->openAPINullablesSetToNull, 'order_details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('order_details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['order_details'] = $order_details;
+
+        return $this;
+    }
+
+    /**
      * Gets setup_intent_id
      *
      * @return string|null
@@ -1505,7 +1608,7 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets setup_intent_id
      *
-     * @param string|null $setup_intent_id Unique identifier for the setup intent.
+     * @param string|null $setup_intent_id The unique identifier for the setup intent.
      *
      * @return self
      */
@@ -1527,35 +1630,171 @@ class PaymentIntent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets payment_events
+     * Gets cashback_amount
      *
-     * @return \Dojo_PHP\Model\PaymentStatusResponse[]|null
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCashbackAmount|null
      */
-    public function getPaymentEvents()
+    public function getCashbackAmount()
     {
-        return $this->container['payment_events'];
+        return $this->container['cashback_amount'];
     }
 
     /**
-     * Sets payment_events
+     * Sets cashback_amount
      *
-     * @param \Dojo_PHP\Model\PaymentStatusResponse[]|null $payment_events The past events of the payment.
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCashbackAmount|null $cashback_amount cashback_amount
      *
      * @return self
      */
-    public function setPaymentEvents($payment_events)
+    public function setCashbackAmount($cashback_amount)
     {
-        if (is_null($payment_events)) {
-            array_push($this->openAPINullablesSetToNull, 'payment_events');
+        if (is_null($cashback_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'cashback_amount');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('payment_events', $nullablesSetToNull);
+            $index = array_search('cashback_amount', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['payment_events'] = $payment_events;
+        $this->container['cashback_amount'] = $cashback_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_charge_amount
+     *
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestServiceChargeAmount|null
+     */
+    public function getServiceChargeAmount()
+    {
+        return $this->container['service_charge_amount'];
+    }
+
+    /**
+     * Sets service_charge_amount
+     *
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestServiceChargeAmount|null $service_charge_amount service_charge_amount
+     *
+     * @return self
+     */
+    public function setServiceChargeAmount($service_charge_amount)
+    {
+        if (is_null($service_charge_amount)) {
+            array_push($this->openAPINullablesSetToNull, 'service_charge_amount');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('service_charge_amount', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['service_charge_amount'] = $service_charge_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_link
+     *
+     * @return string|null
+     */
+    public function getPaymentLink()
+    {
+        return $this->container['payment_link'];
+    }
+
+    /**
+     * Sets payment_link
+     *
+     * @param string|null $payment_link The URL of the generated payment link. The customer will be redirected to this URL in order to complete the payment.
+     *
+     * @return self
+     */
+    public function setPaymentLink($payment_link)
+    {
+        if (is_null($payment_link)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_link');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_link', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment_link'] = $payment_link;
+
+        return $this;
+    }
+
+    /**
+     * Gets terminal_session_history
+     *
+     * @return \Dojo_PHP\Model\TerminalSessionHistoryResponse[]|null
+     */
+    public function getTerminalSessionHistory()
+    {
+        return $this->container['terminal_session_history'];
+    }
+
+    /**
+     * Sets terminal_session_history
+     *
+     * @param \Dojo_PHP\Model\TerminalSessionHistoryResponse[]|null $terminal_session_history The past events of the terminal session.
+     *
+     * @return self
+     */
+    public function setTerminalSessionHistory($terminal_session_history)
+    {
+        if (is_null($terminal_session_history)) {
+            array_push($this->openAPINullablesSetToNull, 'terminal_session_history');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('terminal_session_history', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['terminal_session_history'] = $terminal_session_history;
+
+        return $this;
+    }
+
+    /**
+     * Gets captures
+     *
+     * @return \Dojo_PHP\Model\CaptureDetails[]|null
+     */
+    public function getCaptures()
+    {
+        return $this->container['captures'];
+    }
+
+    /**
+     * Sets captures
+     *
+     * @param \Dojo_PHP\Model\CaptureDetails[]|null $captures Details of captured payments.
+     *
+     * @return self
+     */
+    public function setCaptures($captures)
+    {
+        if (is_null($captures)) {
+            array_push($this->openAPINullablesSetToNull, 'captures');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('captures', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['captures'] = $captures;
 
         return $this;
     }

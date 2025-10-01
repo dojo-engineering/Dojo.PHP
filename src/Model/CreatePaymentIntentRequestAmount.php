@@ -81,7 +81,7 @@ class CreatePaymentIntentRequestAmount implements ModelInterface, ArrayAccess, \
       */
     protected static array $openAPINullables = [
         'value' => false,
-		'currency_code' => false
+        'currency_code' => false
     ];
 
     /**

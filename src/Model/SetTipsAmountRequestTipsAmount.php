@@ -81,7 +81,7 @@ class SetTipsAmountRequestTipsAmount implements ModelInterface, ArrayAccess, \Js
       */
     protected static array $openAPINullables = [
         'value' => false,
-		'currency_code' => false
+        'currency_code' => false
     ];
 
     /**

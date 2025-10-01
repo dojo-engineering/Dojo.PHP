@@ -81,7 +81,7 @@ class TaxLineAmountTotal implements ModelInterface, ArrayAccess, \JsonSerializab
       */
     protected static array $openAPINullables = [
         'value' => false,
-		'currency_code' => false
+        'currency_code' => false
     ];
 
     /**
