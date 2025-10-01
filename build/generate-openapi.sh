@@ -13,6 +13,9 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.2.0 gener
   -c /local/build/open-api-config.json \
   --additional-properties invokerPackage=Dojo_PHP \
 
+# remove older files in models and api
+rm -rf src/Model/*
+rm -rf src/Api/*
 # Copy files from generated to src - only everything inside generated/src
 cp -rv generated/src/. src/
 rm -rf generated
