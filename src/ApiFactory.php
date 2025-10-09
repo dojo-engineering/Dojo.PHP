@@ -55,6 +55,34 @@ class ApiFactory {
 
         return $api;
     }
+    
+    public static function createCapabilitiesApi($apiKey) {
+        $api = new Api\CapabilitiesApi();
+        ApiFactory::updateConfigWithApiKey($api, $apiKey);
+
+        return $api;
+    }
+    
+    public static function createEventsApi($apiKey) {
+        $api = new Api\EventsApi();
+        ApiFactory::updateConfigWithApiKey($api, $apiKey);
+
+        return $api;
+    }
+    
+    public static function createTerminalsApi($apiKey) {
+        $api = new Api\TerminalsApi();
+        ApiFactory::updateConfigWithApiKey($api, $apiKey);
+
+        return $api;
+    }
+    
+    public static function createTerminalSessionsApi($apiKey) {
+        $api = new Api\TerminalSessionsApi();
+        ApiFactory::updateConfigWithApiKey($api, $apiKey);
+
+        return $api;
+    }
 
     private static function updateConfigWithApiKey($api, $apiKey) {
         $api->getConfig()->setApiKey(HEADER_AUTHORIZATION, BASIC_AUTH_PREFIX . " {$apiKey}");

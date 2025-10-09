@@ -10,13 +10,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -79,7 +79,7 @@ class RefundsApi
         ],
     ];
 
-/**
+    /**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -130,8 +130,8 @@ class RefundsApi
      *
      * Retrieve a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $refund_id Unique identifier for the refund. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $refund_id A unique identifier for the refund. It will be used to reference this refund in all operations. It is recommended to use a UUID. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGetRefundById'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -149,8 +149,8 @@ class RefundsApi
      *
      * Retrieve a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $refund_id Unique identifier for the refund. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $refund_id A unique identifier for the refund. It will be used to reference this refund in all operations. It is recommended to use a UUID. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGetRefundById'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -214,7 +214,7 @@ class RefundsApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -241,7 +241,7 @@ class RefundsApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -268,7 +268,7 @@ class RefundsApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -344,8 +344,8 @@ class RefundsApi
      *
      * Retrieve a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $refund_id Unique identifier for the refund. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $refund_id A unique identifier for the refund. It will be used to reference this refund in all operations. It is recommended to use a UUID. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGetRefundById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -366,8 +366,8 @@ class RefundsApi
      *
      * Retrieve a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $refund_id Unique identifier for the refund. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $refund_id A unique identifier for the refund. It will be used to reference this refund in all operations. It is recommended to use a UUID. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGetRefundById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -417,8 +417,8 @@ class RefundsApi
     /**
      * Create request for operation 'paymentIntentsGetRefundById'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $refund_id Unique identifier for the refund. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $refund_id A unique identifier for the refund. It will be used to reference this refund in all operations. It is recommended to use a UUID. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['paymentIntentsGetRefundById'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -531,10 +531,10 @@ class RefundsApi
      *
      * Create a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $idempotency_key An idempotency key to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. Must be unique for each new refund for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier of the payment intent. (required)
+     * @param  string $idempotency_key An idempotency key is used to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. The key must be unique for each new refund processed on the payment intent. (required)
+     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request create_refund_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundsCreate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -552,10 +552,10 @@ class RefundsApi
      *
      * Create a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $idempotency_key An idempotency key to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. Must be unique for each new refund for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier of the payment intent. (required)
+     * @param  string $idempotency_key An idempotency key is used to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. The key must be unique for each new refund processed on the payment intent. (required)
+     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundsCreate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -619,7 +619,7 @@ class RefundsApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -646,7 +646,7 @@ class RefundsApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -673,7 +673,7 @@ class RefundsApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -749,10 +749,10 @@ class RefundsApi
      *
      * Create a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $idempotency_key An idempotency key to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. Must be unique for each new refund for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier of the payment intent. (required)
+     * @param  string $idempotency_key An idempotency key is used to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. The key must be unique for each new refund processed on the payment intent. (required)
+     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundsCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -773,10 +773,10 @@ class RefundsApi
      *
      * Create a refund
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $idempotency_key An idempotency key to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. Must be unique for each new refund for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier of the payment intent. (required)
+     * @param  string $idempotency_key An idempotency key is used to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. The key must be unique for each new refund processed on the payment intent. (required)
+     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundsCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -826,10 +826,10 @@ class RefundsApi
     /**
      * Create request for operation 'refundsCreate'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $payment_intent_id Unique identifier for the payment intent. (required)
-     * @param  string $idempotency_key An idempotency key to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. Must be unique for each new refund for the payment intent. (required)
-     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request  (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $payment_intent_id The unique identifier of the payment intent. (required)
+     * @param  string $idempotency_key An idempotency key is used to recognize subsequent retries of the same request. How you generate the idempotency key is up to you. The key must be unique for each new refund processed on the payment intent. (required)
+     * @param  \Dojo_PHP\Model\CreateRefundRequest $create_refund_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['refundsCreate'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException

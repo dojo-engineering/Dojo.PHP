@@ -10,13 +10,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -100,7 +100,7 @@ class WebhooksApi
         ],
     ];
 
-/**
+    /**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
@@ -151,9 +151,9 @@ class WebhooksApi
      *
      * Activate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksActivateSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -170,9 +170,9 @@ class WebhooksApi
      *
      * Activate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksActivateSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -225,7 +225,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -233,7 +233,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -241,7 +241,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -256,9 +256,9 @@ class WebhooksApi
      *
      * Activate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksActivateSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -279,9 +279,9 @@ class WebhooksApi
      *
      * Activate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksActivateSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -318,9 +318,9 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksActivateSecret'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksActivateSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -445,9 +445,9 @@ class WebhooksApi
      *
      * Delete a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -464,9 +464,9 @@ class WebhooksApi
      *
      * Delete a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -519,7 +519,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -527,7 +527,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -535,7 +535,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -550,9 +550,9 @@ class WebhooksApi
      *
      * Delete a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -573,9 +573,9 @@ class WebhooksApi
      *
      * Delete a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -612,9 +612,9 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksDeleteSecret'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  string $secret_id Unique identifier for the secret. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  string $secret_id The unique identifier for the secret. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -739,8 +739,8 @@ class WebhooksApi
      *
      * Delete a subscription
      *
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSubscriptions'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -757,8 +757,8 @@ class WebhooksApi
      *
      * Delete a subscription
      *
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSubscriptions'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
@@ -811,7 +811,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -819,7 +819,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -827,7 +827,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -842,8 +842,8 @@ class WebhooksApi
      *
      * Delete a subscription
      *
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSubscriptions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -864,8 +864,8 @@ class WebhooksApi
      *
      * Delete a subscription
      *
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSubscriptions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -902,8 +902,8 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksDeleteSubscriptions'
      *
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksDeleteSubscriptions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1013,13 +1013,13 @@ class WebhooksApi
      *
      * Generate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGenerateSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse
      */
     public function webhooksGenerateSecret($version, $subscription_id, string $contentType = self::contentTypes['webhooksGenerateSecret'][0])
     {
@@ -1032,13 +1032,13 @@ class WebhooksApi
      *
      * Generate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGenerateSecret'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function webhooksGenerateSecretWithHttpInfo($version, $subscription_id, string $contentType = self::contentTypes['webhooksGenerateSecret'][0])
     {
@@ -1097,7 +1097,7 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -1108,11 +1108,11 @@ class WebhooksApi
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1124,22 +1124,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1151,22 +1151,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1178,22 +1178,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 409:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1205,13 +1205,13 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1258,7 +1258,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1266,7 +1266,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1274,7 +1274,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1282,7 +1282,7 @@ class WebhooksApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1297,8 +1297,8 @@ class WebhooksApi
      *
      * Generate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGenerateSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1319,8 +1319,8 @@ class WebhooksApi
      *
      * Generate a secret
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGenerateSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1370,8 +1370,8 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksGenerateSecret'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGenerateSecret'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1481,12 +1481,12 @@ class WebhooksApi
      *
      * List all subscriptions
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAlSubscriptions'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\Subscription[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\Subscription[]|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse
      */
     public function webhooksGetAlSubscriptions($version, string $contentType = self::contentTypes['webhooksGetAlSubscriptions'][0])
     {
@@ -1499,12 +1499,12 @@ class WebhooksApi
      *
      * List all subscriptions
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAlSubscriptions'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\Subscription[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\Subscription[]|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function webhooksGetAlSubscriptionsWithHttpInfo($version, string $contentType = self::contentTypes['webhooksGetAlSubscriptions'][0])
     {
@@ -1563,7 +1563,7 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -1574,11 +1574,11 @@ class WebhooksApi
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1590,22 +1590,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1617,13 +1617,13 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1670,7 +1670,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1678,7 +1678,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1693,7 +1693,7 @@ class WebhooksApi
      *
      * List all subscriptions
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAlSubscriptions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1714,7 +1714,7 @@ class WebhooksApi
      *
      * List all subscriptions
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAlSubscriptions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1764,7 +1764,7 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksGetAlSubscriptions'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAlSubscriptions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -1859,12 +1859,12 @@ class WebhooksApi
      *
      * List all events
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAllWebhooks'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\WebhookViewModel[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\WebhookEvents[]|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse
      */
     public function webhooksGetAllWebhooks($version, string $contentType = self::contentTypes['webhooksGetAllWebhooks'][0])
     {
@@ -1877,12 +1877,12 @@ class WebhooksApi
      *
      * List all events
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAllWebhooks'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\WebhookViewModel[]|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\WebhookEvents[]|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function webhooksGetAllWebhooksWithHttpInfo($version, string $contentType = self::contentTypes['webhooksGetAllWebhooks'][0])
     {
@@ -1925,11 +1925,11 @@ class WebhooksApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Dojo_PHP\Model\WebhookViewModel[]' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\WebhookEvents[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\WebhookViewModel[]' !== 'string') {
+                        if ('\Dojo_PHP\Model\WebhookEvents[]' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1941,22 +1941,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\WebhookViewModel[]', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\WebhookEvents[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1968,22 +1968,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1995,19 +1995,19 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Dojo_PHP\Model\WebhookViewModel[]';
+            $returnType = '\Dojo_PHP\Model\WebhookEvents[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -2040,7 +2040,7 @@ class WebhooksApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\WebhookViewModel[]',
+                        '\Dojo_PHP\Model\WebhookEvents[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2048,7 +2048,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2056,7 +2056,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2071,7 +2071,7 @@ class WebhooksApi
      *
      * List all events
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAllWebhooks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2092,7 +2092,7 @@ class WebhooksApi
      *
      * List all events
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAllWebhooks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2100,7 +2100,7 @@ class WebhooksApi
      */
     public function webhooksGetAllWebhooksAsyncWithHttpInfo($version, string $contentType = self::contentTypes['webhooksGetAllWebhooks'][0])
     {
-        $returnType = '\Dojo_PHP\Model\WebhookViewModel[]';
+        $returnType = '\Dojo_PHP\Model\WebhookEvents[]';
         $request = $this->webhooksGetAllWebhooksRequest($version, $contentType);
 
         return $this->client
@@ -2142,7 +2142,7 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksGetAllWebhooks'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetAllWebhooks'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2237,13 +2237,13 @@ class WebhooksApi
      *
      * List all secrets
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetSecrets'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse
      */
     public function webhooksGetSecrets($version, $subscription_id, string $contentType = self::contentTypes['webhooksGetSecrets'][0])
     {
@@ -2256,13 +2256,13 @@ class WebhooksApi
      *
      * List all secrets
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetSecrets'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\SecretsResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function webhooksGetSecretsWithHttpInfo($version, $subscription_id, string $contentType = self::contentTypes['webhooksGetSecrets'][0])
     {
@@ -2321,7 +2321,7 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -2332,11 +2332,11 @@ class WebhooksApi
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2348,22 +2348,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2375,22 +2375,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2402,13 +2402,13 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2455,7 +2455,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2463,7 +2463,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2471,7 +2471,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2486,8 +2486,8 @@ class WebhooksApi
      *
      * List all secrets
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetSecrets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2508,8 +2508,8 @@ class WebhooksApi
      *
      * List all secrets
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetSecrets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2559,8 +2559,8 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksGetSecrets'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksGetSecrets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2670,13 +2670,13 @@ class WebhooksApi
      *
      * Subscribe to an event
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  \Dojo_PHP\Model\SubscriptionRequest $subscription_request subscription_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribe'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse
      */
     public function webhooksSubscribe($version, $subscription_request, string $contentType = self::contentTypes['webhooksSubscribe'][0])
     {
@@ -2689,13 +2689,13 @@ class WebhooksApi
      *
      * Subscribe to an event
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  \Dojo_PHP\Model\SubscriptionRequest $subscription_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribe'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function webhooksSubscribeWithHttpInfo($version, $subscription_request, string $contentType = self::contentTypes['webhooksSubscribe'][0])
     {
@@ -2754,7 +2754,7 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -2765,11 +2765,11 @@ class WebhooksApi
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2781,22 +2781,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2808,22 +2808,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2835,22 +2835,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2862,22 +2862,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 409:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2889,13 +2889,13 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2942,7 +2942,7 @@ class WebhooksApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2950,7 +2950,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2958,7 +2958,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2966,7 +2966,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2974,7 +2974,7 @@ class WebhooksApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2989,7 +2989,7 @@ class WebhooksApi
      *
      * Subscribe to an event
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  \Dojo_PHP\Model\SubscriptionRequest $subscription_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribe'] to see the possible values for this operation
      *
@@ -3011,7 +3011,7 @@ class WebhooksApi
      *
      * Subscribe to an event
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  \Dojo_PHP\Model\SubscriptionRequest $subscription_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribe'] to see the possible values for this operation
      *
@@ -3062,7 +3062,7 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksSubscribe'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
      * @param  \Dojo_PHP\Model\SubscriptionRequest $subscription_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribe'] to see the possible values for this operation
      *
@@ -3172,14 +3172,14 @@ class WebhooksApi
      *
      * Update a subscription
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  \Dojo_PHP\Model\SubscriptionUpdateRequest $subscription_update_request subscription_update_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribeUpdate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails
+     * @return \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse
      */
     public function webhooksSubscribeUpdate($version, $subscription_id, $subscription_update_request, string $contentType = self::contentTypes['webhooksSubscribeUpdate'][0])
     {
@@ -3192,14 +3192,14 @@ class WebhooksApi
      *
      * Update a subscription
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  \Dojo_PHP\Model\SubscriptionUpdateRequest $subscription_update_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribeUpdate'] to see the possible values for this operation
      *
      * @throws \Dojo_PHP\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails|\Dojo_PHP\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Dojo_PHP\Model\Subscription|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse|\Dojo_PHP\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function webhooksSubscribeUpdateWithHttpInfo($version, $subscription_id, $subscription_update_request, string $contentType = self::contentTypes['webhooksSubscribeUpdate'][0])
     {
@@ -3258,7 +3258,7 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
@@ -3269,11 +3269,11 @@ class WebhooksApi
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -3285,22 +3285,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 401:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -3312,22 +3312,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -3339,22 +3339,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -3366,22 +3366,22 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 409:
-                    if ('\Dojo_PHP\Model\ProblemDetails' === '\SplFileObject') {
+                    if ('\Dojo_PHP\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Dojo_PHP\Model\ProblemDetails' !== 'string') {
+                        if ('\Dojo_PHP\Model\ErrorResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -3393,13 +3393,13 @@ class WebhooksApi
                                     $statusCode,
                                     $response->getHeaders(),
                                     $content
-                                 );
+                                );
                             }
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ProblemDetails', []),
+                        ObjectSerializer::deserialize($content, '\Dojo_PHP\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -3446,7 +3446,7 @@ class WebhooksApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3454,7 +3454,7 @@ class WebhooksApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3462,7 +3462,7 @@ class WebhooksApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3470,7 +3470,7 @@ class WebhooksApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3478,7 +3478,7 @@ class WebhooksApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Dojo_PHP\Model\ProblemDetails',
+                        '\Dojo_PHP\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3493,8 +3493,8 @@ class WebhooksApi
      *
      * Update a subscription
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  \Dojo_PHP\Model\SubscriptionUpdateRequest $subscription_update_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribeUpdate'] to see the possible values for this operation
      *
@@ -3516,8 +3516,8 @@ class WebhooksApi
      *
      * Update a subscription
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  \Dojo_PHP\Model\SubscriptionUpdateRequest $subscription_update_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribeUpdate'] to see the possible values for this operation
      *
@@ -3568,8 +3568,8 @@ class WebhooksApi
     /**
      * Create request for operation 'webhooksSubscribeUpdate'
      *
-     * @param  \DateTime $version API version with format yyyy-mm-dd. Current version is 2022-04-07. Today&#39;s date will always give you the latest version. (required)
-     * @param  string $subscription_id Unique identifier for the subscription. (required)
+     * @param  \DateTime $version The API version with format yyyy-mm-dd. The current version is &#x60;2025-09-10&#x60;. (required)
+     * @param  string $subscription_id The unique identifier for the subscription. (required)
      * @param  \Dojo_PHP\Model\SubscriptionUpdateRequest $subscription_update_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['webhooksSubscribeUpdate'] to see the possible values for this operation
      *

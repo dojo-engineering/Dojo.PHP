@@ -11,13 +11,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -35,7 +35,7 @@ use \Dojo_PHP\ObjectSerializer;
  * PaymentIntentPaymentDetails Class Doc Comment
  *
  * @category Class
- * @description Details about the payment.
+ * @description These details about the payment will only populate once the status of the transaction is finalized.
  * @package  Dojo_PHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -58,13 +58,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
+        'transaction_id' => 'string',
         'transaction_date_time' => 'string',
         'message' => 'string',
+        'payment_method_id' => 'string',
         'auth_code' => 'string',
-        'card_number' => 'string',
-        'card_name' => 'string',
-        'expiry_date' => 'string',
-        'card_type' => 'string'
+        'card' => '\Dojo_PHP\Model\PaymentDetailsCard',
+        'avs_result' => 'string'
     ];
 
     /**
@@ -75,13 +75,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'transaction_id' => null,
         'transaction_date_time' => null,
         'message' => null,
+        'payment_method_id' => null,
         'auth_code' => null,
-        'card_number' => null,
-        'card_name' => null,
-        'expiry_date' => null,
-        'card_type' => null
+        'card' => null,
+        'avs_result' => null
     ];
 
     /**
@@ -90,13 +90,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'transaction_id' => true,
         'transaction_date_time' => true,
-		'message' => true,
-		'auth_code' => true,
-		'card_number' => true,
-		'card_name' => true,
-		'expiry_date' => true,
-		'card_type' => true
+        'message' => true,
+        'payment_method_id' => true,
+        'auth_code' => true,
+        'card' => true,
+        'avs_result' => true
     ];
 
     /**
@@ -185,13 +185,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
+        'transaction_id' => 'transactionId',
         'transaction_date_time' => 'transactionDateTime',
         'message' => 'message',
+        'payment_method_id' => 'paymentMethodId',
         'auth_code' => 'authCode',
-        'card_number' => 'cardNumber',
-        'card_name' => 'cardName',
-        'expiry_date' => 'expiryDate',
-        'card_type' => 'cardType'
+        'card' => 'card',
+        'avs_result' => 'avsResult'
     ];
 
     /**
@@ -200,13 +200,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
+        'transaction_id' => 'setTransactionId',
         'transaction_date_time' => 'setTransactionDateTime',
         'message' => 'setMessage',
+        'payment_method_id' => 'setPaymentMethodId',
         'auth_code' => 'setAuthCode',
-        'card_number' => 'setCardNumber',
-        'card_name' => 'setCardName',
-        'expiry_date' => 'setExpiryDate',
-        'card_type' => 'setCardType'
+        'card' => 'setCard',
+        'avs_result' => 'setAvsResult'
     ];
 
     /**
@@ -215,13 +215,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
+        'transaction_id' => 'getTransactionId',
         'transaction_date_time' => 'getTransactionDateTime',
         'message' => 'getMessage',
+        'payment_method_id' => 'getPaymentMethodId',
         'auth_code' => 'getAuthCode',
-        'card_number' => 'getCardNumber',
-        'card_name' => 'getCardName',
-        'expiry_date' => 'getExpiryDate',
-        'card_type' => 'getCardType'
+        'card' => 'getCard',
+        'avs_result' => 'getAvsResult'
     ];
 
     /**
@@ -281,13 +281,13 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
+        $this->setIfExists('transaction_id', $data ?? [], null);
         $this->setIfExists('transaction_date_time', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('payment_method_id', $data ?? [], null);
         $this->setIfExists('auth_code', $data ?? [], null);
-        $this->setIfExists('card_number', $data ?? [], null);
-        $this->setIfExists('card_name', $data ?? [], null);
-        $this->setIfExists('expiry_date', $data ?? [], null);
-        $this->setIfExists('card_type', $data ?? [], null);
+        $this->setIfExists('card', $data ?? [], null);
+        $this->setIfExists('avs_result', $data ?? [], null);
     }
 
     /**
@@ -331,6 +331,40 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets transaction_id
+     *
+     * @return string|null
+     */
+    public function getTransactionId()
+    {
+        return $this->container['transaction_id'];
+    }
+
+    /**
+     * Sets transaction_id
+     *
+     * @param string|null $transaction_id The unique identifier of the transaction.
+     *
+     * @return self
+     */
+    public function setTransactionId($transaction_id)
+    {
+        if (is_null($transaction_id)) {
+            array_push($this->openAPINullablesSetToNull, 'transaction_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('transaction_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['transaction_id'] = $transaction_id;
+
+        return $this;
+    }
 
     /**
      * Gets transaction_date_time
@@ -401,6 +435,40 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
     }
 
     /**
+     * Gets payment_method_id
+     *
+     * @return string|null
+     */
+    public function getPaymentMethodId()
+    {
+        return $this->container['payment_method_id'];
+    }
+
+    /**
+     * Sets payment_method_id
+     *
+     * @param string|null $payment_method_id The unique identifier of the customer payment method.
+     *
+     * @return self
+     */
+    public function setPaymentMethodId($payment_method_id)
+    {
+        if (is_null($payment_method_id)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_method_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_method_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment_method_id'] = $payment_method_id;
+
+        return $this;
+    }
+
+    /**
      * Gets auth_code
      *
      * @return string|null
@@ -413,7 +481,7 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets auth_code
      *
-     * @param string|null $auth_code The acquirer authorization code. This code is returned on a successful transaction.
+     * @param string|null $auth_code The acquirer's authorization code. This code is returned on a successful transaction.
      *
      * @return self
      */
@@ -435,137 +503,69 @@ class PaymentIntentPaymentDetails implements ModelInterface, ArrayAccess, \JsonS
     }
 
     /**
-     * Gets card_number
+     * Gets card
      *
-     * @return string|null
+     * @return \Dojo_PHP\Model\PaymentDetailsCard|null
      */
-    public function getCardNumber()
+    public function getCard()
     {
-        return $this->container['card_number'];
+        return $this->container['card'];
     }
 
     /**
-     * Sets card_number
+     * Sets card
      *
-     * @param string|null $card_number The card number.
+     * @param \Dojo_PHP\Model\PaymentDetailsCard|null $card card
      *
      * @return self
      */
-    public function setCardNumber($card_number)
+    public function setCard($card)
     {
-        if (is_null($card_number)) {
-            array_push($this->openAPINullablesSetToNull, 'card_number');
+        if (is_null($card)) {
+            array_push($this->openAPINullablesSetToNull, 'card');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('card_number', $nullablesSetToNull);
+            $index = array_search('card', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['card_number'] = $card_number;
+        $this->container['card'] = $card;
 
         return $this;
     }
 
     /**
-     * Gets card_name
+     * Gets avs_result
      *
      * @return string|null
      */
-    public function getCardName()
+    public function getAvsResult()
     {
-        return $this->container['card_name'];
+        return $this->container['avs_result'];
     }
 
     /**
-     * Sets card_name
+     * Sets avs_result
      *
-     * @param string|null $card_name The name of the cardholder.
+     * @param string|null $avs_result The result of the Address Verification Service (AVS) check.
      *
      * @return self
      */
-    public function setCardName($card_name)
+    public function setAvsResult($avs_result)
     {
-        if (is_null($card_name)) {
-            array_push($this->openAPINullablesSetToNull, 'card_name');
+        if (is_null($avs_result)) {
+            array_push($this->openAPINullablesSetToNull, 'avs_result');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('card_name', $nullablesSetToNull);
+            $index = array_search('avs_result', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['card_name'] = $card_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets expiry_date
-     *
-     * @return string|null
-     */
-    public function getExpiryDate()
-    {
-        return $this->container['expiry_date'];
-    }
-
-    /**
-     * Sets expiry_date
-     *
-     * @param string|null $expiry_date The expiry month and year. Format: MM/YY.
-     *
-     * @return self
-     */
-    public function setExpiryDate($expiry_date)
-    {
-        if (is_null($expiry_date)) {
-            array_push($this->openAPINullablesSetToNull, 'expiry_date');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('expiry_date', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['expiry_date'] = $expiry_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets card_type
-     *
-     * @return string|null
-     */
-    public function getCardType()
-    {
-        return $this->container['card_type'];
-    }
-
-    /**
-     * Sets card_type
-     *
-     * @param string|null $card_type The card scheme.
-     *
-     * @return self
-     */
-    public function setCardType($card_type)
-    {
-        if (is_null($card_type)) {
-            array_push($this->openAPINullablesSetToNull, 'card_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('card_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['card_type'] = $card_type;
+        $this->container['avs_result'] = $avs_result;
 
         return $this;
     }

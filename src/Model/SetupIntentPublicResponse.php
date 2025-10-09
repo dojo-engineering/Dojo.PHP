@@ -11,13 +11,13 @@
  */
 
 /**
- * Payment Service
+ * Dojo API
  *
- * # Introduction  The Dojo API is RESTful. It returns HTTP response codes to indicate errors. It also accepts and returns JSON in the HTTP body.  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Looking for no-code solutions?  Try one of our [pre-built solutions](../payments/plugins/) for your site.  ## Authentication  The Dojo API uses [Basic HTTP auth](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment have the prefix `sk_sandbox_` and for production have the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ... ```  API requests without authentication will fail.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. HTTP status codes summary are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807) also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo API uses the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2022-04-07' \\ ```  When we make [breaking changes](../payments/development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2022-04-07`.
+ * # Introduction  The Dojo API is a REST API, using HTTP response codes to convey status, including successful responses and errors. Additionally, it accepts and returns JSON in the HTTP body. For information on the latest development progress, visit the [changelog](../changelog).  ## Base URLs  Use the following base URL when making requests to the API:  https://api.dojo.tech/  ## Authentication  The Dojo API uses [Basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). You can generate API keys in the [Developer Portal](https://developer.dojo.tech). Secret keys for the test environment use the prefix `sk_sandbox_`. Production keys use the prefix `sk_prod_`.  You must include your secret API key in the header of all requests, for example:  ```curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\ ```  API requests without authentication will fail.  ## Additional Required Headers  The following headers are required on Terminal and Terminal Sessions API requests, requests without them will fail.  - `reseller-id` - Identifies the reseller who sells software on behalf of the EPOS company. This value will be unique and provided by Dojo to each reseller. - `software-house-id` - Identifies the EPOS company whose software is generating the request. This value shouldn't be configurable, as it will remain the same for all customers using particular EPOS software. This value will be provided by Dojo.  ## HTTP Responses  The API returns standard HTTP response codes [RFC 7231](https://tools.ietf.org/html/rfc7231#section-6) on each request to indicate the success or otherwise of API requests. Summaries for each HTTP code are listed below:  * `200 OK`—The request was successful.  * `201 Created`—The request was successful, and a new resource was created as a result.  * `204 No Content`—The request was successful, but there is no content to send.  * `400 Bad Request`—Bad request, probably due to a syntax error.  * `401 Unauthorized`—Authentication required.  * `403 Forbidden`—The API key doesn't have permissions.  * `404 Not Found`—The resource doesn't exist.  * `405 Method Not Allowed`—The request method is known by the server but isn't supported by the target resource.  * `409 Conflict`—The request couldn't be completed because it conflicted with another request or the server's configuration.  * `500`, `502`, `503`, `504` `Server Errors`—An error occurred with our API.  ## Errors  Dojo follows the error response format proposed in [RFC 7807](https://tools.ietf.org/html/rfc7807), also known as Problem Details for HTTP APIs. All errors are returned in the form of JSON.  ### Error Schema  In case of an error, the response object contains the following fields:  * `errors` [object]—A human-readable explanation of errors.  * `type` [string]— A URI reference RFC 3986 that identifies the problem type.  * `title` [string]—A short, human-readable summary of the error.  * `status` [integer]—The HTTP status code.  * `detail` [string]—A human-readable message giving more details about the error. Not always present.  * `traceId` [string]—The unique identifier of the failing request.  The following example shows a possible error response:  ```json {     \"errors\": {         \"Reference\": [             \"The Reference field is required.\"         ]     },     \"type\": \"https://tools.ietf.org/html/rfc7231#section-6.5.1\",     \"title\": \"One or more validation errors occurred.\",     \"status\": 400,     \"traceId\": \"00-a405f077df056a498323ffbcec05923f-aa63e6f4dbbc734a-01\", } ```  ## Versioning  Dojo APIs use the yyyy-mm-dd API version-naming scheme. You have to pass the version as the `version` header in all API calls, for example:  ``` curl   --header 'content-type: application/json' \\   --header 'Authorization: Basic sk_prod_your_key' \\   --header 'version: 2025-09-10' \\ ```  When we make [breaking changes](../development-resources/versioning-overview#breaking-changes) to the API, we release new dated versions.  The current version is `2025-09-10`.  ## SDKs Use our PHP, .NET, and mobile [client libraries](/development-resources/sdk) to build your integration.  ## Code Samples  Get help in building your integration with our [code samples](/development-resources/code-samples).
  *
- * The version of the OpenAPI document: 2022-04-07
+ * The version of the OpenAPI document: 2025-09-10
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 7.2.0-SNAPSHOT
+ * OpenAPI Generator version: 7.2.0
  */
 
 /**
@@ -61,8 +61,9 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'client_session_secret' => 'string',
         'client_session_secret_expiration_date' => '\DateTime',
         'status' => '\Dojo_PHP\Model\SetupIntentStatus',
-        'payment_methods' => '\Dojo_PHP\Model\PaymentMethod[]',
-        'customer' => '\Dojo_PHP\Model\CreatePaymentIntentRequestCustomer',
+        'payment_methods' => 'string[]',
+        'customer' => '\Dojo_PHP\Model\PaymentIntentCustomer',
+        'request_security' => '\Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity',
         'billing_address' => '\Dojo_PHP\Model\CreatePaymentIntentRequestBillingAddress',
         'shipping_details' => '\Dojo_PHP\Model\CreatePaymentIntentRequestShippingDetails',
         'created_at' => '\DateTime',
@@ -73,9 +74,11 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'merchant_config' => '\Dojo_PHP\Model\PaymentIntentMerchantConfig',
         'config' => '\Dojo_PHP\Model\PaymentIntentConfig',
         'metadata' => 'array<string,string>',
+        'payment_details' => '\Dojo_PHP\Model\SetupIntentPublicResponsePaymentDetails',
         'intended_amount' => '\Dojo_PHP\Model\CreateSetupIntentRequestIntendedAmount',
-        'merchant_initiated_transaction_type' => '\Dojo_PHP\Model\MerchantInitiatedTransactionType',
-        'terms' => 'string'
+        'merchant_initiated_transaction_type' => 'string',
+        'terms' => 'string',
+        'payment_source' => 'string'
     ];
 
     /**
@@ -92,6 +95,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'status' => null,
         'payment_methods' => null,
         'customer' => null,
+        'request_security' => null,
         'billing_address' => null,
         'shipping_details' => null,
         'created_at' => 'date-time',
@@ -102,9 +106,11 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'merchant_config' => null,
         'config' => null,
         'metadata' => null,
+        'payment_details' => null,
         'intended_amount' => null,
         'merchant_initiated_transaction_type' => null,
-        'terms' => null
+        'terms' => null,
+        'payment_source' => null
     ];
 
     /**
@@ -114,24 +120,27 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static array $openAPINullables = [
         'id' => true,
-		'client_session_secret' => true,
-		'client_session_secret_expiration_date' => false,
-		'status' => false,
-		'payment_methods' => true,
-		'customer' => true,
-		'billing_address' => true,
-		'shipping_details' => true,
-		'created_at' => false,
-		'updated_at' => false,
-		'expire_at' => true,
-		'reference' => true,
-		'description' => true,
-		'merchant_config' => true,
-		'config' => true,
-		'metadata' => true,
-		'intended_amount' => true,
-		'merchant_initiated_transaction_type' => false,
-		'terms' => true
+        'client_session_secret' => true,
+        'client_session_secret_expiration_date' => true,
+        'status' => false,
+        'payment_methods' => true,
+        'customer' => true,
+        'request_security' => true,
+        'billing_address' => true,
+        'shipping_details' => true,
+        'created_at' => false,
+        'updated_at' => false,
+        'expire_at' => true,
+        'reference' => true,
+        'description' => true,
+        'merchant_config' => true,
+        'config' => true,
+        'metadata' => true,
+        'payment_details' => true,
+        'intended_amount' => true,
+        'merchant_initiated_transaction_type' => false,
+        'terms' => true,
+        'payment_source' => true
     ];
 
     /**
@@ -226,6 +235,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'status' => 'status',
         'payment_methods' => 'paymentMethods',
         'customer' => 'customer',
+        'request_security' => 'requestSecurity',
         'billing_address' => 'billingAddress',
         'shipping_details' => 'shippingDetails',
         'created_at' => 'createdAt',
@@ -236,9 +246,11 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'merchant_config' => 'merchantConfig',
         'config' => 'config',
         'metadata' => 'metadata',
+        'payment_details' => 'paymentDetails',
         'intended_amount' => 'intendedAmount',
         'merchant_initiated_transaction_type' => 'merchantInitiatedTransactionType',
-        'terms' => 'terms'
+        'terms' => 'terms',
+        'payment_source' => 'paymentSource'
     ];
 
     /**
@@ -253,6 +265,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'status' => 'setStatus',
         'payment_methods' => 'setPaymentMethods',
         'customer' => 'setCustomer',
+        'request_security' => 'setRequestSecurity',
         'billing_address' => 'setBillingAddress',
         'shipping_details' => 'setShippingDetails',
         'created_at' => 'setCreatedAt',
@@ -263,9 +276,11 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'merchant_config' => 'setMerchantConfig',
         'config' => 'setConfig',
         'metadata' => 'setMetadata',
+        'payment_details' => 'setPaymentDetails',
         'intended_amount' => 'setIntendedAmount',
         'merchant_initiated_transaction_type' => 'setMerchantInitiatedTransactionType',
-        'terms' => 'setTerms'
+        'terms' => 'setTerms',
+        'payment_source' => 'setPaymentSource'
     ];
 
     /**
@@ -280,6 +295,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'status' => 'getStatus',
         'payment_methods' => 'getPaymentMethods',
         'customer' => 'getCustomer',
+        'request_security' => 'getRequestSecurity',
         'billing_address' => 'getBillingAddress',
         'shipping_details' => 'getShippingDetails',
         'created_at' => 'getCreatedAt',
@@ -290,9 +306,11 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         'merchant_config' => 'getMerchantConfig',
         'config' => 'getConfig',
         'metadata' => 'getMetadata',
+        'payment_details' => 'getPaymentDetails',
         'intended_amount' => 'getIntendedAmount',
         'merchant_initiated_transaction_type' => 'getMerchantInitiatedTransactionType',
-        'terms' => 'getTerms'
+        'terms' => 'getTerms',
+        'payment_source' => 'getPaymentSource'
     ];
 
     /**
@@ -358,6 +376,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('payment_methods', $data ?? [], null);
         $this->setIfExists('customer', $data ?? [], null);
+        $this->setIfExists('request_security', $data ?? [], null);
         $this->setIfExists('billing_address', $data ?? [], null);
         $this->setIfExists('shipping_details', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -368,9 +387,11 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
         $this->setIfExists('merchant_config', $data ?? [], null);
         $this->setIfExists('config', $data ?? [], null);
         $this->setIfExists('metadata', $data ?? [], null);
+        $this->setIfExists('payment_details', $data ?? [], null);
         $this->setIfExists('intended_amount', $data ?? [], null);
         $this->setIfExists('merchant_initiated_transaction_type', $data ?? [], null);
         $this->setIfExists('terms', $data ?? [], null);
+        $this->setIfExists('payment_source', $data ?? [], null);
     }
 
     /**
@@ -428,7 +449,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets id
      *
-     * @param string|null $id Unique identifier for the setup intent.
+     * @param string|null $id The unique identifier for the setup intent.
      *
      * @return self
      */
@@ -503,7 +524,14 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     public function setClientSessionSecretExpirationDate($client_session_secret_expiration_date)
     {
         if (is_null($client_session_secret_expiration_date)) {
-            throw new \InvalidArgumentException('non-nullable client_session_secret_expiration_date cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'client_session_secret_expiration_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('client_session_secret_expiration_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['client_session_secret_expiration_date'] = $client_session_secret_expiration_date;
 
@@ -540,7 +568,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets payment_methods
      *
-     * @return \Dojo_PHP\Model\PaymentMethod[]|null
+     * @return string[]|null
      */
     public function getPaymentMethods()
     {
@@ -550,7 +578,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets payment_methods
      *
-     * @param \Dojo_PHP\Model\PaymentMethod[]|null $payment_methods The payment methods that customers can use to pay.
+     * @param string[]|null $payment_methods The payment methods that customers can use to pay. (Card, Wallet, SavedCard)
      *
      * @return self
      */
@@ -574,7 +602,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets customer
      *
-     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null
+     * @return \Dojo_PHP\Model\PaymentIntentCustomer|null
      */
     public function getCustomer()
     {
@@ -584,7 +612,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets customer
      *
-     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestCustomer|null $customer customer
+     * @param \Dojo_PHP\Model\PaymentIntentCustomer|null $customer customer
      *
      * @return self
      */
@@ -601,6 +629,40 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
             }
         }
         $this->container['customer'] = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Gets request_security
+     *
+     * @return \Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity|null
+     */
+    public function getRequestSecurity()
+    {
+        return $this->container['request_security'];
+    }
+
+    /**
+     * Sets request_security
+     *
+     * @param \Dojo_PHP\Model\CreatePaymentIntentRequestRequestSecurity|null $request_security request_security
+     *
+     * @return self
+     */
+    public function setRequestSecurity($request_security)
+    {
+        if (is_null($request_security)) {
+            array_push($this->openAPINullablesSetToNull, 'request_security');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_security', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['request_security'] = $request_security;
 
         return $this;
     }
@@ -686,7 +748,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets created_at
      *
-     * @param \DateTime|null $created_at The timestamp of the create date, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format.
+     * @param \DateTime|null $created_at The creation date, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format.
      *
      * @return self
      */
@@ -740,7 +802,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets expire_at
      *
-     * @param \DateTime|null $expire_at The timestamp and date of when a setup intent will be voided, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) UTC format. This occurs when a setup intent is created and not yet authorized.
+     * @param \DateTime|null $expire_at The timestamp and date of when a setup intent will be voided, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. This occurs when a setup intent is created and not yet authorized.
      *
      * @return self
      */
@@ -774,7 +836,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets reference
      *
-     * @param string|null $reference Details of the reference for the payment.
+     * @param string|null $reference A unique identifier for the payment. For example, `Order 236`.
      *
      * @return self
      */
@@ -910,7 +972,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets metadata
      *
-     * @param array<string,string>|null $metadata A set of key-value pairs that you can use for storing additional information.
+     * @param array<string,string>|null $metadata A set of key-value pairs that you can use to store additional information.
      *
      * @return self
      */
@@ -927,6 +989,40 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
             }
         }
         $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_details
+     *
+     * @return \Dojo_PHP\Model\SetupIntentPublicResponsePaymentDetails|null
+     */
+    public function getPaymentDetails()
+    {
+        return $this->container['payment_details'];
+    }
+
+    /**
+     * Sets payment_details
+     *
+     * @param \Dojo_PHP\Model\SetupIntentPublicResponsePaymentDetails|null $payment_details payment_details
+     *
+     * @return self
+     */
+    public function setPaymentDetails($payment_details)
+    {
+        if (is_null($payment_details)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_details');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_details', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment_details'] = $payment_details;
 
         return $this;
     }
@@ -968,7 +1064,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Gets merchant_initiated_transaction_type
      *
-     * @return \Dojo_PHP\Model\MerchantInitiatedTransactionType|null
+     * @return string|null
      */
     public function getMerchantInitiatedTransactionType()
     {
@@ -978,7 +1074,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets merchant_initiated_transaction_type
      *
-     * @param \Dojo_PHP\Model\MerchantInitiatedTransactionType|null $merchant_initiated_transaction_type merchant_initiated_transaction_type
+     * @param string|null $merchant_initiated_transaction_type Details about the merchant-initiated transaction type (NoShow, Unscheduled)
      *
      * @return self
      */
@@ -1005,7 +1101,7 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets terms
      *
-     * @param string|null $terms The terms that customers are required to review before adding a card to setup intent.
+     * @param string|null $terms The terms that customers are required to review before adding a card to the setup intent.
      *
      * @return self
      */
@@ -1022,6 +1118,40 @@ class SetupIntentPublicResponse implements ModelInterface, ArrayAccess, \JsonSer
             }
         }
         $this->container['terms'] = $terms;
+
+        return $this;
+    }
+
+    /**
+     * Gets payment_source
+     *
+     * @return string|null
+     */
+    public function getPaymentSource()
+    {
+        return $this->container['payment_source'];
+    }
+
+    /**
+     * Sets payment_source
+     *
+     * @param string|null $payment_source Information about a single payment source type. Invalid if used along with `paymentSources` parameter.
+     *
+     * @return self
+     */
+    public function setPaymentSource($payment_source)
+    {
+        if (is_null($payment_source)) {
+            array_push($this->openAPINullablesSetToNull, 'payment_source');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payment_source', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['payment_source'] = $payment_source;
 
         return $this;
     }
